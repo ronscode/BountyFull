@@ -1,0 +1,33 @@
+{
+  "name": "bountyfull",
+  "version": "1.0.0",
+  "description": "App designed to allow users to post bounties on litter in their community and have other users claim these bounties by cleaning it up. ",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ronscode/BountyFull.git"
+  },
+  "author": "Ron Cagle, Jordan Mateen, CJ Horlebein",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ronscode/BountyFull/issues"
+  },
+  "homepage": "https://github.com/ronscode/BountyFull#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "express-session": "^1.15.6",
+    "mongoose": "^5.4.19",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.10"
+  }
+}

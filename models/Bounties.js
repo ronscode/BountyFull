@@ -2,10 +2,6 @@ const mongoose = require('mongoose');
 
 // User Schema
 const BountySchema = new mongoose.Schema({
-    bountyId: {
-        type: String,
-        required: true
-    },
     poster: {
         type: String,
         required: true
@@ -27,6 +23,10 @@ const BountySchema = new mongoose.Schema({
         required: true
     },
     isStarted: {
+        type: Boolean,
+        required: true
+    },
+    isPaid: {
         type: Boolean,
         required: true
     },

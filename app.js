@@ -31,6 +31,6 @@ app.use(passport.session());
 // Routes
 app.use('/users', require('./routes/users')) // Register, Login, Logout User
 app.use('/find', require('./routes/find')) // Find new litter bounties
-app.use('/list', require('./routes/list')) // List new litter bounties
+app.use('/post', require('./routes/post')) // List new litter bounties
 
 app.listen(PORT, () => console.log(`Serer started on port ${PORT}`))

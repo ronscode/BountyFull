@@ -11,6 +11,7 @@ import LinksScreen from "../screens/LinksScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import SettingsScreen from "../screens/SettingsScreen";
 import PostBountyScreen from "../screens/PostBountyScreen";
+import FindBountyScreen from "../screens/FindBountyScreen";
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen
@@ -23,8 +24,8 @@ HomeStack.navigationOptions = {
       focused={focused}
       name={
         Platform.OS === "ios"
-          ? `ios-information-circle${focused ? "" : "-outline"}`
-          : "md-information-circle"
+          ? `ios-home${focused ? "" : "-outline"}`
+          : "md-home"
       }
     />
   )
@@ -39,7 +40,21 @@ PostBountyStack.navigationOptions = {
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={Platform.OS === "ios" ? "ios-options" : "md-options"}
+      name={Platform.OS === "ios" ? "ios-bulb" : "md-paper-plane"}
+    />
+  )
+};
+
+const FindBountyStack = createStackNavigator({
+  tabBarLabel: FindBountyScreen
+});
+
+FindBountyStack.navigationOptions = {
+  tabBarLabel: "Find Bounty",
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={Platform.OS === "ios" ? "ios-search" : "md-search"}
     />
   )
 };
@@ -67,7 +82,7 @@ SettingsStack.navigationOptions = {
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={Platform.OS === "ios" ? "ios-options" : "md-options"}
+      name={Platform.OS === "ios" ? "ios-options" : "md-cog"}
     />
   )
 };
@@ -81,13 +96,14 @@ ProfileStack.navigationOptions = {
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={Platform.OS === "ios" ? "ios-options" : "md-options"}
+      name={Platform.OS === "ios" ? "ios-happy" : "md-person"}
     />
   )
 };
 
 export default createBottomTabNavigator({
   HomeStack,
+  FindBountyStack,
   PostBountyStack,
   ProfileStack,
   SettingsStack

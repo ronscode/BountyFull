@@ -1,9 +1,10 @@
 {
   "devToolsPort": 19003,
-  "expoServerPort": null,
-  "packagerPort": null,
-  "packagerPid": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null
+  "expoServerPort": 19001,
+  "packagerPort": 19004,
+  "packagerPid": 58885,
+  "expoServerNgrokUrl": "https://wg-kq3.anonymous.client.exp.direct",
+  "packagerNgrokUrl": "https://packager.wg-kq3.anonymous.client.exp.direct",
+  "ngrokPid": 58915,
+  "webpackServerPort": null
 }

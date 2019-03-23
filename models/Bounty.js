@@ -13,7 +13,11 @@ const BountySchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    isComplete: {
+    isStarted: {
+        type: Boolean,
+        required: true
+    },
+    isCleaned: {
         type: Boolean,
         required: true
     },
@@ -21,11 +25,11 @@ const BountySchema = new mongoose.Schema({
         type: Boolean,
         required: true
     },
-    isStarted: {
+    isPaid: {
         type: Boolean,
         required: true
     },
-    isPaid: {
+    isComplete: {
         type: Boolean,
         required: true
     },

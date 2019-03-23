@@ -3,6 +3,7 @@ const router = express.Router();
 
 // Core Functionality
 const makeBounty = require('./functions/makeBounty');
+const updateBounty = require('./functions/updateBounty');
 
 // Database Models
 const User = require('../models/User');
@@ -16,24 +17,32 @@ router.post('/', (req, res) => {
         res.status(400).send(post.errors)
     } else {
         let newBounty = new Bounty({ ...post })
-        console.log(newBounty)
         newBounty.save()
-            .then(reply => res.status(200).json(reply))
+            .then(reply => res.send(reply))
             .catch(err => res.status(400).send(
                 [{msg: 'Something happened!'}]
             ))
     }
 });
 
-router.put('/update/:id', (req, res) => {
-    let { id } = req.params;
-    Bounty.findOne({_id : id })
-    res.send('Good');
-});
-
-router.put('/verify/:id', (req, res) => {
-    let { id } = req.params;
-    res.send('Good');
+router.put('/update/', (req, res) => {
+    Bounty.findOne({ _id: req.body.id })
+        .then(reply => {
+            let update = updateBounty(reply, req.body);
+            if(update.isVerified){
+                /****************************
+                        DO PAYMENT STUFF
+                *****************************/
+                update = updateBounty(update);
+            }
+            if(update.isPaid){ update = updateBounty(reply) }
+            if(update.errors && update.errors.length > 0) {
+                throw update.errors 
+            } else{
+                res.send(update);
+            }
+        })
+        .catch(err => res.status(400).send(err));
 });
 
 module.exports = router;

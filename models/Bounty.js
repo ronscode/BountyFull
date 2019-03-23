@@ -8,7 +8,6 @@ const BountySchema = new mongoose.Schema({
     },
     claimer: {
         type: String,
-        required: true
     },
     bountyAmount:{
         type: Number,

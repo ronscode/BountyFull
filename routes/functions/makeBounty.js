@@ -14,8 +14,8 @@ module.exports = (body) => {
         isStarted: false,
         isPaid: false,
         timeStarted: '',
-        timeEnded: '',
-    }
+        timeEnded: ''
+    };
     let newBounty = {
         ...defaultValues,
         poster,

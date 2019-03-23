@@ -1,6 +1,5 @@
 const intiialState = {
     bounty: {
-        bounty_id: 1,
         poster_id : 0,
         claimed_id : 0,
         bounty_amount : 0,
@@ -14,11 +13,12 @@ const intiialState = {
         time_completed: '',
         isStarted : false,
         isComplete : false,
-        isVerified : false
+        isVerified : false,
+        isPaid : false
     },
 
     users: {
-        user_id: 0,
+        user_id : 0,
         firstName : '',
         lastName : '',
         email : '',
@@ -36,7 +36,7 @@ const intiialState = {
 const reducer = (state = intiialState, actions) =>{
 
     //destructured payloads
-    let { type, user,  } = actions
+    let { type, bounty, user, picture } = actions
 
     switch(type){
 
@@ -49,11 +49,13 @@ const reducer = (state = intiialState, actions) =>{
         }
         case "GET_BOUNTY": 
         return{
-            
+            ...state,
+            bounty : bounty
         }
         case "PICTURE": 
         return{
-            
+            ...state,
+            picture : picture
         }
         
         //CLEANER STORY 
@@ -63,7 +65,9 @@ const reducer = (state = intiialState, actions) =>{
         }
         case "START_BOUNTY": 
         return{
-            
+            ...state,
+            before_pic_url : state.bounty.picture.before_pic_url,
+            isStarted : !state.bounty.isStarted
         }
         case "COMPLETE_BOUNTY": 
         return{
@@ -73,12 +77,18 @@ const reducer = (state = intiialState, actions) =>{
         //POSTER
         case "POST_BOUNTY": 
         return{
-            
+            ...state,
+            user: {
+                ...user,
+                user_id : state.bounty.poster_id
+            }
         }
         case "VERIFY_BOUNTY": 
         return{
             ...state,
-            isComplete : !state.isComplete
+            isComplete : !state.isComplete,
+            isPaid : !state.bounty.isPaid
+
         }
 
         default :

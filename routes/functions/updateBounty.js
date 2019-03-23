@@ -1,23 +1,24 @@
 module.exports = (bounty, body) => {
-    let { picUrl, claimer } = body;
     let { isStarted, isCleaned, isVerified, isPaid} = bounty
     if(!isStarted){
         return {
             ...bounty,
-            claimer,
+            claimer: body.claimer,
+            timeStarted: Date.now(),
             isStarted: true,
             pictures: {
                 ...bounty.pictures,
-                start: picUrl
+                start: body.picUrl
             }
         }
     } else if (!isCleaned){
         return {
             ...bounty,
             isCleaned: true,
+            timeEnded: Date.now(),
             pictures: {
                 ...bounty.pictures,
-                end: picUrl
+                end: body.picUrl
             }
         }
     } else if(!isVerified){

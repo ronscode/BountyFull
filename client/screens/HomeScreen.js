@@ -128,6 +128,11 @@ export default class HomeScreen extends React.Component {
       "https://docs.expo.io/versions/latest/guides/up-and-running.html#can-t-see-your-changes"
     );
   };
+  // Opens the Camera
+  _buttonCameraExample = () => {
+    console.log("Camera Example");
+    this.props.navigation.navigate("CameraExampleStack");
+  };
 
   // Navigates to the post a bounty page
   _buttonPostBounty = () => {

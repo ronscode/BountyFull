@@ -13,7 +13,7 @@ import FetchLocation from "../components/FetchLocation";
 import UsersMap from "../components/UsersMap";
 import { MonoText } from "../components/StyledText";
 
-export default class FindBountycreen extends React.Component {
+export default class FindBountyScreen extends React.Component {
   static navigationOptions = {
     header: null
   };

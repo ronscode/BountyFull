@@ -18,13 +18,28 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    postedBounty: {
+    bio: {
+        type: String
+    },
+    profilePic: {
+        type: String
+    },
+    totalEarnings: {
+        type: Number,
+        required: true
+    },
+    totalHours: {
+        type: Number,
+        required: true
+    },
+    inProgress: {
+        type: Boolean,
+        required: true
+    },
+    completed: {
         type: mongoose.Mixed
     },
-    inprogressBounty: {
-        type: mongoose.Mixed
-    },
-    claimedBounties: {
+    posted: {
         type: mongoose.Mixed
     }
 })

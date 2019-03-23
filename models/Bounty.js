@@ -8,7 +8,6 @@ const BountySchema = new mongoose.Schema({
     },
     claimer: {
         type: String,
-        required: true
     },
     bountyAmount:{
         type: Number,
@@ -34,11 +33,9 @@ const BountySchema = new mongoose.Schema({
         type: mongoose.Mixed,
         required: true
     },
-    beforePic: {
-        type: String,
-    },
-    beforePic: {
-        type: String,
+    pictures: {
+        type: mongoose.Mixed,
+        required: true
     },
     timeStarted: {
         type: String

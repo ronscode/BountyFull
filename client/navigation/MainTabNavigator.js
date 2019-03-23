@@ -1,60 +1,110 @@
-import React from 'react';
-import { Platform } from 'react-native';
-import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+import React from "react";
+import { Platform } from "react-native";
+import {
+  createStackNavigator,
+  createBottomTabNavigator
+} from "react-navigation";
 
-import TabBarIcon from '../components/TabBarIcon';
-import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
-import SettingsScreen from '../screens/SettingsScreen';
+import TabBarIcon from "../components/TabBarIcon";
+import HomeScreen from "../screens/HomeScreen";
+import LinksScreen from "../screens/LinksScreen";
+import ProfileScreen from "../screens/ProfileScreen";
+import SettingsScreen from "../screens/SettingsScreen";
+import PostBountyScreen from "../screens/PostBountyScreen";
+import FindBountyScreen from "../screens/FindBountyScreen";
 
 const HomeStack = createStackNavigator({
-  Home: HomeScreen,
+  Home: HomeScreen
 });
 
 HomeStack.navigationOptions = {
-  tabBarLabel: 'Home',
+  tabBarLabel: "Home",
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
       name={
-        Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'md-information-circle'
+        Platform.OS === "ios"
+          ? `ios-home${focused ? "" : "-outline"}`
+          : "md-home"
       }
     />
-  ),
+  )
 };
 
-const LinksStack = createStackNavigator({
-  Links: LinksScreen,
+const PostBountyStack = createStackNavigator({
+  tabBarLabel: PostBountyScreen
 });
 
-LinksStack.navigationOptions = {
-  tabBarLabel: 'Links',
+PostBountyStack.navigationOptions = {
+  tabBarLabel: "Post Bounty",
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'}
+      name={Platform.OS === "ios" ? "ios-bulb" : "md-paper-plane"}
     />
-  ),
+  )
 };
 
+const FindBountyStack = createStackNavigator({
+  tabBarLabel: FindBountyScreen
+});
+
+FindBountyStack.navigationOptions = {
+  tabBarLabel: "Find Bounty",
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={Platform.OS === "ios" ? "ios-search" : "md-search"}
+    />
+  )
+};
+
+// const LinksStack = createStackNavigator({
+//   Links: LinksScreen
+// });
+
+// LinksStack.navigationOptions = {
+//   tabBarLabel: "Links",
+//   tabBarIcon: ({ focused }) => (
+//     <TabBarIcon
+//       focused={focused}
+//       name={Platform.OS === "ios" ? "ios-link" : "md-link"}
+//     />
+//   )
+// };
+
 const SettingsStack = createStackNavigator({
-  Settings: SettingsScreen,
+  Settings: SettingsScreen
 });
 
 SettingsStack.navigationOptions = {
-  tabBarLabel: 'Settings',
+  tabBarLabel: "Settings",
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'}
+      name={Platform.OS === "ios" ? "ios-options" : "md-cog"}
     />
-  ),
+  )
+};
+
+const ProfileStack = createStackNavigator({
+  tabBarLabel: ProfileScreen
+});
+
+ProfileStack.navigationOptions = {
+  tabBarLabel: "Profile",
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={Platform.OS === "ios" ? "ios-happy" : "md-person"}
+    />
+  )
 };
 
 export default createBottomTabNavigator({
   HomeStack,
-  LinksStack,
-  SettingsStack,
+  FindBountyStack,
+  PostBountyStack,
+  ProfileStack,
+  SettingsStack
 });

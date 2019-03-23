@@ -19,7 +19,10 @@ const usersMap = props => {
         }}
         region={props.userLocation}
         style={styles.map}
-      />
+      >
+        {/* drops a marker pin for your location after pressing the get location button */}
+        {userLocationMarker}
+      </MapView>
     </View>
   );
 };
@@ -27,7 +30,7 @@ const usersMap = props => {
 const styles = StyleSheet.create({
   mapContainer: {
     width: "100%",
-    height: "50%",
+    height: "75%",
     marginTop: "10%"
   },
   map: {

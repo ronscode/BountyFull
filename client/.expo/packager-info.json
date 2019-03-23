@@ -1,19 +1,9 @@
 {
   "devToolsPort": 19002,
-<<<<<<< HEAD
   "expoServerPort": null,
   "packagerPort": null,
   "packagerPid": null,
   "expoServerNgrokUrl": null,
   "packagerNgrokUrl": null,
   "ngrokPid": null
-=======
-  "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 82159,
-  "expoServerNgrokUrl": "https://jf-apt.ronscode.client.exp.direct",
-  "packagerNgrokUrl": "https://packager.jf-apt.ronscode.client.exp.direct",
-  "ngrokPid": 82186,
-  "webpackServerPort": null
->>>>>>> master
 }

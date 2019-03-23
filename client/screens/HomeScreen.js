@@ -6,14 +6,38 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  View
+  View,
+  Button
 } from "react-native";
 import { WebBrowser } from "expo";
 import FetchLocation from "../components/FetchLocation";
 import UsersMap from "../components/UsersMap";
+import CameraExample from "../components/CameraExample";
 import { MonoText } from "../components/StyledText";
 
 export default class HomeScreen extends React.Component {
+  // Get Location button handler
+  state = {
+    userLocation: null
+  };
+  getUserLocationHandler = () => {
+    console.log("Get location button pressed.");
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        this.setState({
+          userLocation: {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421
+          }
+        });
+        console.log(position);
+      },
+      err => console.log(err)
+    );
+  };
+
   static navigationOptions = {
     header: null
   };
@@ -36,9 +60,19 @@ export default class HomeScreen extends React.Component {
               style={styles.welcomeImage}
             />
             <Text style={styles.getStartedText}>
-              Earn bounties for picking up litter. Post bounties for a cleaner
-              world.
+              💰Earn bounties for picking up litter.
             </Text>
+            <Text style={styles.getStartedText}>
+              ⛳ Post bounties for a cleaner world.
+            </Text>
+            <Button onPress={this._buttonPostBounty} title="Post a Bounty" />
+            <Text> </Text>
+            <Button
+              onPress={this._buttonFindOpenBounty}
+              title="Find A Litter Bounty"
+            />
+            <FetchLocation onGetLocation={this.getUserLocationHandler} />
+            <UsersMap userLocation={this.state.userLocation} />
           </View>
 
           <View style={styles.getStartedContainer}>
@@ -63,10 +97,14 @@ export default class HomeScreen extends React.Component {
       );
 
       return (
-        <Text style={styles.developmentModeText}>
-          -Map loads here with bounties? (dev mode) -Buttons for find/post
-          bounties
-        </Text>
+        <View>
+          <Text style={styles.developmentModeText}>
+            -Map loads here with bounties? (we are in dev mode)
+          </Text>
+          <Text style={styles.developmentModeText}>
+            -Light on style for now, heavy on fun(ction)
+          </Text>
+        </View>
       );
     } else {
       return (
@@ -87,6 +125,18 @@ export default class HomeScreen extends React.Component {
     WebBrowser.openBrowserAsync(
       "https://docs.expo.io/versions/latest/guides/up-and-running.html#can-t-see-your-changes"
     );
+  };
+
+  // Navigates to the post a bounty page
+  _buttonPostBounty = () => {
+    console.log("Navigate to post a bounty");
+    this.props.navigation.navigate("PostBountyStack");
+  };
+
+  // Navigates to find open bounties
+  _buttonFindOpenBounty = () => {
+    console.log("Navigate to find an open bounty");
+    this.props.navigation.navigate("FindBountyStack");
   };
 }
 

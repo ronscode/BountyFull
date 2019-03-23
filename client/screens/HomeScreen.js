@@ -14,6 +14,7 @@ import FetchLocation from "../components/FetchLocation";
 import UsersMap from "../components/UsersMap";
 import CameraExample from "../components/CameraExample";
 import { MonoText } from "../components/StyledText";
+import AuthScreen from "../components/AuthScreen";
 
 export default class HomeScreen extends React.Component {
   // Get Location button handler
@@ -71,6 +72,7 @@ export default class HomeScreen extends React.Component {
               onPress={this._buttonFindOpenBounty}
               title="Find A Litter Bounty"
             />
+            <AuthScreen />
             <FetchLocation onGetLocation={this.getUserLocationHandler} />
             <UsersMap userLocation={this.state.userLocation} />
           </View>

@@ -5,14 +5,7 @@ const router = express.Router();
 const updateBounty = require('./functions/updateBounty')
 
 // Database Models
-const User = require('../models/User');
 const Bounty = require('../models/Bounty');
-
-// Routes for finding litter bounties
-// router.get('/', (req, res) => {
-//     Bounty.find
-//     res.send('Good');
-// });
 
 router.get('/:started?', (req, res) => {
     let search = req.params.started === 'started';
@@ -23,14 +16,22 @@ router.get('/:started?', (req, res) => {
         ))
 });
 
+router.get('/status/:id', (req, res) => {
+    Bounty.find({ _id: req.params.id })
+        .then(reply => res.send(reply))
+        .catch(err => res.status(400).send([{ msg: 'Something happened!' }]));
+});
+
 router.put('/update/', (req, res) => {
     Bounty.findOne({ _id : req.body.id})
         .then(reply => {
-            let update = updateBounty(reply, req.body);
+            let update = updateBounty(reply._doc, req.body);
             if(update.errors && update.errors.length > 0){
                 throw update.errors;
             } else{
-                res.send(update);
+                Bounty.findOneAndUpdate({ _id: update._id }, update)
+                    .then(reply => res.send(update))
+                    .catch(err => { throw [{ msg: 'Bounty not updated!' }] })
             }
         })
         .catch(err => res.status(400).send(err));

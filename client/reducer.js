@@ -12,12 +12,13 @@ const intiialState = {
         time_started : '',
         time_completed: '',
         isStarted : false,
-        isComplete : false,
+        isCleaned : false,
         isVerified : false,
-        isPaid : false
+        isPaid : false,
+        isComplete : false
     },
 
-    users: {
+    user: {
         user_id : 0,
         firstName : '',
         lastName : '',
@@ -44,9 +45,13 @@ const reducer = (state = intiialState, actions) =>{
         case "SAVE_USER": 
         return{
             ...state,
-            users : user
+            user : user //this is an object
             
         }
+
+        //list bouty action somewhere 
+
+
         case "GET_BOUNTY": 
         return{
             ...state,
@@ -55,11 +60,15 @@ const reducer = (state = intiialState, actions) =>{
         case "PICTURE": 
         return{
             ...state,
-            picture : picture
+            bounty : {
+                ...state.bounty,
+                picture : picture
+            }
+
         }
         
         //CLEANER STORY 
-        case "PICK_BOUNTY": 
+        case "PICK_BOUNTY":  //consider making this a button   
         return{
             
         }
@@ -71,7 +80,15 @@ const reducer = (state = intiialState, actions) =>{
         }
         case "COMPLETE_BOUNTY": 
         return{
-            
+            ...state,
+            bounty : {
+                ...state.bounty,
+                picture : {
+                    ...picture,
+                    after_pic_url : state.bounty.picture.after_pic_url
+                },
+                isCleaned : !state.bounty.isCleaned
+            } 
         }
 
         //POSTER
@@ -88,7 +105,6 @@ const reducer = (state = intiialState, actions) =>{
             ...state,
             isComplete : !state.isComplete,
             isPaid : !state.bounty.isPaid
-
         }
 
         default :

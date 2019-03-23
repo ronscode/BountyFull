@@ -11,6 +11,7 @@ import {
 import { WebBrowser } from "expo";
 import FetchLocation from "../components/FetchLocation";
 import UsersMap from "../components/UsersMap";
+// import CameraExample from "../components/CameraExample";
 import { MonoText } from "../components/StyledText";
 
 export default class PostBountycreen extends React.Component {

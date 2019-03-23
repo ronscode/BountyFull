@@ -16,6 +16,28 @@ import CameraExample from "../components/CameraExample";
 import { MonoText } from "../components/StyledText";
 
 export default class HomeScreen extends React.Component {
+  // Get Location button handler
+  state = {
+    userLocation: null
+  };
+  getUserLocationHandler = () => {
+    console.log("Get location button pressed.");
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        this.setState({
+          userLocation: {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421
+          }
+        });
+        console.log(position);
+      },
+      err => console.log(err)
+    );
+  };
+
   static navigationOptions = {
     header: null
   };
@@ -49,6 +71,8 @@ export default class HomeScreen extends React.Component {
               onPress={this._buttonFindOpenBounty}
               title="Find A Litter Bounty"
             />
+            <FetchLocation onGetLocation={this.getUserLocationHandler} />
+            <UsersMap userLocation={this.state.userLocation} />
           </View>
 
           <View style={styles.getStartedContainer}>

@@ -40,6 +40,11 @@ export default class FindBountycreen extends React.Component {
             <Text style={styles.getStartedText}>
               Find a litter clean up bounty near you!
             </Text>
+            <Text>Map with bounty pins.</Text>
+            <Text>Top 10 offers button?</Text>
+            <Text>
+              We should look at other apps like Roadie or similar for ideas.
+            </Text>
           </View>
 
           <View style={styles.getStartedContainer}>

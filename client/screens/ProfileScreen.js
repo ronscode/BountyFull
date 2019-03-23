@@ -36,8 +36,6 @@ export default class ProfileScreen extends React.Component {
           </View>
 
           <View style={styles.getStartedContainer}>
-            {this._maybeRenderDevelopmentModeWarning()}
-
             <Text style={styles.getStartedText}>PROFILE PAGE</Text>
 
             <View
@@ -77,6 +75,7 @@ export default class ProfileScreen extends React.Component {
             </MonoText>
           </View>
         </View>
+        {this._maybeRenderDevelopmentModeWarning()}
       </View>
     );
   }

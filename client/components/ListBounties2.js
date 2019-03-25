@@ -7,7 +7,12 @@ import {
   Platform,
   StyleSheet
 } from "react-native";
+import {
+  createStackNavigator,
+  createBottomTabNavigator
+} from "react-navigation";
 import { List, Button } from "react-native-elements";
+// import AppNavigator from "./navigation/AppNavigator";
 
 const demoData = [
   {
@@ -51,13 +56,34 @@ export default class ListBounties2 extends Component {
         renderSectionHeader={({ section: { title } }) => (
           <Text style={styles.bountyTitle}>{title}</Text>
         )}
-        renderSectionHeader={({ section: { title } }) => (
-          <Text style={styles.bountyTitle}>{title}</Text>
+        renderSectionFooter={({ section: { button } }) => (
+          <Button
+            onPress={() => {
+              /* 1. Navigate to the Details route with params */
+              console.log("the button was pressed");
+            }}
+            style={styles.bountyButton}
+            raised
+            rightIcon={{ name: "polymer" }}
+            title="CLAIM & CLEAN"
+          />
         )}
         sections={[
-          { title: "Banana on Sidewalk", data: ["Posted by: Zaphod", "$25"] },
-          { title: "Pile of napkins", data: ["Posted by: Mario", "$10"] },
-          { title: "Hiking trail trashed!", data: ["MasterChief", "$42"] }
+          {
+            title: "Banana on Sidewalk",
+            data: ["Posted by: Zaphod", "$25"],
+            button: "Click & Clean"
+          },
+          {
+            title: "Pile of napkins",
+            data: ["Posted by: Mario", "$10"],
+            button: "Click & Clean"
+          },
+          {
+            title: "Hiking trail trashed!",
+            data: ["MasterChief", "$42"],
+            button: "Click & Clean"
+          }
         ]}
         keyExtractor={(item, index) => item + index}
       />
@@ -86,6 +112,12 @@ const styles = StyleSheet.create({
   bountyAmount: {
     marginBottom: 10,
     color: "rgba(33,108,42,1)",
+    fontSize: 22,
+    textAlign: "center"
+  },
+  bountyButton: {
+    marginBottom: 20,
+    color: "rgba(0,0,0,0.9)",
     fontSize: 22,
     textAlign: "center"
   }

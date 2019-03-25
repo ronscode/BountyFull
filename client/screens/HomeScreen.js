@@ -53,27 +53,46 @@ export default class HomeScreen extends React.Component {
         >
           <View style={styles.welcomeContainer}>
             <Text style={styles.headerTopText}>BountyFull WELCOMES YOU!</Text>
+            <Text />
             <Image
               source={require("../assets/images/bin.png")}
               style={styles.welcomeImage}
             />
+            <Text />
             <Text style={styles.getStartedText}>
-              💰Earn bounties for picking up litter.
+              💰Clean litter for bounties : ⛳ Track Litter Cleanups
             </Text>
-            <Text style={styles.getStartedText}>
-              ⛳ Post bounties for a cleaner world.
-            </Text>
+
             <Text />
 
             <Text />
-            <Button onPress={this._buttonPostBounty} title="Post a Bounty" />
+            <View style={styles.homeButton}>
+              <Button
+                type={"outline"}
+                raised={true}
+                onPress={this._buttonPostBounty}
+                title="Post Bounty For Cleanup"
+              />
+            </View>
             <Text />
-            <Button
-              onPress={this._buttonFindOpenBounty}
-              title="Find A Litter Bounty"
-            />
+            <View style={styles.homeButton}>
+              <Button
+                type={"outline"}
+                raised={true}
+                onPress={this._buttonFindOpenBounty}
+                title="Find Litter Bounty"
+              />
+            </View>
             <Text />
-
+            <View style={styles.homeButton}>
+              <Button
+                type={"outline"}
+                raised={true}
+                onPress={this._buttonTrackCleanUp}
+                title="Track Litter Cleanup"
+              />
+            </View>
+            <Text />
             <FetchLocation onGetLocation={this.getUserLocationHandler} />
             <Text />
             <AuthScreen />
@@ -148,6 +167,12 @@ export default class HomeScreen extends React.Component {
     console.log("Navigate to find an open bounty");
     this.props.navigation.navigate("FindBountyStack");
   };
+
+  // Navigates to track clean up
+  _buttonTrackCleanUp = () => {
+    console.log("Track clean up button pressed");
+    this.props.navigation.navigate("TrackCleanStack");
+  };
 }
 
 const styles = StyleSheet.create({
@@ -159,6 +184,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingTop: 10,
     paddingBottom: 10
+  },
+  homeButton: {
+    flex: 1,
+    width: "85%",
+    fontSize: 15,
+    height: 32,
+    marginTop: 10
   },
   developmentModeText: {
     marginBottom: 20,

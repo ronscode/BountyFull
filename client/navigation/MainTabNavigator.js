@@ -13,9 +13,12 @@ import SettingsScreen from "../screens/SettingsScreen";
 import PostBountyScreen from "../screens/PostBountyScreen";
 import FindBountyScreen from "../screens/FindBountyScreen";
 import CameraExampleScreen from "../screens/CameraExampleScreen";
+import CameraScreen from "../components/CameraScreen";
+import TrackCleanScreen from "../screens/TrackCleanScreen";
 
 const HomeStack = createStackNavigator({
-  Home: HomeScreen
+  Home: HomeScreen,
+  Camera: CameraExampleScreen
 });
 
 HomeStack.navigationOptions = {
@@ -41,7 +44,7 @@ CameraExampleStack.navigationOptions = {
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={Platform.OS === "ios" ? "ios-search" : "md-search"}
+      name={Platform.OS === "ios" ? "ios-camera" : "md-camera"}
     />
   )
 };
@@ -88,16 +91,16 @@ FindBountyStack.navigationOptions = {
 //   )
 // };
 
-const SettingsStack = createStackNavigator({
-  Settings: SettingsScreen
+const TrackCleanStack = createStackNavigator({
+  Settings: TrackCleanScreen
 });
 
-SettingsStack.navigationOptions = {
-  tabBarLabel: "Settings",
+TrackCleanStack.navigationOptions = {
+  tabBarLabel: "Track Clean Up",
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={Platform.OS === "ios" ? "ios-options" : "md-cog"}
+      name={Platform.OS === "ios" ? "ios-watch" : "md-watch"}
     />
   )
 };
@@ -118,9 +121,9 @@ ProfileStack.navigationOptions = {
 
 export default createBottomTabNavigator({
   HomeStack,
+  TrackCleanStack,
   FindBountyStack,
   PostBountyStack,
   ProfileStack,
-  SettingsStack,
   CameraExampleStack
 });

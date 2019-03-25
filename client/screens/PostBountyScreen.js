@@ -16,7 +16,7 @@ import { MonoText } from "../components/StyledText";
 import StartBountyImagePicker from "../components/StartBountyImagePicker";
 import AuthScreen from "../components/AuthScreen";
 import PostBountyInputTitle from "../components/PostBountyInputTitle";
-import BasicForm from "../components/BasicForm";
+import PostBountyForm from "../components/PostBountyForm";
 
 export default class PostBountycreen extends React.Component {
   static navigationOptions = {
@@ -31,7 +31,9 @@ export default class PostBountycreen extends React.Component {
           contentContainerStyle={styles.contentContainer}
         >
           <View style={styles.PostBountyContainer}>
-            <Text style={styles.getStartedText}>POST A BOUNTY FOR LITTER</Text>
+            <Text style={styles.getStartedText}>
+              CREATE LITTER CLEANUP BOUNTY
+            </Text>
             <Text />
 
             <Image
@@ -42,11 +44,9 @@ export default class PostBountycreen extends React.Component {
               }
               style={styles.welcomeImage}
             />
-            <Text style={styles.getStartedText}>
-              Post a picture of litter. Set a price. Gets cleaned up!
-            </Text>
+
             <Text />
-            <BasicForm />
+            <PostBountyForm />
           </View>
         </ScrollView>
       </View>

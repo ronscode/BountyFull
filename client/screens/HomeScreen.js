@@ -6,9 +6,10 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  View,
-  Button
+  View
 } from "react-native";
+
+import { Button } from "react-native-elements";
 import { WebBrowser } from "expo";
 import FetchLocation from "../components/FetchLocation";
 import UsersMap from "../components/UsersMap";
@@ -51,13 +52,9 @@ export default class HomeScreen extends React.Component {
           contentContainerStyle={styles.contentContainer}
         >
           <View style={styles.welcomeContainer}>
-            <Text style={styles.getStartedText}>BountyFull Welcomes You!</Text>
+            <Text style={styles.headerTopText}>BountyFull WELCOMES YOU!</Text>
             <Image
-              source={
-                __DEV__
-                  ? require("../assets/images/bin.png")
-                  : require("../assets/images/bin.png")
-              }
+              source={require("../assets/images/bin.png")}
               style={styles.welcomeImage}
             />
             <Text style={styles.getStartedText}>
@@ -66,14 +63,20 @@ export default class HomeScreen extends React.Component {
             <Text style={styles.getStartedText}>
               ⛳ Post bounties for a cleaner world.
             </Text>
+            <Text />
+
+            <Text />
             <Button onPress={this._buttonPostBounty} title="Post a Bounty" />
-            <Text> </Text>
+            <Text />
             <Button
               onPress={this._buttonFindOpenBounty}
               title="Find A Litter Bounty"
             />
-            <AuthScreen />
+            <Text />
+
             <FetchLocation onGetLocation={this.getUserLocationHandler} />
+            <Text />
+            <AuthScreen />
             <UsersMap userLocation={this.state.userLocation} />
           </View>
 
@@ -152,6 +155,11 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff"
   },
+  homeButtons: {
+    alignItems: "center",
+    paddingTop: 10,
+    paddingBottom: 10
+  },
   developmentModeText: {
     marginBottom: 20,
     color: "rgba(0,0,0,0.4)",
@@ -189,11 +197,14 @@ const styles = StyleSheet.create({
     borderRadius: 3,
     paddingHorizontal: 4
   },
-  getStartedText: {
-    fontSize: 17,
+  headerTopText: {
+    fontSize: 22,
+    fontWeight: "bold",
     color: "rgba(96,100,109, 1)",
     lineHeight: 24,
-    textAlign: "center"
+    textAlign: "center",
+    marginTop: 2,
+    marginBottom: 2
   },
   tabBarInfoContainer: {
     position: "absolute",

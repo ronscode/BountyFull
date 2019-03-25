@@ -9,6 +9,7 @@ import {
   View
 } from "react-native";
 import { WebBrowser } from "expo";
+import AuthScreen from "../components/AuthScreen";
 
 import { MonoText } from "../components/StyledText";
 
@@ -25,14 +26,7 @@ export default class ProfileScreen extends React.Component {
           contentContainerStyle={styles.contentContainer}
         >
           <View style={styles.welcomeContainer}>
-            <Image
-              source={
-                __DEV__
-                  ? require("../assets/images/robot-dev.png")
-                  : require("../assets/images/robot-prod.png")
-              }
-              style={styles.welcomeImage}
-            />
+            <AuthScreen />
           </View>
 
           <View style={styles.getStartedContainer}>

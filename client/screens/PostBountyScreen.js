@@ -13,6 +13,10 @@ import FetchLocation from "../components/FetchLocation";
 import UsersMap from "../components/UsersMap";
 // import CameraExample from "../components/CameraExample";
 import { MonoText } from "../components/StyledText";
+import StartBountyImagePicker from "../components/StartBountyImagePicker";
+import AuthScreen from "../components/AuthScreen";
+import PostBountyInputTitle from "../components/PostBountyInputTitle";
+import BasicForm from "../components/BasicForm";
 
 export default class PostBountycreen extends React.Component {
   static navigationOptions = {
@@ -26,8 +30,10 @@ export default class PostBountycreen extends React.Component {
           style={styles.container}
           contentContainerStyle={styles.contentContainer}
         >
-          <View style={styles.welcomeContainer}>
+          <View style={styles.PostBountyContainer}>
             <Text style={styles.getStartedText}>POST A BOUNTY FOR LITTER</Text>
+            <Text />
+
             <Image
               source={
                 __DEV__
@@ -37,16 +43,10 @@ export default class PostBountycreen extends React.Component {
               style={styles.welcomeImage}
             />
             <Text style={styles.getStartedText}>
-              Post a picture of litter. Set a price. Set the time. Notes. Go
-              live!
+              Post a picture of litter. Set a price. Gets cleaned up!
             </Text>
-          </View>
-
-          <View style={styles.getStartedContainer}>
-            <View
-              style={[styles.codeHighlightContainer, styles.homeScreenFilename]}
-            />
-            {/* <UsersMap /> */}
+            <Text />
+            <BasicForm />
           </View>
         </ScrollView>
       </View>
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
   contentContainer: {
     paddingTop: 30
   },
-  welcomeContainer: {
+  PostBountyContainer: {
     alignItems: "center",
     marginTop: 10,
     marginBottom: 20

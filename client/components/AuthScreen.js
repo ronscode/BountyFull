@@ -1,6 +1,7 @@
 import React from "react";
-import { StyleSheet, Text, View, Image, Button } from "react-native";
+import { StyleSheet, Text, View, Image } from "react-native";
 import Google from "expo";
+import { Button } from "react-native-elements";
 
 export default class App extends React.Component {
   constructor(props) {
@@ -49,7 +50,6 @@ export default class App extends React.Component {
 const LoginPage = props => {
   return (
     <View>
-      <Text style={styles.header}>Sign In With Google</Text>
       <Button title="Sign in with Google" onPress={() => props.signIn()} />
     </View>
   );

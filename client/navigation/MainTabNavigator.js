@@ -12,6 +12,7 @@ import ProfileScreen from "../screens/ProfileScreen";
 import SettingsScreen from "../screens/SettingsScreen";
 import PostBountyScreen from "../screens/PostBountyScreen";
 import FindBountyScreen from "../screens/FindBountyScreen";
+import CameraExampleScreen from "../screens/CameraExampleScreen";
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen
@@ -27,6 +28,20 @@ HomeStack.navigationOptions = {
           ? `ios-home${focused ? "" : "-outline"}`
           : "md-home"
       }
+    />
+  )
+};
+
+const CameraExampleStack = createStackNavigator({
+  tabBarLabel: CameraExampleScreen
+});
+
+CameraExampleStack.navigationOptions = {
+  tabBarLabel: "Camera",
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={Platform.OS === "ios" ? "ios-search" : "md-search"}
     />
   )
 };
@@ -106,5 +121,6 @@ export default createBottomTabNavigator({
   FindBountyStack,
   PostBountyStack,
   ProfileStack,
-  SettingsStack
+  SettingsStack,
+  CameraExampleStack
 });

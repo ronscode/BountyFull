@@ -14,6 +14,7 @@ import FetchLocation from "../components/FetchLocation";
 import { MonoText } from "../components/StyledText";
 import PostBountyInputTitle from "../components/PostBountyInputTitle";
 import TrackCleanForm from "../components/TrackCleanForm";
+import TestImageUpload from "../components/TestImageUpload";
 
 export default class TrackCleanScreen extends React.Component {
   static navigationOptions = {
@@ -29,39 +30,22 @@ export default class TrackCleanScreen extends React.Component {
         >
           <View style={styles.PostBountyContainer}>
             <Text style={styles.trackCleanHeader}>TRACK YOUR CLEAN UP</Text>
+            <Text style={styles.trackCleanHeader}>CURRENTLY CLEANING:</Text>
+            <Text>Hiking Trail is Trashed! Please Help!</Text>
+            <Text />
+            <Text>POSTED BY: Zaphod Beeblbrox</Text>
+            <Text style={styles.trackCleanHeader}>BEFORE IMAGE</Text>
+            <Image
+              source={require("../assets/images/demo/before_1.jpg")}
+              style={{ width: 150, height: 150 }}
+            />
 
-            <View style={styles.homeButton}>
-              <Button
-                onPress={() => {
-                  /* 1. Navigate to the Details route with params */
-                  console.log("the start clean picture button was pressed");
-                }}
-                style={styles.bountyButton}
-                raised
-                rightIcon={{ name: "polymer" }}
-                title="TAKE A START PICTURE"
-              />
-            </View>
-            <Text />
-            <Text />
             <TrackCleanForm />
           </View>
         </ScrollView>
       </View>
     );
   }
-
-  _handleLearnMorePress = () => {
-    WebBrowser.openBrowserAsync(
-      "https://docs.expo.io/versions/latest/guides/development-mode"
-    );
-  };
-
-  _handleHelpPress = () => {
-    WebBrowser.openBrowserAsync(
-      "https://docs.expo.io/versions/latest/guides/up-and-running.html#can-t-see-your-changes"
-    );
-  };
 }
 
 const styles = StyleSheet.create({

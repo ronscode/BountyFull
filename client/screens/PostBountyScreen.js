@@ -9,13 +9,8 @@ import {
   View
 } from "react-native";
 import { WebBrowser } from "expo";
-import FetchLocation from "../components/FetchLocation";
-import UsersMap from "../components/UsersMap";
-// import CameraExample from "../components/CameraExample";
 import { MonoText } from "../components/StyledText";
-import StartBountyImagePicker from "../components/StartBountyImagePicker";
 import AuthScreen from "../components/AuthScreen";
-import PostBountyInputTitle from "../components/PostBountyInputTitle";
 import PostBountyForm from "../components/PostBountyForm";
 
 export default class PostBountycreen extends React.Component {
@@ -31,45 +26,30 @@ export default class PostBountycreen extends React.Component {
           contentContainerStyle={styles.contentContainer}
         >
           <View style={styles.PostBountyContainer}>
-            <Text style={styles.getStartedText}>
+            <Text style={styles.headerTopText}>
               CREATE LITTER CLEANUP BOUNTY
             </Text>
-            <Text />
-
-            <Image
-              source={
-                __DEV__
-                  ? require("../assets/images/bin.png")
-                  : require("../assets/images/bin.png")
-              }
-              style={styles.welcomeImage}
-            />
-
-            <Text />
             <PostBountyForm />
           </View>
         </ScrollView>
       </View>
     );
   }
-
-  _handleLearnMorePress = () => {
-    WebBrowser.openBrowserAsync(
-      "https://docs.expo.io/versions/latest/guides/development-mode"
-    );
-  };
-
-  _handleHelpPress = () => {
-    WebBrowser.openBrowserAsync(
-      "https://docs.expo.io/versions/latest/guides/up-and-running.html#can-t-see-your-changes"
-    );
-  };
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff"
+  },
+  headerTopText: {
+    fontSize: 22,
+    fontWeight: "bold",
+    color: "rgba(96,100,109, 1)",
+    lineHeight: 24,
+    textAlign: "center",
+    marginTop: 2,
+    marginBottom: 2
   },
   developmentModeText: {
     marginBottom: 20,

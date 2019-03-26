@@ -13,6 +13,7 @@ import {
 } from "react-native";
 import UsersMap from "../components/UsersMap";
 import FetchBountyLocation from "../components/FetchBountyLocation";
+import axios from 'axios';
 
 const initialValues = {
   image: ""
@@ -40,12 +41,19 @@ export default class App extends React.Component {
     );
   };
   onSubmit(values) {
-    //List of form values
-    console.log(values);
-    Alert.alert(
-      "Thank you! Your bounty {values.BountyTitle} for {values.BountyAmount} has been posted." +
-        JSON.stringify(values)
-    );
+    //List of form values to be inserted here
+    let body = {
+        poster: '',
+        amount: '',
+        location: '',
+        picture: '',
+        title: ''
+    };
+    let message = 'Thank you! Your bounty {values.BountyTitle} for {values.BountyAmount} has been posted.';
+    axios.get('http://192.168.1.9:3001/list/', body)
+      .then(res => this.props.saveBounty(res.data))
+      .then(() => Alert.alert(message))
+      .catch(err => console.log(err))
     Keyboard.dismiss();
   }
 

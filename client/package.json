@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@expo/samples": "2.1.1",
+    "axios": "^0.18.0",
     "expo": "^32.0.0",
     "formik": "^1.5.1",
     "react": "16.5.0",
@@ -25,6 +26,5 @@
     "babel-preset-expo": "^5.0.0",
     "jest-expo": "^32.0.0"
   },
-  "private": true,
-  "proxy": "http://localhost:3001"
+  "private": true
 }

@@ -40,20 +40,20 @@ export default class App extends React.Component {
       err => console.log(err)
     );
   };
-  onSubmit(values) {
+  async onSubmit(values) {
     //List of form values to be inserted here
     let body = {
-        poster: '',
-        amount: '',
-        location: '',
-        picture: '',
-        title: ''
+        poster: 'Fred',
+        amount: 25,
+        location: '22232323232',
+        picture: 'URL HERE',
+        title: 'Fancy fancy title'
     };
     let message = 'Thank you! Your bounty {values.BountyTitle} for {values.BountyAmount} has been posted.';
-    axios.get('http://192.168.1.9:3001/list/', body)
+    await axios.post('http://192.168.1.9:3001/post/', body)
       .then(res => this.props.saveBounty(res.data))
-      .then(() => Alert.alert(message))
       .catch(err => console.log(err))
+    Alert.alert(message)
     Keyboard.dismiss();
   }
 

@@ -1,20 +1,9 @@
 {
-<<<<<<< HEAD
   "devToolsPort": 19003,
-  "expoServerPort": 19001,
-  "packagerPort": 19004,
-  "packagerPid": 85317,
-  "expoServerNgrokUrl": "https://wg-kq3.anonymous.client.exp.direct",
-  "packagerNgrokUrl": "https://packager.wg-kq3.anonymous.client.exp.direct",
-  "ngrokPid": 85330
-=======
-  "devToolsPort": 19002,
   "expoServerPort": null,
   "packagerPort": null,
   "packagerPid": null,
   "expoServerNgrokUrl": null,
   "packagerNgrokUrl": null,
-  "ngrokPid": null,
-  "webpackServerPort": null
->>>>>>> master
+  "ngrokPid": null
 }

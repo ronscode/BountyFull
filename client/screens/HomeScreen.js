@@ -7,15 +7,20 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  View,
-  Button
+  View
 } from "react-native";
+
+import { Button } from "react-native-elements";
 import { WebBrowser } from "expo";
 import FetchLocation from "../components/FetchLocation";
 import UsersMap from "../components/UsersMap";
 import CameraExample from "../components/CameraExample";
 import { MonoText } from "../components/StyledText";
+<<<<<<< HEAD
 //import { connect } from "tls";
+=======
+import AuthScreen from "../components/AuthScreen";
+>>>>>>> master
 
 class HomeScreen extends React.Component {
   // Get Location button handler
@@ -52,28 +57,50 @@ class HomeScreen extends React.Component {
           contentContainerStyle={styles.contentContainer}
         >
           <View style={styles.welcomeContainer}>
-            <Text style={styles.getStartedText}>BountyFull Welcomes You!</Text>
+            <Text style={styles.headerTopText}>BountyFull WELCOMES YOU!</Text>
+            <Text />
             <Image
-              source={
-                __DEV__
-                  ? require("../assets/images/bin.png")
-                  : require("../assets/images/bin.png")
-              }
+              source={require("../assets/images/bin.png")}
               style={styles.welcomeImage}
             />
+            <Text />
             <Text style={styles.getStartedText}>
-              💰Earn bounties for picking up litter.
+              💰Clean litter for bounties : ⛳ Track Litter Cleanups
             </Text>
-            <Text style={styles.getStartedText}>
-              ⛳ Post bounties for a cleaner world.
-            </Text>
-            <Button onPress={this._buttonPostBounty} title="Post a Bounty" />
-            <Text> </Text>
-            <Button
-              onPress={this._buttonFindOpenBounty}
-              title="Find A Litter Bounty"
-            />
+
+            <Text />
+
+            <Text />
+            <View style={styles.homeButton}>
+              <Button
+                type={"outline"}
+                raised={true}
+                onPress={this._buttonPostBounty}
+                title="Post Bounty For Cleanup"
+              />
+            </View>
+            <Text />
+            <View style={styles.homeButton}>
+              <Button
+                type={"outline"}
+                raised={true}
+                onPress={this._buttonFindOpenBounty}
+                title="Find Litter Bounty"
+              />
+            </View>
+            <Text />
+            <View style={styles.homeButton}>
+              <Button
+                type={"outline"}
+                raised={true}
+                onPress={this._buttonTrackCleanUp}
+                title="Track Litter Cleanup"
+              />
+            </View>
+            <Text />
             <FetchLocation onGetLocation={this.getUserLocationHandler} />
+            <Text />
+            <AuthScreen />
             <UsersMap userLocation={this.state.userLocation} />
           </View>
 
@@ -83,7 +110,6 @@ class HomeScreen extends React.Component {
             <View
               style={[styles.codeHighlightContainer, styles.homeScreenFilename]}
             />
-            {/* <UsersMap /> */}
           </View>
         </ScrollView>
       </View>
@@ -117,16 +143,10 @@ class HomeScreen extends React.Component {
     }
   }
 
-  _handleLearnMorePress = () => {
-    WebBrowser.openBrowserAsync(
-      "https://docs.expo.io/versions/latest/guides/development-mode"
-    );
-  };
-
-  _handleHelpPress = () => {
-    WebBrowser.openBrowserAsync(
-      "https://docs.expo.io/versions/latest/guides/up-and-running.html#can-t-see-your-changes"
-    );
+  // Opens the Camera
+  _buttonCameraExample = () => {
+    console.log("Camera Example");
+    this.props.navigation.navigate("CameraExampleStack");
   };
 
   // Navigates to the post a bounty page
@@ -140,12 +160,30 @@ class HomeScreen extends React.Component {
     console.log("Navigate to find an open bounty");
     this.props.navigation.navigate("FindBountyStack");
   };
+
+  // Navigates to track clean up
+  _buttonTrackCleanUp = () => {
+    console.log("Track clean up button pressed");
+    this.props.navigation.navigate("TrackCleanStack");
+  };
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff"
+  },
+  homeButtons: {
+    alignItems: "center",
+    paddingTop: 10,
+    paddingBottom: 10
+  },
+  homeButton: {
+    flex: 1,
+    width: "85%",
+    fontSize: 15,
+    height: 32,
+    marginTop: 10
   },
   developmentModeText: {
     marginBottom: 20,
@@ -184,11 +222,14 @@ const styles = StyleSheet.create({
     borderRadius: 3,
     paddingHorizontal: 4
   },
-  getStartedText: {
-    fontSize: 17,
+  headerTopText: {
+    fontSize: 22,
+    fontWeight: "bold",
     color: "rgba(96,100,109, 1)",
     lineHeight: 24,
-    textAlign: "center"
+    textAlign: "center",
+    marginTop: 2,
+    marginBottom: 2
   },
   tabBarInfoContainer: {
     position: "absolute",

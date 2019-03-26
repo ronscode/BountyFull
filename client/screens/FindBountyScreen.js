@@ -7,18 +7,52 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  View
+  View,
+  FlatList
 } from "react-native";
+import { List, ListItem } from "react-native-elements";
 import { WebBrowser } from "expo";
 import FetchLocation from "../components/FetchLocation";
 import UsersMap from "../components/UsersMap";
 import { MonoText } from "../components/StyledText";
+import ListBounties2 from "../components/ListBounties2";
 
+const list = [
+  {
+    name: "Amy Farha",
+    subtitle: "Vice President"
+  },
+  {
+    name: "Chris Jackson",
+    avatar_url:
+      "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
+    subtitle: "Vice Chairman"
+  }
+];
+
+export default class FindBountyScreen extends React.Component {
+
+  keyExtractor = (item, index) => index.toString();
+
+  renderItem = ({ item }) => (
+    <ListItem
+      title={item.name}
+      subtitle={item.subtitle}
+      leftAvatar={{
+        source: item.avatar_url && { uri: item.avatar_url },
+        title: item.name[0]
+      }}
+    />
+  );
+
+<<<<<<< HEAD
 class FindBountyScreen extends React.Component {
 
   constructor(props){
     super(props)
   }
+=======
+>>>>>>> master
   static navigationOptions = {
     header: null
   };
@@ -34,6 +68,7 @@ class FindBountyScreen extends React.Component {
             <Text style={styles.getStartedText}>
               CLEAN UP LITTER & COLLECT A PRIZE
             </Text>
+
             <Image
               source={
                 __DEV__
@@ -45,6 +80,7 @@ class FindBountyScreen extends React.Component {
             <Text style={styles.getStartedText}>
               Find a litter clean up bounty near you!
             </Text>
+<<<<<<< HEAD
             <Text>Map with bounty pins.</Text>
             <Text>Top 10 offers button?</Text>
             <Text>
@@ -55,12 +91,11 @@ class FindBountyScreen extends React.Component {
               
             </Text>
           </View>
+=======
+            <Text />
+>>>>>>> master
 
-          <View style={styles.getStartedContainer}>
-            <View
-              style={[styles.codeHighlightContainer, styles.homeScreenFilename]}
-            />
-            {/* <UsersMap /> */}
+            <ListBounties2 />
           </View>
         </ScrollView>
       </View>

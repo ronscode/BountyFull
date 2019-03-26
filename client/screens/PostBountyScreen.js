@@ -9,10 +9,9 @@ import {
   View
 } from "react-native";
 import { WebBrowser } from "expo";
-import FetchLocation from "../components/FetchLocation";
-import UsersMap from "../components/UsersMap";
-// import CameraExample from "../components/CameraExample";
 import { MonoText } from "../components/StyledText";
+import AuthScreen from "../components/AuthScreen";
+import PostBountyForm from "../components/PostBountyForm";
 
 export default class PostBountycreen extends React.Component {
   static navigationOptions = {
@@ -26,50 +25,31 @@ export default class PostBountycreen extends React.Component {
           style={styles.container}
           contentContainerStyle={styles.contentContainer}
         >
-          <View style={styles.welcomeContainer}>
-            <Text style={styles.getStartedText}>POST A BOUNTY FOR LITTER</Text>
-            <Image
-              source={
-                __DEV__
-                  ? require("../assets/images/bin.png")
-                  : require("../assets/images/bin.png")
-              }
-              style={styles.welcomeImage}
-            />
-            <Text style={styles.getStartedText}>
-              Post a picture of litter. Set a price. Set the time. Notes. Go
-              live!
+          <View style={styles.PostBountyContainer}>
+            <Text style={styles.headerTopText}>
+              CREATE LITTER CLEANUP BOUNTY
             </Text>
-          </View>
-
-          <View style={styles.getStartedContainer}>
-            <View
-              style={[styles.codeHighlightContainer, styles.homeScreenFilename]}
-            />
-            {/* <UsersMap /> */}
+            <PostBountyForm />
           </View>
         </ScrollView>
       </View>
     );
   }
-
-  _handleLearnMorePress = () => {
-    WebBrowser.openBrowserAsync(
-      "https://docs.expo.io/versions/latest/guides/development-mode"
-    );
-  };
-
-  _handleHelpPress = () => {
-    WebBrowser.openBrowserAsync(
-      "https://docs.expo.io/versions/latest/guides/up-and-running.html#can-t-see-your-changes"
-    );
-  };
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff"
+  },
+  headerTopText: {
+    fontSize: 22,
+    fontWeight: "bold",
+    color: "rgba(96,100,109, 1)",
+    lineHeight: 24,
+    textAlign: "center",
+    marginTop: 2,
+    marginBottom: 2
   },
   developmentModeText: {
     marginBottom: 20,
@@ -81,7 +61,7 @@ const styles = StyleSheet.create({
   contentContainer: {
     paddingTop: 30
   },
-  welcomeContainer: {
+  PostBountyContainer: {
     alignItems: "center",
     marginTop: 10,
     marginBottom: 20

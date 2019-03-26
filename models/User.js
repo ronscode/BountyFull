@@ -18,12 +18,6 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    bio: {
-        type: String
-    },
-    profilePic: {
-        type: String
-    },
     totalEarnings: {
         type: Number,
         required: true
@@ -33,8 +27,14 @@ const UserSchema = new mongoose.Schema({
         required: true
     },
     inProgress: {
-        type: Boolean,
+        type: mongoose.Mixed,
         required: true
+    },
+    bio: {
+        type: String
+    },
+    profilePic: {
+        type: String
     },
     completed: {
         type: mongoose.Mixed

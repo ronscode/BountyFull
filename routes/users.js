@@ -31,8 +31,6 @@ router.post('/register', (req, res) => {
     if (errors.length > 0) {
         res.status(422).send(errors);
     } else {
-        
-
         User.findOne({ email: email })
             .then(user => {
                 if(user) {

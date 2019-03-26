@@ -1,5 +1,5 @@
 module.exports = (body) => {
-    let { poster, bountyAmount, location, pictures } = body
+    let { poster, amount, location, picture } = body
     let errors = [];
     if (!poster){errors.push({msg:'no user provided'})}
     if (!bountyAmount){errors.push({msg:'no bounty amount provided'})}
@@ -9,20 +9,21 @@ module.exports = (body) => {
 
     let defaultValues = {
         claimer: '',
-        isComplete: false,
-        isVerified: false,
         isStarted: false,
+        isCleaned: false,
+        isVerified: false,
         isPaid: false,
+        isComplete: false,
         timeStarted: '',
         timeEnded: ''
     };
     let newBounty = {
         ...defaultValues,
         poster,
-        bountyAmount,
         location,
+        bountyAmount : amount,
         pictures: {
-            post: pictures.post,
+            post: picture,
             start: '',
             end: ''
         },

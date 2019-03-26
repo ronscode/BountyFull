@@ -6,10 +6,11 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  View
+  View,
+  ImageBackground
 } from "react-native";
 
-import { Button } from "react-native-elements";
+import { Button, ButtonGroup } from "react-native-elements";
 import { WebBrowser } from "expo";
 import FetchLocation from "../components/FetchLocation";
 import UsersMap from "../components/UsersMap";
@@ -51,21 +52,20 @@ export default class HomeScreen extends React.Component {
           style={styles.container}
           contentContainerStyle={styles.contentContainer}
         >
+          <Text style={styles.headerTopText}>BountyFull WELCOMES YOU!</Text>
+          <Text />
+
+          <Text />
+          <Text style={styles.getStartedText}>
+            💰Clean litter for bounties : ⛳ Track Litter Cleanups
+          </Text>
+          <Text />
+
           <View style={styles.welcomeContainer}>
-            <Text style={styles.headerTopText}>BountyFull WELCOMES YOU!</Text>
-            <Text />
-            <Image
-              source={require("../assets/images/bin.png")}
-              style={styles.welcomeImage}
-            />
-            <Text />
-            <Text style={styles.getStartedText}>
-              💰Clean litter for bounties : ⛳ Track Litter Cleanups
-            </Text>
-
             <Text />
 
             <Text />
+
             <View style={styles.homeButton}>
               <Button
                 type={"outline"}
@@ -94,9 +94,9 @@ export default class HomeScreen extends React.Component {
             </View>
             <Text />
             <FetchLocation onGetLocation={this.getUserLocationHandler} />
+
             <Text />
             <AuthScreen />
-            <UsersMap userLocation={this.state.userLocation} />
           </View>
 
           <View style={styles.getStartedContainer}>
@@ -168,6 +168,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff"
   },
+  backgroundImage: {
+    flex: 1,
+    resizeMode: "cover" // or 'stretch'
+  },
   homeButtons: {
     alignItems: "center",
     paddingTop: 10,
@@ -220,7 +224,7 @@ const styles = StyleSheet.create({
   headerTopText: {
     fontSize: 22,
     fontWeight: "bold",
-    color: "rgba(96,100,109, 1)",
+    color: "darkgrey",
     lineHeight: 24,
     textAlign: "center",
     marginTop: 2,

@@ -15,6 +15,7 @@ import { MonoText } from "../components/StyledText";
 import PostBountyInputTitle from "../components/PostBountyInputTitle";
 import TrackCleanForm from "../components/TrackCleanForm";
 import TestImageUpload from "../components/TestImageUpload";
+import { Divider } from "react-native-paper";
 
 export default class TrackCleanScreen extends React.Component {
   static navigationOptions = {
@@ -30,6 +31,7 @@ export default class TrackCleanScreen extends React.Component {
         >
           <View style={styles.PostBountyContainer}>
             <Text style={styles.trackCleanHeader}>TRACK YOUR CLEAN UP</Text>
+            <Text />
             <Text style={styles.trackCleanHeader}>CURRENTLY CLEANING:</Text>
             <Text>Hiking Trail is Trashed! Please Help!</Text>
             <Text />
@@ -39,7 +41,6 @@ export default class TrackCleanScreen extends React.Component {
               source={require("../assets/images/demo/before_1.jpg")}
               style={{ width: 150, height: 150 }}
             />
-
             <TrackCleanForm />
           </View>
         </ScrollView>
@@ -64,6 +65,7 @@ const styles = StyleSheet.create({
   },
   trackCleanHeader: {
     fontSize: 18,
+    backgroundColor: "skyblue",
     color: "rgba(96,100,109, 1)",
     lineHeight: 24,
     textAlign: "center",

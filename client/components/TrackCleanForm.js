@@ -20,7 +20,9 @@ export default class App extends React.Component {
   onSubmit(values) {
     //List of form values
     console.log(values);
-    Alert.alert(JSON.stringify(values));
+    Alert.alert(
+      "Thank you for cleaning up! Your cleanup will be reviewed within 24 hours."
+    );
     Keyboard.dismiss();
   }
 
@@ -125,6 +127,7 @@ export default class App extends React.Component {
               </Text>
               <Text />
               <Text>{values.TrackCleanNotes}</Text>
+              <Text />
               <Text style={styles.thanksBox}>
                 Thank you for helping clean up the world! Keep up the good work
                 and tell a friend!
@@ -161,6 +164,7 @@ const styles = StyleSheet.create({
     borderColor: "lightgrey",
     borderWidth: 1
   },
+
   trackCleanHeader: {
     fontSize: 22,
     fontWeight: "bold",

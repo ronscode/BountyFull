@@ -43,7 +43,11 @@ export default class App extends React.Component {
     //List of form values
     console.log(values);
     Alert.alert(
-      "Thank you! Your bounty {values.BountyTitle} for {values.BountyAmount} has been posted." +
+      "Thank you! Your bounty " +
+        JSON.stringify(values.BountyTitle) +
+        " for $" +
+        JSON.stringify(values.BountyAmount) +
+        " has been posted." +
         JSON.stringify(values)
     );
     Keyboard.dismiss();
@@ -167,6 +171,7 @@ export default class App extends React.Component {
               <Text />
               <Text style={styles.bountyReviewText}>{values.bountyNotes}</Text>
 
+              <Text />
               <Text />
 
               <Text style={styles.thanksBox}>

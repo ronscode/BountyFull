@@ -10,7 +10,6 @@ import {
   FlatList
 } from "react-native";
 import { List, ListItem } from "react-native-elements";
-
 import { WebBrowser } from "expo";
 import FetchLocation from "../components/FetchLocation";
 import UsersMap from "../components/UsersMap";
@@ -31,6 +30,7 @@ const list = [
 ];
 
 export default class FindBountyScreen extends React.Component {
+
   keyExtractor = (item, index) => index.toString();
 
   renderItem = ({ item }) => (

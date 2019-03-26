@@ -1,20 +1,9 @@
 {
-<<<<<<< HEAD
-  "devToolsPort": 19003,
-  "expoServerPort": 19001,
-  "packagerPort": 19004,
-  "packagerPid": 85317,
-  "expoServerNgrokUrl": "https://wg-kq3.anonymous.client.exp.direct",
-  "packagerNgrokUrl": "https://packager.wg-kq3.anonymous.client.exp.direct",
-  "ngrokPid": 85330
-=======
-  "devToolsPort": 19002,
   "expoServerPort": 19000,
+  "expoServerNgrokUrl": "https://wg-kq3.ronscode.client.exp.direct",
+  "packagerNgrokUrl": "https://packager.wg-kq3.ronscode.client.exp.direct",
+  "ngrokPid": 55691,
+  "devToolsPort": 19002,
   "packagerPort": 19001,
-  "packagerPid": 47124,
-  "expoServerNgrokUrl": "https://wg-kq3.anonymous.client.exp.direct",
-  "packagerNgrokUrl": "https://packager.wg-kq3.anonymous.client.exp.direct",
-  "ngrokPid": 47143,
-  "webpackServerPort": null
->>>>>>> master
+  "packagerPid": 55675
 }

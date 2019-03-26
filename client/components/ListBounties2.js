@@ -11,7 +11,7 @@ import {
   createStackNavigator,
   createBottomTabNavigator
 } from "react-navigation";
-import axios from 'axios';
+import axios from "axios";
 import { List, Button } from "react-native-elements";
 // import AppNavigator from "./navigation/AppNavigator";
 
@@ -50,13 +50,14 @@ export default class ListBounties2 extends Component {
     super(props);
     let initialState = {
       bounties: []
-    }
+    };
     this.state = initialState;
   }
   componentDidMount() {
-    axios.get('http://192.168.1.9:3001/find/')
-      .then(res => this.setState({ bounties: res.data }))
-      .catch(err => console.log(err));
+    // axios
+    //   .get("http://10.150.41.130:3001/find/")
+    //   .then(res => this.setState({ bounties: res.data }))
+    //   .catch(err => console.log(err));
   }
   render() {
     return (

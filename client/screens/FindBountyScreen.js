@@ -45,14 +45,6 @@ export default class FindBountyScreen extends React.Component {
     />
   );
 
-<<<<<<< HEAD
-class FindBountyScreen extends React.Component {
-
-  constructor(props){
-    super(props)
-  }
-=======
->>>>>>> master
   static navigationOptions = {
     header: null
   };

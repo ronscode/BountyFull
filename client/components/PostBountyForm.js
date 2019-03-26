@@ -1,145 +1,262 @@
-// Formik x React Native example
-import React, { Component } from "react";
-import { Image, Button, TextInput, View, Text } from "react-native";
-import { FormLabel, FormInputs, Divider } from "react-native-elements";
+import * as React from "react";
 import { ImagePicker } from "expo";
-
 import { Formik } from "formik";
-import BountyFirstImage from "./BountyFirstImage";
-import StartBountyImagePicker from "./StartBountyImagePicker";
+import { TextInput, Divider } from "react-native-paper";
+import {
+  Alert,
+  Keyboard,
+  Image,
+  View,
+  StyleSheet,
+  Text,
+  Button
+} from "react-native";
+import UsersMap from "../components/UsersMap";
+import FetchBountyLocation from "../components/FetchBountyLocation";
 
-var nbi = "";
-export default class PostBountyForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { image: "" };
+const initialValues = {
+  image: ""
+};
+
+export default class App extends React.Component {
+  state = {
+    userLocation: null
+  };
+  getUserLocationHandler = () => {
+    console.log("Get location button pressed.");
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        this.setState({
+          userLocation: {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421
+          }
+        });
+        console.log(position);
+      },
+      err => console.log(err)
+    );
+  };
+  onSubmit(values) {
+    //List of form values
+    console.log(values);
+    Alert.alert(
+      "Thank you! Your bounty {values.BountyTitle} for {values.BountyAmount} has been posted." +
+        JSON.stringify(values)
+    );
+    Keyboard.dismiss();
   }
+
+  async _pickImage(handleChange) {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      allowsEditing: true,
+      aspect: [4, 3]
+    });
+    console.log("Thank you for the bounty submission!" + result);
+    if (!result.cancelled) {
+      handleChange(result.uri);
+    }
+  }
+
   render() {
     return (
-      <Formik
-        initialValues={{ BountyTitle: "" }}
-        onSubmit={values => console.log(values)}
-      >
-        {props => (
-          <View>
-            <Button
-              title="Pick an image from camera roll"
-              onPress={this._pickImage}
-              onBlur={props.handleBlur("BountyFirstImage")}
-              value={props.values.BountyFirstImage}
-            />
-            <Text />
-            <Text>GIVE YOUR BOUNTY A TITLE:</Text>
-            <TextInput
-              style={{
-                borderColor: "lightgrey",
-                borderWidth: 1
-              }}
-              onChangeText={props.handleChange("BountyTitle")}
-              onBlur={props.handleBlur("BountyTitle")}
-              value={props.values.BountyTitle}
-            />
-            <Text>AMOUNT:</Text>
-            <TextInput
-              style={{
-                borderColor: "lightgrey",
-                borderWidth: 1,
-                width: 42
-              }}
-              keyboardType="numeric"
-              onChangeText={props.handleChange("BountyAmount")}
-              onBlur={props.handleBlur("BountyAmount")}
-              value={props.values.BountyAmount}
-            />
-            <Text>EXTRA NOTES:</Text>
-            <TextInput
-              style={{
-                borderColor: "lightgrey",
-                borderWidth: 1,
-                height: 120
-              }}
-              onChangeText={props.handleChange("BountyNotes")}
-              onBlur={props.handleBlur("BountyNotes")}
-              value={props.values.BountyNotes}
-            />
-            <Button onPress={props.handleSubmit} title="Submit" />
-            <Text />
-            <Text>NEW BOUNTY DETAILS:</Text>
-            <Text>Bounty Poster is: (render username) </Text>
+      <View style={[styles.container, styles.content]}>
+        <Formik
+          initialValues={initialValues}
+          onSubmit={this.onSubmit.bind(this)}
+        >
+          {({ handleChange, handleSubmit, values }) => (
+            <View>
+              {/* <TextInput
+                onChangeText={handleChange("title")}
+                value={values.title}
+                label="Title"
+                placeholder="e.g My Awesome Selfie"
+              /> */}
 
-            <Image source={this.state.image} />
-            <Text>Your Bounty Title:{props.values.BountyTitle}</Text>
-            <Text>Bounty Amount: ${props.values.BountyAmount}</Text>
-            <Text>Extra Notes:{props.values.BountyNotes}</Text>
-          </View>
-        )}
-      </Formik>
+              <Text style={styles.trackCleanSubHeader}>NAME YOUR CLEANUP:</Text>
+
+              <TextInput
+                onChangeText={handleChange("BountyTitle")}
+                style={styles.inputBox}
+                value={values.BountyTitle}
+                label="BountyTitle"
+                placeholder="Use A Catchy Title for Terrific Trash Cleanup!"
+              />
+              <Text />
+
+              <FetchBountyLocation
+                onGetLocation={this.getUserLocationHandler}
+              />
+              <Text />
+
+              <Text style={styles.trackCleanSubHeader}>SET BOUNTY AMOUNT:</Text>
+
+              <TextInput
+                onChangeText={handleChange("BountyAmount")}
+                style={styles.inputBoxAmount}
+                value={values.BountyAmount}
+                label="BountyAmount"
+                placeholder="$"
+                keyboardType="numeric"
+              />
+              <Text />
+
+              <Button
+                title="PICTURE OF THE LITTER"
+                icon="add-a-photo"
+                mode="contained"
+                style={styles.button}
+                onPress={() => {
+                  this._pickImage(handleChange("image"));
+                }}
+              />
+              <Text />
+              <Text style={styles.trackCleanSubHeader}>NOTES FOR CLEANER:</Text>
+              <TextInput
+                onChangeText={handleChange("bountyNotes")}
+                style={styles.inputBoxNotes}
+                value={values.bountyNotes}
+                label="bountyNotes"
+                placeholder="Notes about cleanup"
+              />
+
+              <Text />
+              <Text>
+                Ready to post your litter cleanup bounty? Review the cleanup
+                details below before submitting.
+              </Text>
+              <Text />
+              <Button
+                onPress={handleSubmit}
+                title={"submit"}
+                style={styles.button}
+              >
+                Submit
+              </Button>
+              <Text />
+              <Text />
+              <Text />
+              <Divider />
+              <Text />
+              <Text style={styles.trackCleanHeader}>YOUR CLEANUP DETAILS:</Text>
+              <Text style={styles.bountyReviewTitle}>TITLE:</Text>
+              <Text style={styles.bountyReviewTitleInput}>
+                {values.BountyTitle}
+              </Text>
+
+              <Text style={styles.trackCleanSubHeader}>
+                BEFORE CLEANUP PICTURE:
+              </Text>
+              {values.image && values.image.length > 0 ? (
+                <Image
+                  style={styles.bountyBeforeImage}
+                  source={{ uri: values.image }}
+                />
+              ) : (
+                <Image
+                  source={require("../assets/images/demo/uploadImage.png")}
+                  style={{ width: 150, height: 150 }}
+                />
+              )}
+              <Text style={styles.trackCleanSubHeader}>
+                Notes About The Cleanup
+              </Text>
+              <Text />
+              <Text style={styles.bountyReviewText}>{values.bountyNotes}</Text>
+
+              <Text />
+
+              <Text style={styles.thanksBox}>
+                Thank you for helping clean up the world! Keep up the good work
+                and tell a friend!
+              </Text>
+            </View>
+          )}
+        </Formik>
+      </View>
     );
   }
-
-  _pickImage = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
-      allowsEditing: false,
-      aspect: [4, 3],
-      exif: true
-    });
-
-    console.log(result);
-
-    if (!result.cancelled) {
-      console.log(result.uri);
-      var nbi = result.uri;
-      console.log(result.exif);
-      console.log("the new bounty image is " + nbi);
-      this.setState({ image: result.uri });
-      console.log("the state image string is " + this.state.image);
-    }
-  };
 }
 
-/* <ScrollView>
-              <Text>NEW BOUNTY DETAILS:</Text>
-              <Text>{props.values.BountyTitle}</Text>
-              <Text>{props.values.BountyAmount}</Text>
-              <Text>{props.values.BountyNotes}</Text>
-            </ScrollView> */
-
-// import React from "react";
-// import { Button, Image, View } from "react-native";
-// import { ImagePicker } from "expo";
-
-// export default class StartBountyImagePicker extends React.Component {
-//   state = {
-//     image: null
-//   };
-
-//   render() {
-//     let { image } = this.state;
-
-//     return (
-//       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-//         <Button
-//           title="Pick Your Starting Picture from the camera roll"
-//           onPress={this._pickImage}
-//         />
-//         {image && (
-//           <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
-//         )}
-//       </View>
-//     );
-//   }
-
-//   _pickImage = async () => {
-//     let result = await ImagePicker.launchImageLibraryAsync({
-//       allowsEditing: true,
-//       aspect: [4, 3]
-//     });
-
-//     console.log(result);
-
-//     if (!result.cancelled) {
-//       console.log({ image: result.uri });
-//       this.setState({ image: result.uri });
-//     }
-//   };
-// }
+const styles = StyleSheet.create({
+  container: {
+    flex: 1
+  },
+  bountyReviewTitle: {},
+  bountyReviewTitleInput: {},
+  inputBox: {
+    borderColor: "lightgrey",
+    borderWidth: 1
+  },
+  inputBoxAmount: {
+    borderColor: "lightgrey",
+    borderWidth: 1
+  },
+  inputBoxNotes: {
+    borderColor: "lightgrey",
+    borderWidth: 1,
+    height: 80
+  },
+  inputBoxWeight: {
+    borderColor: "lightgrey",
+    borderWidth: 1,
+    width: 42
+  },
+  bountyBeforeImage: {
+    width: 150,
+    height: 150
+  },
+  trackCleanNotes: {
+    height: 80,
+    marginTop: 2,
+    marginBottom: 2,
+    borderColor: "lightgrey",
+    borderWidth: 1
+  },
+  trackCleanHeader: {
+    fontSize: 22,
+    fontWeight: "bold",
+    color: "rgba(96,100,109, 1)",
+    lineHeight: 24,
+    textAlign: "center",
+    marginTop: 2,
+    marginBottom: 2,
+    paddingTop: 2,
+    paddingBottom: 2
+  },
+  trackCleanSubHeader: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "rgba(96,100,109, 1)",
+    lineHeight: 21,
+    textAlign: "center",
+    marginBottom: 2
+  },
+  bountyReviewText: {
+    fontSize: 14,
+    lineHeight: 18,
+    marginTop: 2,
+    marginBottom: 2,
+    paddingTop: 2,
+    paddingBottom: 2
+  },
+  thanksBox: {
+    borderColor: "lightgrey",
+    borderWidth: 1,
+    backgroundColor: "black",
+    color: "lightblue",
+    fontSize: 15,
+    padding: 3,
+    textAlign: "center"
+  },
+  content: {
+    paddingTop: 40,
+    padding: 16
+  },
+  button: {
+    marginTop: 16
+  }
+});

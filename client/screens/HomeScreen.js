@@ -105,7 +105,6 @@ export default class HomeScreen extends React.Component {
             <View
               style={[styles.codeHighlightContainer, styles.homeScreenFilename]}
             />
-            {/* <UsersMap /> */}
           </View>
         </ScrollView>
       </View>
@@ -139,17 +138,6 @@ export default class HomeScreen extends React.Component {
     }
   }
 
-  _handleLearnMorePress = () => {
-    WebBrowser.openBrowserAsync(
-      "https://docs.expo.io/versions/latest/guides/development-mode"
-    );
-  };
-
-  _handleHelpPress = () => {
-    WebBrowser.openBrowserAsync(
-      "https://docs.expo.io/versions/latest/guides/up-and-running.html#can-t-see-your-changes"
-    );
-  };
   // Opens the Camera
   _buttonCameraExample = () => {
     console.log("Camera Example");

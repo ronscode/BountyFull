@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from 'react-redux'
 import {
   Image,
   Platform,
@@ -44,6 +45,14 @@ export default class FindBountyScreen extends React.Component {
     />
   );
 
+<<<<<<< HEAD
+class FindBountyScreen extends React.Component {
+
+  constructor(props){
+    super(props)
+  }
+=======
+>>>>>>> master
   static navigationOptions = {
     header: null
   };
@@ -71,7 +80,20 @@ export default class FindBountyScreen extends React.Component {
             <Text style={styles.getStartedText}>
               Find a litter clean up bounty near you!
             </Text>
+<<<<<<< HEAD
+            <Text>Map with bounty pins.</Text>
+            <Text>Top 10 offers button?</Text>
+            <Text>
+              We should look at other apps like Roadie or similar for ideas.
+
+              {this.props.bounty.time_started}
+
+              
+            </Text>
+          </View>
+=======
             <Text />
+>>>>>>> master
 
             <ListBounties2 />
           </View>
@@ -181,3 +203,16 @@ const styles = StyleSheet.create({
     color: "#2e78b7"
   }
 });
+
+const mapStateToProps = (state) =>{
+  return { 
+    bounty : state.bounty
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  null
+)( FindBountyScreen )
+
+// export default FindBountyScreen

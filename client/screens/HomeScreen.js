@@ -1,5 +1,5 @@
 import React from "react";
-import { connect } from 'redux'
+//import { connect } from 'redux'
 import {
   Image,
   Platform,
@@ -15,7 +15,7 @@ import FetchLocation from "../components/FetchLocation";
 import UsersMap from "../components/UsersMap";
 import CameraExample from "../components/CameraExample";
 import { MonoText } from "../components/StyledText";
-import { connect } from "tls";
+//import { connect } from "tls";
 
 class HomeScreen extends React.Component {
   // Get Location button handler
@@ -232,14 +232,15 @@ const styles = StyleSheet.create({
 });
 
 
-const mapStateToProps = (state) => {
-    return{
+export default HomeScreen
+// const mapStateToProps = (state) => {
+//     return{
+      
+//     }
+// }
 
-    }
-}
 
-
-export default connect(
-  mapStateToProps(),
-  null
-)(HomeScreen)
+// export default connect(
+//   mapStateToProps(),
+//   null
+// )(HomeScreen)

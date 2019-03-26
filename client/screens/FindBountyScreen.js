@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from 'react-redux'
 import {
   Image,
   Platform,
@@ -13,7 +14,11 @@ import FetchLocation from "../components/FetchLocation";
 import UsersMap from "../components/UsersMap";
 import { MonoText } from "../components/StyledText";
 
-export default class FindBountycreen extends React.Component {
+class FindBountyScreen extends React.Component {
+
+  constructor(props){
+    super(props)
+  }
   static navigationOptions = {
     header: null
   };
@@ -44,6 +49,10 @@ export default class FindBountycreen extends React.Component {
             <Text>Top 10 offers button?</Text>
             <Text>
               We should look at other apps like Roadie or similar for ideas.
+
+              {this.props.bounty.time_started}
+
+              
             </Text>
           </View>
 
@@ -159,3 +168,16 @@ const styles = StyleSheet.create({
     color: "#2e78b7"
   }
 });
+
+const mapStateToProps = (state) =>{
+  return { 
+    bounty : state.bounty
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  null
+)( FindBountyScreen )
+
+// export default FindBountyScreen

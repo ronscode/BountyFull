@@ -1,11 +1,13 @@
-import React, { Component, View } from "react";
+import React, { Component} from "react";
 import {
   Text,
   ListItem,
   ListView,
   SectionList,
   Platform,
-  StyleSheet
+  StyleSheet,
+  ScrollView,
+  View
 } from "react-native";
 import {
   createStackNavigator,
@@ -54,52 +56,23 @@ export default class ListBounties2 extends Component {
     this.state = initialState;
   }
   componentDidMount() {
-    axios.get('http://192.168.1.9:3001/find/')
-      .then(res => this.setState({ bounties: res.data }))
-      .catch(err => console.log(err));
+    axios.get('http://10.150.40.230:3001/find/')
+        .then(res => this.setState({ bounties: res.data }))
+        .catch(err => console.log(err));
   }
   render() {
     return (
-      <SectionList
-        renderItem={({ item, index, section }) => (
-          <Text style={styles.bountyText} key={index}>
-            {item}
-          </Text>
-        )}
-        renderSectionHeader={({ section: { title } }) => (
-          <Text style={styles.bountyTitle}>{title}</Text>
-        )}
-        renderSectionFooter={({ section: { button } }) => (
-          <Button
-            onPress={() => {
-              /* 1. Navigate to the Details route with params */
-              console.log("the button was pressed");
-            }}
-            style={styles.bountyButton}
-            raised
-            rightIcon={{ name: "polymer" }}
-            title="CLAIM & CLEAN"
-          />
-        )}
-        sections={[
-          {
-            title: "Banana on Sidewalk",
-            data: ["Posted by: Zaphod", "$25"],
-            button: "Click & Clean"
-          },
-          {
-            title: "Pile of napkins",
-            data: ["Posted by: Mario", "$10"],
-            button: "Click & Clean"
-          },
-          {
-            title: "Hiking trail trashed!",
-            data: ["MasterChief", "$42"],
-            button: "Click & Clean"
-          }
-        ]}
-        keyExtractor={(item, index) => item + index}
-      />
+      <ScrollView>
+        {this.state.bounties.map(bounty => {
+          return (
+            <View>
+              <Text>Bounty Title Goes Here</Text>
+              <Text>{bounty.poster}</Text>
+              <Text>{bounty.bountyAmount}</Text>
+            </View>
+          );
+        })}
+      </ScrollView>
     );
   }
 }

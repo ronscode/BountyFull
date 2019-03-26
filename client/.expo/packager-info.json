@@ -1,9 +1,9 @@
 {
-  "expoServerPort": 19000,
+  "expoServerPort": null,
   "expoServerNgrokUrl": "https://wg-kq3.anonymous.client.exp.direct",
   "packagerNgrokUrl": "https://packager.wg-kq3.anonymous.client.exp.direct",
-  "ngrokPid": 3157,
+  "ngrokPid": 4247,
   "devToolsPort": 19002,
-  "packagerPort": 19001,
-  "packagerPid": 3146
+  "packagerPort": null,
+  "packagerPid": null
 }

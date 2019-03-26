@@ -1,10 +1,10 @@
 module.exports = (body) => {
-    let { poster, amount, location, picture } = body
+    let { poster, amount, location, picture, title } = body
     let errors = [];
     if (!poster){errors.push({msg:'no user provided'})}
-    if (!bountyAmount){errors.push({msg:'no bounty amount provided'})}
+    if (!amount){errors.push({msg:'no bounty amount provided'})}
     if (!location){errors.push({msg:'no location provided'})}
-    if (!pictures){errors.push({msg:'no picture provided'})}
+    if (!picture){errors.push({msg:'no picture provided'})}
     if(errors.length > 0){return errors}
 
     let defaultValues = {
@@ -21,6 +21,7 @@ module.exports = (body) => {
         ...defaultValues,
         poster,
         location,
+        title,
         bountyAmount : amount,
         pictures: {
             post: picture,

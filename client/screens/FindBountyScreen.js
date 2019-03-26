@@ -30,7 +30,7 @@ const list = [
   }
 ];
 
-export default class FindBountyScreen extends React.Component {
+class FindBountyScreen extends React.Component {
 
   keyExtractor = (item, index) => index.toString();
 
@@ -45,14 +45,9 @@ export default class FindBountyScreen extends React.Component {
     />
   );
 
-<<<<<<< HEAD
-class FindBountyScreen extends React.Component {
-
   constructor(props){
     super(props)
   }
-=======
->>>>>>> master
   static navigationOptions = {
     header: null
   };
@@ -80,23 +75,15 @@ class FindBountyScreen extends React.Component {
             <Text style={styles.getStartedText}>
               Find a litter clean up bounty near you!
             </Text>
-<<<<<<< HEAD
             <Text>Map with bounty pins.</Text>
             <Text>Top 10 offers button?</Text>
             <Text>
               We should look at other apps like Roadie or similar for ideas.
-
               {this.props.bounty.time_started}
-
-              
             </Text>
-          </View>
-=======
-            <Text />
->>>>>>> master
 
             <ListBounties2 />
-          </View>
+            </View>
         </ScrollView>
       </View>
     );

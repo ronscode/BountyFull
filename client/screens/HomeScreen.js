@@ -16,11 +16,7 @@ import FetchLocation from "../components/FetchLocation";
 import UsersMap from "../components/UsersMap";
 import CameraExample from "../components/CameraExample";
 import { MonoText } from "../components/StyledText";
-<<<<<<< HEAD
-//import { connect } from "tls";
-=======
 import AuthScreen from "../components/AuthScreen";
->>>>>>> master
 
 class HomeScreen extends React.Component {
   // Get Location button handler

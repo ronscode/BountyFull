@@ -16,6 +16,7 @@ router.post('/', (req, res) => {
         res.status(400).send(post.errors)
     } else {
         let newBounty = new Bounty({ ...post })
+        console.log(newBounty)
         newBounty.save()
             .then(reply => res.send(reply))
             .catch(err => res.status(400).send(

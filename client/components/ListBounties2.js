@@ -17,6 +17,10 @@ import axios from 'axios';
 import { List, Button } from "react-native-elements";
 // import AppNavigator from "./navigation/AppNavigator";
 
+
+// Reference URL
+const proxyUrl = require('../proxyUrl.js');
+
 const demoData = [
   {
     _id: "5c964b3f149db56a643704bf",
@@ -56,8 +60,11 @@ export default class ListBounties2 extends Component {
     this.state = initialState;
   }
   componentDidMount() {
-    axios.get('http://10.150.40.230:3001/find/')
-        .then(res => this.setState({ bounties: res.data }))
+    axios.get(proxyUrl.url + '/find/')
+        .then(res => {
+          console.log(res.data)
+          this.setState({ bounties: res.data })
+          })
         .catch(err => console.log(err));
   }
   render() {

@@ -15,6 +15,10 @@ import UsersMap from "../components/UsersMap";
 import FetchBountyLocation from "../components/FetchBountyLocation";
 import axios from 'axios';
 
+
+// Reference URL
+const proxyUrl = require('../proxyUrl.js');
+
 const initialValues = {
   image: ""
 };
@@ -50,9 +54,9 @@ export default class App extends React.Component {
         title: 'Fancy fancy title'
     };
     let message = 'Thank you! Your bounty {values.BountyTitle} for {values.BountyAmount} has been posted.';
-    await axios.post('http://192.168.1.9:3001/post/', body)
-      .then(res => this.props.saveBounty(res.data))
-      .catch(err => console.log(err))
+    await axios.post(proxyUrl.url + '/post/', body)
+        .then(res => this.props.saveBounty(res.data))
+        .catch(err => console.log(err));
     Alert.alert(message)
     Keyboard.dismiss();
   }

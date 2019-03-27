@@ -1,4 +1,4 @@
-import React, { Component} from "react";
+import React, { Component } from "react";
 import {
   Text,
   ListItem,
@@ -13,52 +13,23 @@ import {
   createStackNavigator,
   createBottomTabNavigator
 } from "react-navigation";
-import axios from 'axios';
+import axios from "axios";
 import { List, Button } from "react-native-elements";
 // import AppNavigator from "./navigation/AppNavigator";
-
-const demoData = [
-  {
-    _id: "5c964b3f149db56a643704bf",
-    claimer: "John Smith",
-    poster: "jakethesnake",
-    bountyAmount: 20,
-    location: "1111111111",
-    pictures: { post: "urlofpostpicture", start: "blank", end: "blank" },
-    __v: 0
-  },
-  {
-    _id: "5c9653cfec0bd97372ae7ef5",
-    claimer: "Bob",
-    poster: "rake man 2",
-    bountyAmount: 20,
-    location: "1111111111",
-    pictures: { post: "urlofpostpicture", start: "", end: "" },
-    __v: 0
-  },
-  {
-    _id: "5c9653dbec0bd97372ae7ef6",
-    claimer: "",
-    poster: "final cleanination",
-    bountyAmount: 20,
-    location: "1111111111",
-    pictures: { post: "urlofpostpicture", start: "", end: "" },
-    __v: 0
-  }
-];
 
 export default class ListBounties2 extends Component {
   constructor(props) {
     super(props);
     let initialState = {
       bounties: []
-    }
+    };
     this.state = initialState;
   }
   componentDidMount() {
-    axios.get('http://10.150.40.230:3001/find/')
-        .then(res => this.setState({ bounties: res.data }))
-        .catch(err => console.log(err));
+    axios
+      .get("http://10.150.41.130:3001/find/")
+      .then(res => this.setState({ bounties: res.data }))
+      .catch(err => console.log(err));
   }
   render() {
     return (
@@ -66,9 +37,11 @@ export default class ListBounties2 extends Component {
         {this.state.bounties.map(bounty => {
           return (
             <View>
-              <Text>Bounty Title Goes Here</Text>
-              <Text>{bounty.poster}</Text>
-              <Text>{bounty.bountyAmount}</Text>
+              <Text>{bounty.bountyTitle}</Text>
+              <Text>POSTED BY: {bounty.poster}</Text>
+              <Text>AMOUNT: ${bounty.bountyAmount}</Text>
+              <Text>Notes for cleaner:</Text>
+              <Text>{bounty.bountyNotes}</Text>
             </View>
           );
         })}
@@ -108,14 +81,3 @@ const styles = StyleSheet.create({
     textAlign: "center"
   }
 });
-
-//  <View>
-//         {list.map((l, i) => (
-//           <ListItem
-//             key={i}
-//             leftAvatar={{ source: { uri: l.avatar_url } }}
-//             title={l.name}
-//             subtitle={l.subtitle}
-//           />
-//         ))}
-//       </View>

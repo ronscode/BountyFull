@@ -60,8 +60,11 @@ export default class ListBounties2 extends Component {
     this.state = initialState;
   }
   componentDidMount() {
-    axios.get(proxyUrl + '/find/')
-        .then(res => this.setState({ bounties: res.data }))
+    axios.get(proxyUrl.url + '/find/')
+        .then(res => {
+          console.log(res.data)
+          this.setState({ bounties: res.data })
+          })
         .catch(err => console.log(err));
   }
   render() {

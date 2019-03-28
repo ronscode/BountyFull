@@ -18,6 +18,39 @@ import axios from "axios";
 import { List, Button, Card } from "react-native-elements";
 // import AppNavigator from "./navigation/AppNavigator";
 
+// Reference URL
+const proxyUrl = require("../proxyUrl.js");
+
+const demoData = [
+  {
+    _id: "5c964b3f149db56a643704bf",
+    claimer: "John Smith",
+    poster: "jakethesnake",
+    bountyAmount: 20,
+    location: "1111111111",
+    pictures: { post: "urlofpostpicture", start: "blank", end: "blank" },
+    __v: 0
+  },
+  {
+    _id: "5c9653cfec0bd97372ae7ef5",
+    claimer: "Bob",
+    poster: "rake man 2",
+    bountyAmount: 20,
+    location: "1111111111",
+    pictures: { post: "urlofpostpicture", start: "", end: "" },
+    __v: 0
+  },
+  {
+    _id: "5c9653dbec0bd97372ae7ef6",
+    claimer: "",
+    poster: "final cleanination",
+    bountyAmount: 20,
+    location: "1111111111",
+    pictures: { post: "urlofpostpicture", start: "", end: "" },
+    __v: 0
+  }
+];
+
 export default class ListBounties2 extends Component {
   constructor(props) {
     super(props);
@@ -30,6 +63,13 @@ export default class ListBounties2 extends Component {
     axios
       .get("http://192.168.1.76:3001/find/")
       .then(res => this.setState({ bounties: res.data }))
+      .catch(err => console.log(err));
+    axios
+      .get(proxyUrl.url + "/find/")
+      .then(res => {
+        console.log(res.data);
+        this.setState({ bounties: res.data });
+      })
       .catch(err => console.log(err));
   }
   render() {

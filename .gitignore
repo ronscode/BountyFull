@@ -4,6 +4,7 @@
 /node_modules
 /.pnp
 .pnp.js
+proxyUrl.js
 
 # Expo stuff
  client/.expo/packager-info.json

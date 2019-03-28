@@ -5,6 +5,9 @@
 /.pnp
 .pnp.js
 
+# Expo stuff
+ client/.expo/packager-info.json
+
 # testing
 /coverage
 

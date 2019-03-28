@@ -51,17 +51,18 @@ export default class App extends React.Component {
     //List of form values to be inserted here
     let body = {
       poster: "Zaphod",
-      amount: values.BountyAmount,
       location: "22232323232 NW",
       picture: values.image,
-      title: values.BountyTitle
+      bountyAmount: values.bountyAmount,
+      bountyNotes: values.bountyNotes,
+      bountyTitle: values.bountyTitle
     };
-
+    console.log(body);
     let message =
       "Thank you! Your bounty " +
-      values.BountyTitle +
+      values.bountyTitle +
       " for $" +
-      values.BountyAmount +
+      values.bountyAmount +
       " has been posted.";
     await axios
       .post(proxyUrl.url + "/post/", body)
@@ -97,9 +98,9 @@ export default class App extends React.Component {
               <Text style={styles.trackCleanSubHeader}>NAME YOUR CLEANUP:</Text>
 
               <TextInput
-                onChangeText={handleChange("BountyTitle")}
+                onChangeText={handleChange("bountyTitle")}
                 style={styles.inputBox}
-                value={values.BountyTitle}
+                value={values.bountyTitle}
                 label="Bounty Title"
                 placeholder="Catchy Title for Terrific Trash Take Away!"
               />
@@ -113,9 +114,9 @@ export default class App extends React.Component {
               <Text style={styles.trackCleanSubHeader}>SET BOUNTY AMOUNT:</Text>
 
               <TextInput
-                onChangeText={handleChange("BountyAmount")}
+                onChangeText={handleChange("bountyAmount")}
                 style={styles.inputBoxAmount}
-                value={values.BountyAmount}
+                value={values.bountyAmount}
                 label="Bounty Amount"
                 placeholder="$"
                 keyboardType="numeric"
@@ -162,7 +163,7 @@ export default class App extends React.Component {
               <Text style={styles.trackCleanHeader}>YOUR CLEANUP DETAILS:</Text>
               <Text style={styles.bountyReviewTitle}>TITLE:</Text>
               <Text style={styles.bountyReviewTitleInput}>
-                {values.BountyTitle}
+                {values.bountyTitle}
               </Text>
 
               <Text style={styles.trackCleanSubHeader}>

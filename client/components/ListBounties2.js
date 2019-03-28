@@ -1,4 +1,4 @@
-import React, { Component} from "react";
+import React, { Component } from "react";
 import {
   Text,
   ListItem,
@@ -7,19 +7,19 @@ import {
   Platform,
   StyleSheet,
   ScrollView,
+  Image,
   View
 } from "react-native";
 import {
   createStackNavigator,
   createBottomTabNavigator
 } from "react-navigation";
-import axios from 'axios';
-import { List, Button } from "react-native-elements";
+import axios from "axios";
+import { List, Button, Card } from "react-native-elements";
 // import AppNavigator from "./navigation/AppNavigator";
 
-
 // Reference URL
-const proxyUrl = require('../proxyUrl.js');
+const proxyUrl = require("../proxyUrl.js");
 
 const demoData = [
   {
@@ -56,29 +56,62 @@ export default class ListBounties2 extends Component {
     super(props);
     let initialState = {
       bounties: []
-    }
+    };
     this.state = initialState;
   }
   componentDidMount() {
-    axios.get(proxyUrl.url + '/find/')
-        .then(res => {
-          console.log(res.data)
-          this.setState({ bounties: res.data })
-          })
-        .catch(err => console.log(err));
+    axios
+      .get("http://192.168.1.76:3001/find/")
+      .then(res => this.setState({ bounties: res.data }))
+      .catch(err => console.log(err));
+    axios
+      .get(proxyUrl.url + "/find/")
+      .then(res => {
+        console.log(res.data);
+        this.setState({ bounties: res.data });
+      })
+      .catch(err => console.log(err));
   }
   render() {
     return (
       <ScrollView>
-        {this.state.bounties.map(bounty => {
+        {this.state.bounties.reverse().map((bounty, i) => {
           return (
-            <View>
-              <Text>Bounty Title Goes Here</Text>
-              <Text>{bounty.poster}</Text>
-              <Text>{bounty.bountyAmount}</Text>
-            </View>
+            <Card
+              key={i}
+              title={bounty.bountyTitle}
+              image={{ uri: bounty.pictures.post }}
+            >
+              <View>
+                <Text>POSTED BY: {bounty.bountyPoster}</Text>
+                <Text>AMOUNT: ${bounty.bountyAmount}</Text>
+                <Text>Pre-Clean Notes:</Text>
+                <Text>{bounty.bountyNotes}</Text>
+
+                <Button title="Start Clean" />
+              </View>
+            </Card>
           );
         })}
+
+        {/* 
+        {this.state.bounties.reverse().map(bounty => {
+          return (
+            <View>
+              <Text>{bounty.bountyTitle}</Text>
+              <Text>POSTED BY: {bounty.bountyPoster}</Text>
+              <Text>AMOUNT: ${bounty.bountyAmount}</Text>
+              <Text>Notes for cleaner:</Text>
+              <Text>{bounty.bountyNotes}</Text>
+
+              <Image
+                style={styles.listBountyImage}
+                source={{ uri: bounty.pictures.post }}
+              />
+              <Button title={"Start Bounty"}>Start Bounty</Button>
+            </View>
+          );
+        })} */}
       </ScrollView>
     );
   }
@@ -95,6 +128,10 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     paddingBottom: 10,
     fontSize: 18
+  },
+  listBountyImage: {
+    width: 100,
+    height: 100
   },
   bountyTitle: {
     marginBottom: 10,
@@ -115,14 +152,3 @@ const styles = StyleSheet.create({
     textAlign: "center"
   }
 });
-
-//  <View>
-//         {list.map((l, i) => (
-//           <ListItem
-//             key={i}
-//             leftAvatar={{ source: { uri: l.avatar_url } }}
-//             title={l.name}
-//             subtitle={l.subtitle}
-//           />
-//         ))}
-//       </View>

@@ -7,7 +7,8 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  View
+  View,
+  ImageBackground
 } from "react-native";
 
 import { Button } from "react-native-elements";
@@ -44,99 +45,111 @@ class HomeScreen extends React.Component {
   static navigationOptions = {
     header: null
   };
+  //   <View
+  //   style={styles.container}
+  //   contentContainerStyle={styles.contentContainer}
+  // >
+  //   <ScrollView style={styles.container}>
+  //     <View style={styles.welcomeContainer}>
+  // <Text style={styles.headerTopText}>BountyFull WELCOMES YOU!</Text>
+  // <Text />
+  // <Image
+  //   source={require("../assets/images/bin.png")}
+  //   style={styles.welcomeImage}
+  // />
+  // <Text />
+  // <Text style={styles.getStartedText}>
+  //   💰Clean litter for bounties : ⛳ Track Litter Cleanups
+  // </Text>
+
+  // <Text />
+
+  // <Text />
+
+  // <View style={styles.homeButton}>
+  //   <Button
+  //     type={"outline"}
+  //     raised={true}
+  //     onPress={this._buttonPostBounty}
+  //     title="POST CLEANUP BOUNTY"
+  //   />
+  // </View>
+  // <Text />
+  // <View style={styles.homeButton}>
+  //   <Button
+  //     type={"outline"}
+  //     raised={true}
+  //     onPress={this._buttonFindOpenBounty}
+  //     title="FIND LITTER BOUNTY"
+  //   />
+  // </View>
+  // <Text />
+  // <View style={styles.homeButton}>
+  //   <Button
+  //     type={"outline"}
+  //     raised={true}
+  //     onPress={this._buttonTrackCleanUp}
+  //     title="TRACK CLEANUP"
+  //   />
+  // </View>
+  // <Text />
+  // <FetchLocation onGetLocation={this.getUserLocationHandler} />
+  // <Text />
+  // <AuthScreen />
+  //     </View>
+  //   </ScrollView>
+  // </View>
 
   render() {
     return (
-      <View style={styles.container}>
-        <ScrollView
-          style={styles.container}
-          contentContainerStyle={styles.contentContainer}
-        >
-          <View style={styles.welcomeContainer}>
+      <ImageBackground
+        source={require("../assets/images/demo/bg.jpg")}
+        style={{ width: "100%", height: "100%" }}
+      >
+        <View style={styles.container}>
+          <View style={styles.headerBg}>
             <Text style={styles.headerTopText}>BountyFull WELCOMES YOU!</Text>
             <Text />
-            <Image
-              source={require("../assets/images/bin.png")}
-              style={styles.welcomeImage}
-            />
+
             <Text />
             <Text style={styles.getStartedText}>
               💰Clean litter for bounties : ⛳ Track Litter Cleanups
             </Text>
-
-            <Text />
-
-            <Text />
-            <View style={styles.homeButton}>
-              <Button
-                type={"outline"}
-                raised={true}
-                onPress={this._buttonPostBounty}
-                title="Post Bounty For Cleanup"
-              />
-            </View>
-            <Text />
-            <View style={styles.homeButton}>
-              <Button
-                type={"outline"}
-                raised={true}
-                onPress={this._buttonFindOpenBounty}
-                title="Find Litter Bounty"
-              />
-            </View>
-            <Text />
-            <View style={styles.homeButton}>
-              <Button
-                type={"outline"}
-                raised={true}
-                onPress={this._buttonTrackCleanUp}
-                title="Track Litter Cleanup"
-              />
-            </View>
-            <Text />
-            <FetchLocation onGetLocation={this.getUserLocationHandler} />
-            <Text />
-            <AuthScreen />
-            <UsersMap userLocation={this.state.userLocation} />
           </View>
+          <Text />
 
-          <View style={styles.getStartedContainer}>
-            {this._maybeRenderDevelopmentModeWarning()}
+          <Text />
 
-            <View
-              style={[styles.codeHighlightContainer, styles.homeScreenFilename]}
+          <View style={styles.homeButton}>
+            <Button
+              type={"outline"}
+              raised={true}
+              onPress={this._buttonPostBounty}
+              title="POST CLEANUP BOUNTY"
             />
           </View>
-        </ScrollView>
-      </View>
-    );
-  }
 
-  _maybeRenderDevelopmentModeWarning() {
-    if (__DEV__) {
-      const learnMoreButton = (
-        <Text onPress={this._handleLearnMorePress} style={styles.helpLinkText}>
-          Learn more
-        </Text>
-      );
+          <View style={styles.homeButton}>
+            <Button
+              type={"outline"}
+              raised={true}
+              onPress={this._buttonFindOpenBounty}
+              title="FIND LITTER BOUNTY"
+            />
+          </View>
 
-      return (
-        <View>
-          <Text style={styles.developmentModeText}>
-            -Map loads here with bounties? (we are in dev mode)
-          </Text>
-          <Text style={styles.developmentModeText}>
-            -Light on style for now, heavy on fun(ction)
-          </Text>
+          <View style={styles.homeButton}>
+            <Button
+              type={"outline"}
+              raised={true}
+              onPress={this._buttonTrackCleanUp}
+              title="TRACK CLEANUP"
+            />
+          </View>
+          <AuthScreen />
         </View>
-      );
-    } else {
-      return (
-        <Text style={styles.developmentModeText}>
-          (not dev mode full speed)
-        </Text>
-      );
-    }
+      </ImageBackground>
+    );
   }
 
   // Opens the Camera
@@ -167,19 +180,26 @@ class HomeScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff"
+    justifyContent: "center",
+    alignItems: "center",
+    paddingTop: 30
+  },
+  headerBg: {
+    backgroundColor: "rgba(0, 255, 0, 0.3)",
+    padding: 2,
+    margin: 2
   },
   homeButtons: {
     alignItems: "center",
-    paddingTop: 10,
-    paddingBottom: 10
+    height: 10
+    // paddingTop: 10,
+    // paddingBottom: 10
   },
   homeButton: {
-    flex: 1,
     width: "85%",
     fontSize: 15,
-    height: 32,
-    marginTop: 10
+    height: "10%",
+    textAlign: "center"
   },
   developmentModeText: {
     marginBottom: 20,
@@ -192,9 +212,10 @@ const styles = StyleSheet.create({
     paddingTop: 30
   },
   welcomeContainer: {
-    alignItems: "center",
     marginTop: 10,
-    marginBottom: 20
+    marginBottom: 20,
+    justifyContent: "center",
+    alignItems: "center"
   },
   welcomeImage: {
     width: 100,
@@ -221,7 +242,7 @@ const styles = StyleSheet.create({
   headerTopText: {
     fontSize: 22,
     fontWeight: "bold",
-    color: "rgba(96,100,109, 1)",
+    color: "white",
     lineHeight: 24,
     textAlign: "center",
     marginTop: 2,
@@ -268,16 +289,4 @@ const styles = StyleSheet.create({
   }
 });
 
-
-export default HomeScreen
-// const mapStateToProps = (state) => {
-//     return{
-      
-//     }
-// }
-
-
-// export default connect(
-//   mapStateToProps(),
-//   null
-// )(HomeScreen)
+export default HomeScreen;

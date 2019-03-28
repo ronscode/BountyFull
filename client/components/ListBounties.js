@@ -1,125 +1,151 @@
-import React, { Component, View } from "react";
-import { Text, ListItem, ListView, FlatList } from "react-native";
-import { List } from "react-native-elements";
+import React, { Component } from "react";
+import {
+  Text,
+  ListItem,
+  ListView,
+  SectionList,
+  Platform,
+  StyleSheet,
+  ScrollView,
+  Image,
+  View
+} from "react-native";
+import {
+  createStackNavigator,
+  createBottomTabNavigator
+} from "react-navigation";
+import axios from "axios";
+import { Button, List, Card } from "react-native-elements";
+// import AppNavigator from "./navigation/AppNavigator";
 
-const demoData = [
-  [
-    {
-      _id: "5c964b3f149db56a643704bf",
-      claimer: "John Smith",
-      isStarted: false,
-      isCleaned: false,
-      isVerified: false,
-      isPaid: false,
-      isComplete: false,
-      timeStarted: "",
-      timeEnded: "",
-      poster: "jakethesnake",
-      bountyAmount: 20,
-      location: "1111111111",
-      pictures: { post: "urlofpostpicture", start: "blank", end: "blank" },
-      __v: 0
-    },
-    {
-      _id: "5c9653cfec0bd97372ae7ef5",
-      claimer: "",
-      isComplete: false,
-      isVerified: false,
-      isStarted: false,
-      isPaid: false,
-      timeStarted: "",
-      timeEnded: "",
-      poster: "rake man 2",
-      bountyAmount: 20,
-      location: "1111111111",
-      pictures: { post: "urlofpostpicture", start: "", end: "" },
-      __v: 0
-    },
-    {
-      _id: "5c9653dbec0bd97372ae7ef6",
-      claimer: "",
-      isComplete: false,
-      isVerified: false,
-      isStarted: false,
-      isPaid: false,
-      timeStarted: "",
-      timeEnded: "",
-      poster: "final cleanination",
-      bountyAmount: 20,
-      location: "1111111111",
-      pictures: { post: "urlofpostpicture", start: "", end: "" },
-      __v: 0
-    },
-    {
-      _id: "5c9654803c954e744c66f622",
-      claimer: "",
-      isComplete: false,
-      isVerified: false,
-      isStarted: false,
-      isPaid: false,
-      timeStarted: "",
-      timeEnded: "",
-      poster: "final cleanination",
-      bountyAmount: 20,
-      location: "1111111111",
-      pictures: { post: "urlofpostpicture", start: "", end: "" },
-      __v: 0
-    }
-  ]
-];
-
-const list = [
-  {
-    name: "Amy Farha",
-    subtitle: "Vice President"
-  },
-  {
-    name: "Chris Jackson",
-    avatar_url:
-      "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-    subtitle: "Vice Chairman"
+export default class ListBounties2 extends Component {
+  constructor(props) {
+    super(props);
+    let initialState = {
+      bounties: []
+    };
+    this.state = initialState;
   }
-];
-
-export default class ListBounties extends Component {
-  //   constructor(props) {
-  //     super(props);
-  //     let initialState = {
-  //       bounties: []
-  //     };
-  //     this.state = initialState;
-  //   }
-  //   componentDidMount() {
-  //     async function listAllBounties() {
-  //       try {
-  //         let response = await fetch("http://localhost:3001/find");
-  //         let responseJson = await response.json();
-  //         return responseJson;
-  //       } catch (error) {
-  //         console.error(error);
-  //       }
-  //     }
-  //   }
-  keyExtractor = (item, index) => index.toString();
-
-  renderItem = ({ item }) => (
-    <FlatList
-      title={item.name}
-      subtitle={item.subtitle}
-      leftAvatar={{
-        source: item.avatar_url && { uri: item.avatar_url },
-        title: item.name[0]
-      }}
-    />
-  );
-
+  componentDidMount() {
+    axios
+      .get("http://192.168.1.76:3001/find/")
+      .then(res => this.setState({ bounties: res.data }))
+      .catch(err => console.log(err));
+  }
   render() {
     return (
-      <FlatList
-        keyExtractor={this.keyExtractor}
-        data={list}
-        renderItem={this.renderItem}
-      />
+      <ScrollView>
+        {this.state.bounties.reverse().map((bounty, i) => {
+          return (
+            <View style={styles.listBountyCard} key={i}>
+              <View style={styles.bountyBoxHeader}>
+                <Text style={styles.bountyBoxTitle}>{bounty.bountyTitle}</Text>
+                <Text style={styles.bountyBoxAmount}>
+                  ${bounty.bountyAmount}
+                </Text>
+              </View>
+              <View style={styles.bountyBox}>
+                <Image
+                  style={styles.listBountyImage}
+                  source={{ uri: bounty.pictures.post }}
+                />
+                <View style={styles.bountyBoxColumn}>
+                  <Text>
+                    POSTED BY: {bounty.bountyPoster} {bounty.poster}
+                  </Text>
+                  <Text>AMOUNT: ${bounty.bountyAmount}</Text>
+                  <Text>Pre-Clean Notes:</Text>
+                  <Text>{bounty.bountyNotes}</Text>
+                  <Button
+                    containerStyle={{ width: "50%" }}
+                    title="Start Clean"
+                  />
+                </View>
+              </View>
+            </View>
+          );
+        })}
+
+        {/* 
+        {this.state.bounties.reverse().map(bounty => {
+          return (
+            <View>
+              <Text>{bounty.bountyTitle}</Text>
+              <Text>POSTED BY: {bounty.bountyPoster}</Text>
+              <Text>AMOUNT: ${bounty.bountyAmount}</Text>
+              <Text>Notes for cleaner:</Text>
+              <Text>{bounty.bountyNotes}</Text>
+
+              <Image
+                style={styles.listBountyImage}
+                source={{ uri: bounty.pictures.post }}
+              />
+              <Button title={"Start Bounty"}>Start Bounty</Button>
+            </View>
+          );
+        })} */}
+      </ScrollView>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#fff"
+  },
+  bountyBox: { flex: 1, flexDirection: "row", padding: 1 },
+  bountyBoxColumn: {
+    flex: 1,
+    flexDirection: "column",
+    padding: 1
+  },
+  bountyBoxTitle: {
+    marginLeft: 2,
+    width: 308,
+    marginBottom: 1,
+    color: "rgba(0,0,0,0.9)",
+    fontSize: 22
+  },
+  bountyBoxAmount: {
+    marginRight: 2,
+    width: 42,
+    color: "rgba(33,108,42,1)",
+    fontSize: 22
+  },
+
+  listBountyCard: {
+    flex: 1,
+    marginLeft: 12,
+    marginRight: 12,
+    borderColor: "grey",
+    borderWidth: 1,
+    marginBottom: 15,
+    width: 360
+  },
+  bountyBoxHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between"
+  },
+  bountyText: {
+    color: "rgba(33,108,42,1)",
+    paddingTop: 10,
+    paddingBottom: 10,
+    fontSize: 18
+  },
+  listBountyImage: {
+    width: 140,
+    height: 120
+  },
+
+  bountyAmount: {
+    marginBottom: 10,
+    color: "rgba(33,108,42,1)",
+    fontSize: 22
+  },
+  bountyButton: {
+    marginBottom: 20,
+    color: "rgba(0,0,0,0.9)",
+    fontSize: 22
+  }
+});

@@ -13,16 +13,16 @@ import {
 } from "react-native";
 import UsersMap from "../components/UsersMap";
 import FetchBountyLocation from "../components/FetchBountyLocation";
-import axios from 'axios';
-
+import axios from "axios";
 
 // Reference URL
-const proxyUrl = require('../proxyUrl.js');
+
+// Reference URL
+const proxyUrl = require("../proxyUrl.js");
 
 const initialValues = {
   image: ""
 };
-
 export default class App extends React.Component {
   state = {
     userLocation: null
@@ -44,20 +44,32 @@ export default class App extends React.Component {
       err => console.log(err)
     );
   };
+
+  //Posts new bounty to DB. Also has the thankyou message that pops up after submission
+
   async onSubmit(values) {
     //List of form values to be inserted here
     let body = {
-        poster: 'Fred',
-        amount: 25,
-        location: '22232323232',
-        picture: 'URL HERE',
-        title: 'Fancy fancy title'
+      poster: "Zaphod",
+      amount: values.BountyAmount,
+      location: "22232323232 NW",
+      picture: values.image,
+      title: values.BountyTitle
     };
-    let message = 'Thank you! Your bounty {values.BountyTitle} for {values.BountyAmount} has been posted.';
-    await axios.post(proxyUrl.url + '/post/', body)
-        .then(res => this.props.saveBounty(res.data))
-        .catch(err => console.log(err));
-    Alert.alert(message)
+
+    let message =
+      "Thank you! Your bounty " +
+      values.BountyTitle +
+      " for $" +
+      values.BountyAmount +
+      " has been posted.";
+    await axios
+      .post(proxyUrl.url + "/post/", body)
+      .then(res => this.props.saveBounty(res.data))
+      .catch(err => console.log(err));
+    console.log(values.bountyNotes);
+    Alert.alert(message);
+
     Keyboard.dismiss();
   }
 
@@ -81,21 +93,14 @@ export default class App extends React.Component {
         >
           {({ handleChange, handleSubmit, values }) => (
             <View>
-              {/* <TextInput
-                onChangeText={handleChange("title")}
-                value={values.title}
-                label="Title"
-                placeholder="e.g My Awesome Selfie"
-              /> */}
-
               <Text style={styles.trackCleanSubHeader}>NAME YOUR CLEANUP:</Text>
 
               <TextInput
                 onChangeText={handleChange("BountyTitle")}
                 style={styles.inputBox}
                 value={values.BountyTitle}
-                label="BountyTitle"
-                placeholder="Use A Catchy Title for Terrific Trash Cleanup!"
+                label="Bounty Title"
+                placeholder="Catchy Title for Terrific Trash Take Away!"
               />
               <Text />
 
@@ -110,7 +115,7 @@ export default class App extends React.Component {
                 onChangeText={handleChange("BountyAmount")}
                 style={styles.inputBoxAmount}
                 value={values.BountyAmount}
-                label="BountyAmount"
+                label="Bounty Amount"
                 placeholder="$"
                 keyboardType="numeric"
               />
@@ -131,15 +136,12 @@ export default class App extends React.Component {
                 onChangeText={handleChange("bountyNotes")}
                 style={styles.inputBoxNotes}
                 value={values.bountyNotes}
-                label="bountyNotes"
+                label="Bounty Notes"
                 placeholder="Notes about cleanup"
               />
 
               <Text />
-              <Text>
-                Ready to post your litter cleanup bounty? Review the cleanup
-                details below before submitting.
-              </Text>
+              <Text>Review the cleanup details below and then submit.</Text>
               <Text />
               <Button
                 onPress={handleSubmit}
@@ -153,6 +155,9 @@ export default class App extends React.Component {
               <Text />
               <Divider />
               <Text />
+
+              {/* 
+              // This is the preview before submission section  */}
               <Text style={styles.trackCleanHeader}>YOUR CLEANUP DETAILS:</Text>
               <Text style={styles.bountyReviewTitle}>TITLE:</Text>
               <Text style={styles.bountyReviewTitleInput}>
@@ -170,7 +175,7 @@ export default class App extends React.Component {
               ) : (
                 <Image
                   source={require("../assets/images/demo/uploadImage.png")}
-                  style={{ width: 150, height: 150 }}
+                  style={{ width: 120, height: 120 }}
                 />
               )}
               <Text style={styles.trackCleanSubHeader}>
@@ -218,8 +223,8 @@ const styles = StyleSheet.create({
     width: 42
   },
   bountyBeforeImage: {
-    width: 150,
-    height: 150
+    width: 120,
+    height: 120
   },
   trackCleanNotes: {
     height: 80,

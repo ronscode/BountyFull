@@ -25,12 +25,8 @@ export default class PostBountycreen extends React.Component {
           style={styles.container}
           contentContainerStyle={styles.contentContainer}
         >
-          <View style={styles.PostBountyContainer}>
-            <Text style={styles.headerTopText}>
-              CREATE LITTER CLEANUP BOUNTY
-            </Text>
-            <PostBountyForm />
-          </View>
+          <Text style={styles.headerTopText}>CREATE LITTER CLEANUP BOUNTY</Text>
+          <PostBountyForm />
         </ScrollView>
       </View>
     );

@@ -1,5 +1,5 @@
 import React from "react";
-import { connect } from 'react-redux'
+import { connect } from "react-redux";
 import {
   Image,
   Platform,
@@ -15,38 +15,11 @@ import { WebBrowser } from "expo";
 import FetchLocation from "../components/FetchLocation";
 import UsersMap from "../components/UsersMap";
 import { MonoText } from "../components/StyledText";
-import ListBounties2 from "../components/ListBounties2";
-
-const list = [
-  {
-    name: "Amy Farha",
-    subtitle: "Vice President"
-  },
-  {
-    name: "Chris Jackson",
-    avatar_url:
-      "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-    subtitle: "Vice Chairman"
-  }
-];
+import ListBounties from "../components/ListBounties";
 
 class FindBountyScreen extends React.Component {
-
-  keyExtractor = (item, index) => index.toString();
-
-  renderItem = ({ item }) => (
-    <ListItem
-      title={item.name}
-      subtitle={item.subtitle}
-      leftAvatar={{
-        source: item.avatar_url && { uri: item.avatar_url },
-        title: item.name[0]
-      }}
-    />
-  );
-
-  constructor(props){
-    super(props)
+  constructor(props) {
+    super(props);
   }
   static navigationOptions = {
     header: null
@@ -65,25 +38,15 @@ class FindBountyScreen extends React.Component {
             </Text>
 
             <Image
-              source={
-                __DEV__
-                  ? require("../assets/images/bin.png")
-                  : require("../assets/images/bin.png")
-              }
+              source={require("../assets/images/bin.png")}
               style={styles.welcomeImage}
             />
             <Text style={styles.getStartedText}>
               Find a litter clean up bounty near you!
             </Text>
-            <Text>Map with bounty pins.</Text>
-            <Text>Top 10 offers button?</Text>
-            <Text>
-              We should look at other apps like Roadie or similar for ideas.
-              {this.props.bounty.time_started}
-            </Text>
 
-            <ListBounties2 />
-            </View>
+            <ListBounties />
+          </View>
         </ScrollView>
       </View>
     );
@@ -191,15 +154,15 @@ const styles = StyleSheet.create({
   }
 });
 
-const mapStateToProps = (state) =>{
-  return { 
-    bounty : state.bounty
-  }
-}
+const mapStateToProps = state => {
+  return {
+    bounty: state.bounty
+  };
+};
 
 export default connect(
   mapStateToProps,
   null
-)( FindBountyScreen )
+)(FindBountyScreen);
 
 // export default FindBountyScreen

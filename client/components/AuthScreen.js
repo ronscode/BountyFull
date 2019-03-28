@@ -76,8 +76,8 @@ const styles = StyleSheet.create({
   },
   image: {
     marginTop: 15,
-    width: 150,
-    height: 150,
+    width: 120,
+    height: 120,
     borderColor: "rgba(0,0,0,0.2)",
     borderWidth: 3,
     borderRadius: 150

@@ -47,11 +47,11 @@ class HomeScreen extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <ScrollView
-          style={styles.container}
-          contentContainerStyle={styles.contentContainer}
-        >
+      <View
+        style={styles.container}
+        contentContainerStyle={styles.contentContainer}
+      >
+        <ScrollView style={styles.container}>
           <View style={styles.welcomeContainer}>
             <Text style={styles.headerTopText}>BountyFull WELCOMES YOU!</Text>
             <Text />
@@ -67,12 +67,13 @@ class HomeScreen extends React.Component {
             <Text />
 
             <Text />
+
             <View style={styles.homeButton}>
               <Button
                 type={"outline"}
                 raised={true}
                 onPress={this._buttonPostBounty}
-                title="Post Bounty For Cleanup"
+                title="POST CLEANUP BOUNTY"
               />
             </View>
             <Text />
@@ -81,7 +82,7 @@ class HomeScreen extends React.Component {
                 type={"outline"}
                 raised={true}
                 onPress={this._buttonFindOpenBounty}
-                title="Find Litter Bounty"
+                title="FIND LITTER BOUNTY"
               />
             </View>
             <Text />
@@ -90,53 +91,17 @@ class HomeScreen extends React.Component {
                 type={"outline"}
                 raised={true}
                 onPress={this._buttonTrackCleanUp}
-                title="Track Litter Cleanup"
+                title="TRACK CLEANUP"
               />
             </View>
             <Text />
             <FetchLocation onGetLocation={this.getUserLocationHandler} />
             <Text />
             <AuthScreen />
-            <UsersMap userLocation={this.state.userLocation} />
-          </View>
-
-          <View style={styles.getStartedContainer}>
-            {this._maybeRenderDevelopmentModeWarning()}
-
-            <View
-              style={[styles.codeHighlightContainer, styles.homeScreenFilename]}
-            />
           </View>
         </ScrollView>
       </View>
     );
-  }
-
-  _maybeRenderDevelopmentModeWarning() {
-    if (__DEV__) {
-      const learnMoreButton = (
-        <Text onPress={this._handleLearnMorePress} style={styles.helpLinkText}>
-          Learn more
-        </Text>
-      );
-
-      return (
-        <View>
-          <Text style={styles.developmentModeText}>
-            -Map loads here with bounties? (we are in dev mode)
-          </Text>
-          <Text style={styles.developmentModeText}>
-            -Light on style for now, heavy on fun(ction)
-          </Text>
-        </View>
-      );
-    } else {
-      return (
-        <Text style={styles.developmentModeText}>
-          (not dev mode full speed)
-        </Text>
-      );
-    }
   }
 
   // Opens the Camera
@@ -268,16 +233,4 @@ const styles = StyleSheet.create({
   }
 });
 
-
-export default HomeScreen
-// const mapStateToProps = (state) => {
-//     return{
-      
-//     }
-// }
-
-
-// export default connect(
-//   mapStateToProps(),
-//   null
-// )(HomeScreen)
+export default HomeScreen;

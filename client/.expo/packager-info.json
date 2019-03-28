@@ -1,8 +1,8 @@
 {
   "expoServerPort": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null,
+  "expoServerNgrokUrl": "https://wg-kq3.ronscode.client.exp.direct",
+  "packagerNgrokUrl": "https://packager.wg-kq3.ronscode.client.exp.direct",
+  "ngrokPid": 81255,
   "devToolsPort": 19002,
   "packagerPort": null,
   "packagerPid": null

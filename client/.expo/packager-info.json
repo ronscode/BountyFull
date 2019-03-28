@@ -1,8 +1,8 @@
 {
   "expoServerPort": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null,
+  "expoServerNgrokUrl": "https://ch-spk.anonymous.client.exp.direct",
+  "packagerNgrokUrl": "https://packager.ch-spk.anonymous.client.exp.direct",
+  "ngrokPid": 20898,
   "devToolsPort": 19002,
   "packagerPort": null,
   "packagerPid": null

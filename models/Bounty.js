@@ -7,7 +7,11 @@ const BountySchema = new mongoose.Schema({
     required: true
   },
   bountyTitle: {
-    type: String
+    type: String,
+    required: true
+  },
+  bountyNotes: {
+    type: String,
   },
   claimer: {
     type: String

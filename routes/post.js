@@ -29,8 +29,8 @@ router.put("/update/", (req, res) => {
       let update = updateBounty(reply._doc);
       if (update.isVerified) {
         /*****************************
-                        DO PAYMENT STUFF
-                *****************************/
+              DO PAYMENT STUFF
+        *****************************/
         update = updateBounty(update);
       }
       if (update.isPaid) {

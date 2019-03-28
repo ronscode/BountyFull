@@ -106,16 +106,16 @@ class HomeScreen extends React.Component {
         source={require("../assets/images/demo/bg.jpg")}
         style={{ width: "100%", height: "100%" }}
       >
-        <View style={styles.container}>
-          <View style={styles.headerBg}>
-            <Text style={styles.headerTopText}>BountyFull WELCOMES YOU!</Text>
-            <Text />
+        <View style={styles.headerBg}>
+          <Text style={styles.headerTopText}>BountyFull WELCOMES YOU!</Text>
+          <Text />
 
-            <Text />
-            <Text style={styles.getStartedText}>
-              💰Clean litter for bounties : ⛳ Track Litter Cleanups
-            </Text>
-          </View>
+          <Text />
+          <Text style={styles.headerText}>
+            💰Clean litter for bounties : ⛳ Track Litter Cleanups
+          </Text>
+        </View>
+        <View style={styles.container}>
           <Text />
 
           <Text />
@@ -186,8 +186,12 @@ const styles = StyleSheet.create({
   },
   headerBg: {
     backgroundColor: "rgba(0, 255, 0, 0.3)",
-    padding: 2,
-    margin: 2
+    borderColor: "darkgreen",
+    borderWidth: 1,
+    paddingTop: 30
+  },
+  headerText: {
+    paddingBottom: 2
   },
   homeButtons: {
     alignItems: "center",
@@ -242,7 +246,7 @@ const styles = StyleSheet.create({
   headerTopText: {
     fontSize: 22,
     fontWeight: "bold",
-    color: "white",
+    color: "#fa7b62",
     lineHeight: 24,
     textAlign: "center",
     marginTop: 2,

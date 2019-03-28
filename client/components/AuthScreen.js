@@ -67,7 +67,6 @@ const LoggedInPage = props => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center"
   },
@@ -76,8 +75,8 @@ const styles = StyleSheet.create({
   },
   image: {
     marginTop: 15,
-    width: 120,
-    height: 120,
+    width: 100,
+    height: 150,
     borderColor: "rgba(0,0,0,0.2)",
     borderWidth: 3,
     borderRadius: 150

@@ -39,8 +39,10 @@ export default class ListBounties2 extends Component {
           return (
             <View style={styles.listBountyCard} key={i}>
               <View style={styles.bountyBoxHeader}>
-                <Text style={styles.bountyTitle}>{bounty.bountyTitle}</Text>
-                <Text style={styles.bountyAmount}>${bounty.bountyAmount}</Text>
+                <Text style={styles.bountyBoxTitle}>{bounty.bountyTitle}</Text>
+                <Text style={styles.bountyBoxAmount}>
+                  ${bounty.bountyAmount}
+                </Text>
               </View>
               <View style={styles.bountyBox}>
                 <Image
@@ -93,7 +95,24 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff"
   },
   bountyBox: { flex: 1, flexDirection: "row", padding: 1 },
-  bountyBoxColumn: { flex: 1, flexDirection: "column", padding: 1 },
+  bountyBoxColumn: {
+    flex: 1,
+    flexDirection: "column",
+    padding: 1
+  },
+  bountyBoxTitle: {
+    marginLeft: 2,
+    width: 308,
+    marginBottom: 1,
+    color: "rgba(0,0,0,0.9)",
+    fontSize: 22
+  },
+  bountyBoxAmount: {
+    marginRight: 2,
+    width: 42,
+    color: "rgba(33,108,42,1)",
+    fontSize: 22
+  },
 
   listBountyCard: {
     flex: 1,
@@ -119,11 +138,6 @@ const styles = StyleSheet.create({
     height: 120
   },
 
-  bountyTitle: {
-    marginBottom: 10,
-    color: "rgba(0,0,0,0.9)",
-    fontSize: 22
-  },
   bountyAmount: {
     marginBottom: 10,
     color: "rgba(33,108,42,1)",

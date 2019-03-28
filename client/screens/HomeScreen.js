@@ -7,7 +7,8 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  View
+  View,
+  ImageBackground
 } from "react-native";
 
 import { Button } from "react-native-elements";
@@ -44,63 +45,110 @@ class HomeScreen extends React.Component {
   static navigationOptions = {
     header: null
   };
+  //   <View
+  //   style={styles.container}
+  //   contentContainerStyle={styles.contentContainer}
+  // >
+  //   <ScrollView style={styles.container}>
+  //     <View style={styles.welcomeContainer}>
+  // <Text style={styles.headerTopText}>BountyFull WELCOMES YOU!</Text>
+  // <Text />
+  // <Image
+  //   source={require("../assets/images/bin.png")}
+  //   style={styles.welcomeImage}
+  // />
+  // <Text />
+  // <Text style={styles.getStartedText}>
+  //   💰Clean litter for bounties : ⛳ Track Litter Cleanups
+  // </Text>
+
+  // <Text />
+
+  // <Text />
+
+  // <View style={styles.homeButton}>
+  //   <Button
+  //     type={"outline"}
+  //     raised={true}
+  //     onPress={this._buttonPostBounty}
+  //     title="POST CLEANUP BOUNTY"
+  //   />
+  // </View>
+  // <Text />
+  // <View style={styles.homeButton}>
+  //   <Button
+  //     type={"outline"}
+  //     raised={true}
+  //     onPress={this._buttonFindOpenBounty}
+  //     title="FIND LITTER BOUNTY"
+  //   />
+  // </View>
+  // <Text />
+  // <View style={styles.homeButton}>
+  //   <Button
+  //     type={"outline"}
+  //     raised={true}
+  //     onPress={this._buttonTrackCleanUp}
+  //     title="TRACK CLEANUP"
+  //   />
+  // </View>
+  // <Text />
+  // <FetchLocation onGetLocation={this.getUserLocationHandler} />
+  // <Text />
+  // <AuthScreen />
+  //     </View>
+  //   </ScrollView>
+  // </View>
 
   render() {
     return (
-      <View
-        style={styles.container}
-        contentContainerStyle={styles.contentContainer}
+      <ImageBackground
+        source={require("../assets/images/demo/bg.jpg")}
+        style={{ width: "100%", height: "100%" }}
       >
-        <ScrollView style={styles.container}>
-          <View style={styles.welcomeContainer}>
+        <View style={styles.container}>
+          <View style={styles.headerBg}>
             <Text style={styles.headerTopText}>BountyFull WELCOMES YOU!</Text>
             <Text />
-            <Image
-              source={require("../assets/images/bin.png")}
-              style={styles.welcomeImage}
-            />
+
             <Text />
             <Text style={styles.getStartedText}>
               💰Clean litter for bounties : ⛳ Track Litter Cleanups
             </Text>
-
-            <Text />
-
-            <Text />
-
-            <View style={styles.homeButton}>
-              <Button
-                type={"outline"}
-                raised={true}
-                onPress={this._buttonPostBounty}
-                title="POST CLEANUP BOUNTY"
-              />
-            </View>
-            <Text />
-            <View style={styles.homeButton}>
-              <Button
-                type={"outline"}
-                raised={true}
-                onPress={this._buttonFindOpenBounty}
-                title="FIND LITTER BOUNTY"
-              />
-            </View>
-            <Text />
-            <View style={styles.homeButton}>
-              <Button
-                type={"outline"}
-                raised={true}
-                onPress={this._buttonTrackCleanUp}
-                title="TRACK CLEANUP"
-              />
-            </View>
-            <Text />
-            <FetchLocation onGetLocation={this.getUserLocationHandler} />
-            <Text />
-            <AuthScreen />
           </View>
-        </ScrollView>
-      </View>
+          <Text />
+
+          <Text />
+
+          <View style={styles.homeButton}>
+            <Button
+              type={"outline"}
+              raised={true}
+              onPress={this._buttonPostBounty}
+              title="POST CLEANUP BOUNTY"
+            />
+          </View>
+
+          <View style={styles.homeButton}>
+            <Button
+              type={"outline"}
+              raised={true}
+              onPress={this._buttonFindOpenBounty}
+              title="FIND LITTER BOUNTY"
+            />
+          </View>
+
+          <View style={styles.homeButton}>
+            <Button
+              type={"outline"}
+              raised={true}
+              onPress={this._buttonTrackCleanUp}
+              title="TRACK CLEANUP"
+            />
+          </View>
+          <AuthScreen />
+        </View>
+      </ImageBackground>
     );
   }
 
@@ -132,19 +180,26 @@ class HomeScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff"
+    justifyContent: "center",
+    alignItems: "center",
+    paddingTop: 30
+  },
+  headerBg: {
+    backgroundColor: "rgba(0, 255, 0, 0.3)",
+    padding: 2,
+    margin: 2
   },
   homeButtons: {
     alignItems: "center",
-    paddingTop: 10,
-    paddingBottom: 10
+    height: 10
+    // paddingTop: 10,
+    // paddingBottom: 10
   },
   homeButton: {
-    flex: 1,
     width: "85%",
     fontSize: 15,
-    height: 32,
-    marginTop: 10
+    height: "10%",
+    textAlign: "center"
   },
   developmentModeText: {
     marginBottom: 20,
@@ -157,9 +212,10 @@ const styles = StyleSheet.create({
     paddingTop: 30
   },
   welcomeContainer: {
-    alignItems: "center",
     marginTop: 10,
-    marginBottom: 20
+    marginBottom: 20,
+    justifyContent: "center",
+    alignItems: "center"
   },
   welcomeImage: {
     width: 100,
@@ -186,7 +242,7 @@ const styles = StyleSheet.create({
   headerTopText: {
     fontSize: 22,
     fontWeight: "bold",
-    color: "rgba(96,100,109, 1)",
+    color: "white",
     lineHeight: 24,
     textAlign: "center",
     marginTop: 2,

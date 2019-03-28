@@ -18,6 +18,9 @@ import axios from "axios";
 import { Button, List, Card } from "react-native-elements";
 // import AppNavigator from "./navigation/AppNavigator";
 
+// Reference URL
+const proxyUrl = require("../proxyUrl.js");
+
 export default class ListBounties2 extends Component {
   constructor(props) {
     super(props);
@@ -28,7 +31,7 @@ export default class ListBounties2 extends Component {
   }
   componentDidMount() {
     axios
-      .get("http://192.168.1.76:3001/find/")
+      .get(proxyUrl.url + "/find/")
       .then(res => this.setState({ bounties: res.data }))
       .catch(err => console.log(err));
   }

@@ -66,6 +66,7 @@ export default class App extends React.Component {
     await axios
       .post(proxyUrl.url + "/post/", body)
       .then(res => this.props.saveBounty(res.data))
+      .then(res => this.setState({ bounties: res.data }))
       .catch(err => console.log(err));
     console.log(values.bountyNotes);
     Alert.alert(message);

@@ -33,12 +33,10 @@ class FindBountyScreen extends React.Component {
           contentContainerStyle={styles.contentContainer}
         >
           <View style={styles.headerContainer}>
-            <Text style={styles.headerTitle}>
-              CLEAN UP LITTER & COLLECT A PRIZE
-            </Text>
+            <Text style={styles.headerTopText}>CHOOSE A CLEANUP:</Text>
 
             <Text style={styles.headerText}>
-              Select a bounty from the list to start tracking your cleanup.
+              Select a bounty and tracking your cleanup.
             </Text>
 
             <ListBounties />
@@ -64,16 +62,24 @@ class FindBountyScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff"
+    backgroundColor: "#4eba7e"
   },
-  headerTitle: {
-    fontSize: 18,
+  headerTopText: {
+    fontSize: 22,
     fontWeight: "bold",
-    color: "rgba(96,100,109, 1)",
-    lineHeight: 22,
+    color: "#FFFFFF",
     textAlign: "center",
-    marginTop: 2,
-    marginBottom: 2
+    textShadowColor: "rgba(0,0,0, 1)",
+    textShadowOffset: { width: 1, height: 2 },
+    textShadowRadius: 3
+  },
+
+  headerText: {
+    fontSize: 15,
+    color: "rgba(96,100,109, 1)",
+    lineHeight: 24,
+    textAlign: "center",
+    marginBottom: 15
   },
   developmentModeText: {
     marginBottom: 20,
@@ -112,13 +118,7 @@ const styles = StyleSheet.create({
     borderRadius: 3,
     paddingHorizontal: 4
   },
-  headerText: {
-    fontSize: 15,
-    color: "rgba(96,100,109, 1)",
-    lineHeight: 24,
-    textAlign: "center",
-    marginBottom: 15
-  },
+
   tabBarInfoContainer: {
     position: "absolute",
     bottom: 0,

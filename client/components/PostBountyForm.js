@@ -71,8 +71,19 @@ export default class App extends React.Component {
         >
           {({ handleChange, handleSubmit, values }) => (
             <View>
-              <Text style={styles.trackCleanSubHeader}>NAME YOUR CLEANUP:</Text>
-
+              <View>
+                <Button
+                  title="PICTURE OF CLEANUP"
+                  rightIcon={{ name: "add-a-photo" }}
+                  onPress={() => {
+                    this._pickImage(handleChange("image"));
+                  }}
+                />
+                <Text style={styles.postBountyText}>
+                  Share a starting picture for the cleaner
+                </Text>
+              </View>
+              <Text />
               <TextInput
                 onChangeText={handleChange("BountyTitle")}
                 style={styles.inputBox}
@@ -81,8 +92,6 @@ export default class App extends React.Component {
                 placeholder="Catchy Title for Terrific Trash Take Away!"
               />
               <Text />
-
-              <Text style={styles.trackCleanSubHeader}>SET BOUNTY AMOUNT:</Text>
 
               <TextInput
                 onChangeText={handleChange("BountyAmount")}
@@ -94,22 +103,12 @@ export default class App extends React.Component {
               />
               <Text />
 
-              <Button
-                title="PICTURE OF THE LITTER"
-                icon="add-a-photo"
-                mode="contained"
-                style={styles.button}
-                onPress={() => {
-                  this._pickImage(handleChange("image"));
-                }}
-              />
-              <Text />
-              <Text style={styles.trackCleanSubHeader}>NOTES FOR CLEANER:</Text>
+              <Text style={styles.postBountySubHeader}>NOTES FOR CLEANER:</Text>
               <TextInput
                 onChangeText={handleChange("bountyNotes")}
                 style={styles.inputBoxNotes}
                 value={values.bountyNotes}
-                label="Bounty Notes"
+                label="Notes for cleaner. Gloves? Big or Small? Dangerous?"
                 placeholder="Notes about cleanup"
               />
 
@@ -131,13 +130,15 @@ export default class App extends React.Component {
 
               {/* 
               // This is the preview before submission section  */}
-              <Text style={styles.trackCleanHeader}>YOUR CLEANUP DETAILS:</Text>
+              <Text style={styles.postBountySubHeader}>
+                YOUR CLEANUP DETAILS:
+              </Text>
               <Text style={styles.bountyReviewTitle}>TITLE:</Text>
               <Text style={styles.bountyReviewTitleInput}>
                 {values.BountyTitle}
               </Text>
 
-              <Text style={styles.trackCleanSubHeader}>
+              <Text style={styles.postBountySubHeader}>
                 BEFORE CLEANUP PICTURE:
               </Text>
               {values.image && values.image.length > 0 ? (
@@ -151,18 +152,13 @@ export default class App extends React.Component {
                   style={{ width: 120, height: 120 }}
                 />
               )}
-              <Text style={styles.trackCleanSubHeader}>
+              <Text style={styles.postBountySubHeader}>
                 Notes About The Cleanup
               </Text>
               <Text />
               <Text style={styles.bountyReviewText}>{values.bountyNotes}</Text>
 
               <Text />
-
-              <Text style={styles.thanksBox}>
-                Thank you for helping clean up the world! Keep up the good work
-                and tell a friend!
-              </Text>
             </View>
           )}
         </Formik>
@@ -180,6 +176,18 @@ const styles = StyleSheet.create({
   inputBox: {
     borderColor: "lightgrey",
     borderWidth: 1
+  },
+  postBountyText: {
+    textAlign: "center",
+    paddingTop: 10,
+    marginBottom: 2
+  },
+  homeButton: {
+    width: "42%",
+    fontSize: 15,
+    height: "10%",
+    marginBottom: 15,
+    textAlign: "center"
   },
   inputBoxAmount: {
     borderColor: "lightgrey",
@@ -199,14 +207,14 @@ const styles = StyleSheet.create({
     width: 120,
     height: 120
   },
-  trackCleanNotes: {
+  postBountyNotes: {
     height: 80,
     marginTop: 2,
     marginBottom: 2,
     borderColor: "lightgrey",
     borderWidth: 1
   },
-  trackCleanHeader: {
+  postBountyHeader: {
     fontSize: 22,
     fontWeight: "bold",
     color: "rgba(96,100,109, 1)",
@@ -217,13 +225,15 @@ const styles = StyleSheet.create({
     paddingTop: 2,
     paddingBottom: 2
   },
-  trackCleanSubHeader: {
+  postBountySubHeader: {
     fontSize: 18,
+    marginBottom: 18,
     fontWeight: "bold",
-    color: "rgba(96,100,109, 1)",
-    lineHeight: 21,
+    color: "#FFFFFF",
     textAlign: "center",
-    marginBottom: 2
+    textShadowColor: "rgba(0,0,0, 1)",
+    textShadowOffset: { width: 1, height: 2 },
+    textShadowRadius: 3
   },
   bountyReviewText: {
     fontSize: 14,

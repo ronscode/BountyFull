@@ -1,9 +1,9 @@
 import React from "react";
 import { Platform, StatusBar, StyleSheet, View } from "react-native";
 import { AppLoading, Asset, Font, Icon } from "expo";
-import { Provider } from 'react-redux'
-import { createStore } from 'redux'
-import reducer from './reducer'
+import { Provider } from "react-redux";
+import { createStore } from "redux";
+import reducer from "./reducer";
 import AppNavigator from "./navigation/AppNavigator";
 
 // const rootReducer = (state = {}, action) => {
@@ -11,9 +11,6 @@ import AppNavigator from "./navigation/AppNavigator";
 // }
 const store = createStore(reducer);
 export default class App extends React.Component {
-  
-
-
   state = {
     isLoadingComplete: false
   };
@@ -21,19 +18,18 @@ export default class App extends React.Component {
   render() {
     if (!this.state.isLoadingComplete && !this.props.skipLoadingScreen) {
       return (
-      
-      <AppLoading
+        <AppLoading
           startAsync={this._loadResourcesAsync}
           onError={this._handleLoadingError}
           onFinish={this._handleFinishLoading}
-        /> 
+        />
       );
     } else {
       return (
-        <Provider store = { store }>
+        <Provider store={store}>
           <View style={styles.container}>
             {Platform.OS === "ios" && <StatusBar barStyle="default" />}
-              <AppNavigator /> 
+            <AppNavigator />
           </View>
         </Provider>
       );

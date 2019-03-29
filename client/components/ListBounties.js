@@ -123,8 +123,10 @@ const styles = StyleSheet.create({
     marginRight: 12,
     borderColor: "grey",
     borderWidth: 1,
+    padding: 1,
     marginBottom: 15,
-    width: 360
+    width: 370,
+    backgroundColor: "#ffffff"
   },
   bountyBoxHeader: {
     flexDirection: "row",

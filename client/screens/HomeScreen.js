@@ -22,91 +22,18 @@ import AuthScreen from "../components/AuthScreen";
 const homeButton = {
   Button: {
     titleStyle: {
-      fontSize: 16
+      fontSize: 16,
+      color: "#008e4c"
     }
   }
 };
 
 class HomeScreen extends React.Component {
   // Get Location button handler
-  state = {
-    userLocation: null
-  };
-  getUserLocationHandler = () => {
-    console.log("Get location button pressed.");
-    navigator.geolocation.getCurrentPosition(
-      position => {
-        this.setState({
-          userLocation: {
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude,
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421
-          }
-        });
-        console.log(position);
-      },
-      err => console.log(err)
-    );
-  };
 
   static navigationOptions = {
     header: null
   };
-  //   <View
-  //   style={styles.container}
-  //   contentContainerStyle={styles.contentContainer}
-  // >
-  //   <ScrollView style={styles.container}>
-  //     <View style={styles.welcomeContainer}>
-  // <Text style={styles.headerTopText}>BountyFull WELCOMES YOU!</Text>
-  // <Text />
-  // <Image
-  //   source={require("../assets/images/bin.png")}
-  //   style={styles.welcomeImage}
-  // />
-  // <Text />
-  // <Text style={styles.getStartedText}>
-  //   💰Clean litter for bounties : ⛳ Track Litter Cleanups
-  // </Text>
-
-  // <Text />
-
-  // <Text />
-
-  // <View style={styles.homeButton}>
-  //   <Button
-  //     type={"outline"}
-  //     raised={true}
-  //     onPress={this._buttonPostBounty}
-  //     title="POST CLEANUP BOUNTY"
-  //   />
-  // </View>
-  // <Text />
-  // <View style={styles.homeButton}>
-  //   <Button
-  //     type={"outline"}
-  //     raised={true}
-  //     onPress={this._buttonFindOpenBounty}
-  //     title="FIND LITTER BOUNTY"
-  //   />
-  // </View>
-  // <Text />
-  // <View style={styles.homeButton}>
-  //   <Button
-  //     type={"outline"}
-  //     raised={true}
-  //     onPress={this._buttonTrackCleanUp}
-  //     title="TRACK CLEANUP"
-  //   />
-  // </View>
-  // <Text />
-  // <FetchLocation onGetLocation={this.getUserLocationHandler} />
-  // <Text />
-  // <AuthScreen />
-  //     </View>
-  //   </ScrollView>
-  // </View>
 
   render() {
     return (

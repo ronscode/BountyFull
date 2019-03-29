@@ -13,33 +13,44 @@ import { WebBrowser } from "expo";
 import AuthScreen from "../components/AuthScreen";
 
 import { MonoText } from "../components/StyledText";
+import ListUserBounties from "../components/ListUserBounties";
 
 export default class ProfileScreen extends React.Component {
+  static navigationOptions = {
+    header: null
+  };
+
   render() {
     return (
-      <View styles={styles.container}>
-        <View style={styles.ViewProfileCard}>
+      <View style={styles.container}>
+        <View style={styles.viewProfileCard}>
           <View style={styles.profileBoxHeader}>
-            <Text style={styles.profileBoxUsername}>
-              {" "}
-              This dot state . user name{" "}
-            </Text>
-            <Text style={styles.profileBoxAmount}>Gold Start Cleaner</Text>
+            <Text style={styles.profileBoxUsername}>Zaphod BeebleBrox</Text>
+            <Text style={styles.profileBoxAmount}>🌟</Text>
           </View>
-          <View style={styles.bountyBox}>
-            {/* <Image
-            style={styles.listBountyImage}
-            source={{ uri: bounty.pictures.post }}
-          /> */}
-            <View style={styles.bountyBoxColumn}>
-              <Text>Completed Cleanups: 42</Text>
-              <Text>AMOUNT EARNED: $583</Text>
-              <Text>Pre-Clean Notes:</Text>
-              <Text>COMMENTS</Text>
-              <Button containerStyle={{ width: "50%" }} title="Start Clean" />
+          <View style={styles.profileBox}>
+            <Image
+              style={styles.listBountyImage}
+              source={require("../assets/images/demo/uploadImage.png")}
+            />
+            <View style={styles.profileBoxColumn}>
+              <View style={styles.labelRow}>
+                <Text style={styles.profileLabel}>VERIFIED CLEANUPS: </Text>
+                <Text>42</Text>
+              </View>
+              <View style={styles.labelRow}>
+                <Text style={styles.profileLabel}>AMOUNT EARNED:</Text>
+                <Text> $583</Text>
+              </View>
+
+              <Button title={"Tip User"} />
             </View>
           </View>
         </View>
+        <ScrollView>
+          <Text style={styles.subTitleText}>Verified Cleanups By Zaphod:</Text>
+          <ListUserBounties />
+        </ScrollView>
       </View>
     );
   }
@@ -48,12 +59,40 @@ export default class ProfileScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#4eba7e",
     padding: 2
   },
-  bountyBox: { flex: 1, flexDirection: "row", padding: 1 },
-  bountyBoxColumn: {
-    flex: 1,
+  headerTopText: {
+    fontSize: 22,
+    fontWeight: "bold",
+    color: "#FFFFFF",
+    textAlign: "center",
+    textShadowColor: "rgba(0,0,0, 1)",
+    textShadowOffset: { width: 1, height: 2 },
+    textShadowRadius: 3
+  },
+  subTitleText: {
+    fontSize: 18,
+    marginBottom: 8,
+    fontWeight: "bold",
+    color: "#FFFFFF",
+    textAlign: "center",
+    textShadowColor: "rgba(0,0,0, 1)",
+    textShadowOffset: { width: 1, height: 2 },
+    textShadowRadius: 3
+  },
+  profileBox: {
+    flexDirection: "row",
+    padding: 1,
+    backgroundColor: "#FFFFFF"
+  },
+  labelRow: {
+    flexDirection: "row"
+  },
+  profileLabel: {
+    fontWeight: "bold"
+  },
+  profileBoxColumn: {
     flexDirection: "column",
     padding: 1
   },
@@ -71,20 +110,22 @@ const styles = StyleSheet.create({
     fontSize: 22
   },
 
-  profileViewCard: {
-    flex: 1,
-    marginLeft: 12,
-    marginRight: 12,
+  viewProfileCard: {
+    padding: 10,
+    marginLeft: 10,
+    marginRight: 10,
     borderColor: "grey",
     borderWidth: 1,
+    marginTop: 30,
     marginBottom: 15,
-    width: 360
+
+    backgroundColor: "#FFFFFF"
   },
   profileBoxHeader: {
     flexDirection: "row",
     justifyContent: "space-between"
   },
-  bountyText: {
+  profileText: {
     color: "rgba(33,108,42,1)",
     paddingTop: 10,
     paddingBottom: 10,
@@ -106,10 +147,6 @@ const styles = StyleSheet.create({
     fontSize: 22
   },
 
-  container: {
-    flex: 1,
-    backgroundColor: "#fff"
-  },
   developmentModeText: {
     marginBottom: 20,
     color: "rgba(0,0,0,0.4)",
@@ -132,27 +169,7 @@ const styles = StyleSheet.create({
     marginTop: 3,
     marginLeft: -10
   },
-  getStartedContainer: {
-    alignItems: "center",
-    marginHorizontal: 50
-  },
-  homeScreenFilename: {
-    marginVertical: 7
-  },
-  codeHighlightText: {
-    color: "rgba(96,100,109, 0.8)"
-  },
-  codeHighlightContainer: {
-    backgroundColor: "rgba(0,0,0,0.05)",
-    borderRadius: 3,
-    paddingHorizontal: 4
-  },
-  getStartedText: {
-    fontSize: 17,
-    color: "rgba(96,100,109, 1)",
-    lineHeight: 24,
-    textAlign: "center"
-  },
+
   tabBarInfoContainer: {
     position: "absolute",
     bottom: 0,
@@ -170,76 +187,11 @@ const styles = StyleSheet.create({
       }
     }),
     alignItems: "center",
-    backgroundColor: "#fbfbfb",
     paddingVertical: 20
   },
   tabBarInfoText: {
     fontSize: 17,
     color: "rgba(96,100,109, 1)",
     textAlign: "center"
-  },
-  navigationFilename: {
-    marginTop: 5
-  },
-  helpContainer: {
-    marginTop: 15,
-    alignItems: "center"
-  },
-  helpLink: {
-    paddingVertical: 15
-  },
-  helpLinkText: {
-    fontSize: 14,
-    color: "#2e78b7"
   }
 });
-
-// <View style={styles.container}>
-//   <ScrollView
-//     style={styles.container}
-//     contentContainerStyle={styles.contentContainer}
-//   >
-//     <View style={styles.welcomeContainer}>
-//       <AuthScreen />
-//     </View>
-
-//     <View style={styles.getStartedContainer}>
-//       <Text style={styles.getStartedText}>PROFILE PAGE</Text>
-
-//       <View
-//         style={[styles.codeHighlightContainer, styles.homeScreenFilename]}
-//       />
-
-//       <Text style={styles.getStartedText}>FirstName</Text>
-//       <Text style={styles.getStartedText}>LastName</Text>
-//       <Text style={styles.getStartedText}>Email</Text>
-//       <Text style={styles.getStartedText}>Bounties Cleaned</Text>
-//       <Text style={styles.getStartedText}>Bounties Posted</Text>
-//       <Text style={styles.getStartedText}>
-//         Bio: I love cheesecake tootsie roll topping sweet tootsie roll.
-//         Marshmallow dessert donut marzipan sugar plum. Brownie dessert cotton
-//         candy sweet roll I love caramels topping pastry.
-//       </Text>
-//     </View>
-
-//     <View style={styles.helpContainer}>
-//       <TouchableOpacity
-//         onPress={this._handleHelpPress}
-//         style={styles.helpLink}
-//       />
-//     </View>
-//   </ScrollView>
-
-//   <View style={styles.tabBarInfoContainer}>
-//     <Text style={styles.tabBarInfoText}>
-//       This is a tab bar. You can edit it in:
-//     </Text>
-
-//     <View style={[styles.codeHighlightContainer, styles.navigationFilename]}>
-//       <MonoText style={styles.codeHighlightText}>
-//         navigation/MainTabNavigator.js
-//       </MonoText>
-//     </View>
-//   </View>
-//   {this._maybeRenderDevelopmentModeWarning()}
-// </View>;

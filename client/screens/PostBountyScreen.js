@@ -36,16 +36,16 @@ export default class PostBountycreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff"
+    backgroundColor: "#4eba7e"
   },
   headerTopText: {
     fontSize: 22,
     fontWeight: "bold",
-    color: "rgba(96,100,109, 1)",
-    lineHeight: 24,
+    color: "#FFFFFF",
     textAlign: "center",
-    marginTop: 2,
-    marginBottom: 2
+    textShadowColor: "rgba(0,0,0, 1)",
+    textShadowOffset: { width: 1, height: 2 },
+    textShadowRadius: 3
   },
   developmentModeText: {
     marginBottom: 20,
@@ -55,7 +55,9 @@ const styles = StyleSheet.create({
     textAlign: "center"
   },
   contentContainer: {
-    paddingTop: 30
+    paddingTop: 30,
+    justifyContent: "center",
+    alignItems: "center"
   },
   PostBountyContainer: {
     alignItems: "center",

@@ -50,6 +50,22 @@ export default class App extends React.Component {
                 label="Title"
                 placeholder="e.g My Awesome Selfie"
               /> */}
+              <View style={styles.imageContainer}>
+                <View style={styles.beforeImageLeft}>
+                  <Text style={styles.trackCleanHeader}>BEFORE IMAGE</Text>
+                  <Image
+                    source={require("../assets/images/demo/before_1.jpg")}
+                    style={{ width: 150, height: 150 }}
+                  />
+                </View>
+                <View style={styles.afterImageRight}>
+                  <Text style={styles.trackCleanHeader}>AFTER IMAGE</Text>
+                  <Image
+                    source={require("../assets/images/demo/after_1.jpg")}
+                    style={{ width: 150, height: 150 }}
+                  />
+                </View>
+              </View>
 
               <Text>HOW DID THE CLEANUP GO?</Text>
 
@@ -60,15 +76,6 @@ export default class App extends React.Component {
                 label="TrackCleanNotes"
                 placeholder="Notes about cleanup"
               />
-
-              <Text>ESTIMATED WEIGHT OF TRASH:</Text>
-              <TextInput
-                style={styles.inputBoxWeight}
-                keyboardType="numeric"
-                onChangeText={handleChange("TrackCleanWeight")}
-                value={values.TrackCleanWeight}
-              />
-              <Text />
 
               <Button
                 title="ADD FINAL CLEANUP PIC"
@@ -117,9 +124,7 @@ export default class App extends React.Component {
                 Poster"{" "}
               </Text>
               <Text />
-              <Text>
-                An estimated {values.TrackCleanWeight} lbs of trash collected
-              </Text>
+
               <Text style={styles.trackCleanSubHeader}>
                 Notes from the cleaner:{" "}
               </Text>
@@ -141,6 +146,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1
   },
+  imageContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between"
+  },
+  beforeImageLeft: {
+    margin: 5
+  },
+  afterImageRight: {
+    margin: 5
+  },
+
   inputBox: {
     borderColor: "lightgrey",
     borderWidth: 1

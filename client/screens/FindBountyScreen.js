@@ -32,17 +32,13 @@ class FindBountyScreen extends React.Component {
           style={styles.container}
           contentContainerStyle={styles.contentContainer}
         >
-          <View style={styles.welcomeContainer}>
-            <Text style={styles.getStartedText}>
+          <View style={styles.headerContainer}>
+            <Text style={styles.headerTitle}>
               CLEAN UP LITTER & COLLECT A PRIZE
             </Text>
 
-            <Image
-              source={require("../assets/images/bin.png")}
-              style={styles.welcomeImage}
-            />
-            <Text style={styles.getStartedText}>
-              Find a litter clean up bounty near you!
+            <Text style={styles.headerText}>
+              Select a bounty from the list to start tracking your cleanup.
             </Text>
 
             <ListBounties />
@@ -70,6 +66,15 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff"
   },
+  headerTitle: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "rgba(96,100,109, 1)",
+    lineHeight: 22,
+    textAlign: "center",
+    marginTop: 2,
+    marginBottom: 2
+  },
   developmentModeText: {
     marginBottom: 20,
     color: "rgba(0,0,0,0.4)",
@@ -80,7 +85,7 @@ const styles = StyleSheet.create({
   contentContainer: {
     paddingTop: 30
   },
-  welcomeContainer: {
+  headerContainer: {
     alignItems: "center",
     marginTop: 10,
     marginBottom: 20
@@ -107,11 +112,12 @@ const styles = StyleSheet.create({
     borderRadius: 3,
     paddingHorizontal: 4
   },
-  getStartedText: {
-    fontSize: 17,
+  headerText: {
+    fontSize: 15,
     color: "rgba(96,100,109, 1)",
     lineHeight: 24,
-    textAlign: "center"
+    textAlign: "center",
+    marginBottom: 15
   },
   tabBarInfoContainer: {
     position: "absolute",

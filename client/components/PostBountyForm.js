@@ -16,35 +16,12 @@ import FetchBountyLocation from "../components/FetchBountyLocation";
 import axios from "axios";
 
 // Reference URL
-
-// Reference URL
 const proxyUrl = require("../proxyUrl.js");
 
 const initialValues = {
   image: ""
 };
 export default class App extends React.Component {
-  state = {
-    userLocation: null
-  };
-  getUserLocationHandler = () => {
-    console.log("Get location button pressed.");
-    navigator.geolocation.getCurrentPosition(
-      position => {
-        this.setState({
-          userLocation: {
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude,
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421
-          }
-        });
-        console.log(position);
-      },
-      err => console.log(err)
-    );
-  };
-
   //Posts new bounty to DB. Also has the thankyou message that pops up after submission
 
   async onSubmit(values) {
@@ -102,11 +79,6 @@ export default class App extends React.Component {
                 value={values.BountyTitle}
                 label="Bounty Title"
                 placeholder="Catchy Title for Terrific Trash Take Away!"
-              />
-              <Text />
-
-              <FetchBountyLocation
-                onGetLocation={this.getUserLocationHandler}
               />
               <Text />
 

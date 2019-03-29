@@ -29,8 +29,9 @@ export default class TrackCleanScreen extends React.Component {
           contentContainerStyle={styles.contentContainer}
         >
           <View style={styles.PostBountyContainer}>
-            <Text style={styles.trackCleanHeader}>TRACK YOUR CLEAN UP</Text>
-            <Text style={styles.trackCleanHeader}>CURRENTLY CLEANING:</Text>
+            <Text style={styles.headerTitle}>TRACK YOUR CLEAN UP</Text>
+            <Text />
+            <Text style={styles.headerTitle}>CURRENTLY CLEANING:</Text>
             <Text>Hiking Trail is Trashed! Please Help!</Text>
             <Text />
             <Text>POSTED BY: Zaphod Beeblbrox</Text>
@@ -62,13 +63,15 @@ const styles = StyleSheet.create({
     height: 32,
     marginTop: 10
   },
-  trackCleanHeader: {
+  headerTitle: {
     fontSize: 18,
+    fontWeight: "bold",
     color: "rgba(96,100,109, 1)",
-    lineHeight: 24,
+    lineHeight: 20,
     textAlign: "center",
-    padding: 3
+    marginTop: 2
   },
+
   trackCleanText: {
     fontSize: 14,
     color: "rgba(96,100,109, 1)",

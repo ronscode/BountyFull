@@ -7,11 +7,11 @@
     "platforms": ["ios", "android"],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/bin.png",
+    "icon": "./assets/images/bficon.png",
     "splash": {
-      "image": "./assets/images/bin.png",
+      "image": "./assets/images/bficon.png",
       "resizeMode": "contain",
-      "backgroundColor": "#0077be"
+      "backgroundColor": "#def2e4"
     },
     "updates": {
       "fallbackToCacheTimeout": 0

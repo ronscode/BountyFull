@@ -11,7 +11,7 @@ import {
   ImageBackground
 } from "react-native";
 
-import { Button } from "react-native-elements";
+import { Button, ThemeProvider } from "react-native-elements";
 import { WebBrowser } from "expo";
 import FetchLocation from "../components/FetchLocation";
 import UsersMap from "../components/UsersMap";
@@ -19,91 +19,26 @@ import CameraExample from "../components/CameraExample";
 import { MonoText } from "../components/StyledText";
 import AuthScreen from "../components/AuthScreen";
 
+const homeButton = {
+  Button: {
+    titleStyle: {
+      fontSize: 16,
+      color: "#008e4c"
+    }
+  }
+};
+
 class HomeScreen extends React.Component {
   // Get Location button handler
-  state = {
-    userLocation: null
-  };
-  getUserLocationHandler = () => {
-    console.log("Get location button pressed.");
-    navigator.geolocation.getCurrentPosition(
-      position => {
-        this.setState({
-          userLocation: {
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude,
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421
-          }
-        });
-        console.log(position);
-      },
-      err => console.log(err)
-    );
-  };
 
   static navigationOptions = {
     header: null
   };
-  //   <View
-  //   style={styles.container}
-  //   contentContainerStyle={styles.contentContainer}
-  // >
-  //   <ScrollView style={styles.container}>
-  //     <View style={styles.welcomeContainer}>
-  // <Text style={styles.headerTopText}>BountyFull WELCOMES YOU!</Text>
-  // <Text />
-  // <Image
-  //   source={require("../assets/images/bin.png")}
-  //   style={styles.welcomeImage}
-  // />
-  // <Text />
-  // <Text style={styles.getStartedText}>
-  //   💰Clean litter for bounties : ⛳ Track Litter Cleanups
-  // </Text>
-
-  // <Text />
-
-  // <Text />
-
-  // <View style={styles.homeButton}>
-  //   <Button
-  //     type={"outline"}
-  //     raised={true}
-  //     onPress={this._buttonPostBounty}
-  //     title="POST CLEANUP BOUNTY"
-  //   />
-  // </View>
-  // <Text />
-  // <View style={styles.homeButton}>
-  //   <Button
-  //     type={"outline"}
-  //     raised={true}
-  //     onPress={this._buttonFindOpenBounty}
-  //     title="FIND LITTER BOUNTY"
-  //   />
-  // </View>
-  // <Text />
-  // <View style={styles.homeButton}>
-  //   <Button
-  //     type={"outline"}
-  //     raised={true}
-  //     onPress={this._buttonTrackCleanUp}
-  //     title="TRACK CLEANUP"
-  //   />
-  // </View>
-  // <Text />
-  // <FetchLocation onGetLocation={this.getUserLocationHandler} />
-  // <Text />
-  // <AuthScreen />
-  //     </View>
-  //   </ScrollView>
-  // </View>
 
   render() {
     return (
       <ImageBackground
-        source={require("../assets/images/demo/bg.jpg")}
+        source={require("../assets/images/demo/bgg2.jpg")}
         style={{ width: "100%", height: "100%" }}
       >
         <View style={styles.headerBg}>
@@ -111,40 +46,41 @@ class HomeScreen extends React.Component {
           <Text />
 
           <Text />
-          <Text style={styles.headerText}>
-            💰Clean litter for bounties : ⛳ Track Litter Cleanups
-          </Text>
+          <Text style={styles.headerText}>💰Clean litter for bounties</Text>
+          <Text style={styles.headerText}>⛳ Track Litter Cleanups</Text>
         </View>
         <View style={styles.container}>
-          <Text />
-
-          <Text />
-
           <View style={styles.homeButton}>
-            <Button
-              type={"outline"}
-              raised={true}
-              onPress={this._buttonPostBounty}
-              title="POST CLEANUP BOUNTY"
-            />
+            <ThemeProvider theme={homeButton}>
+              <Button
+                type={"outline"}
+                raised={true}
+                onPress={this._buttonPostBounty}
+                title="POST CLEANUP BOUNTY"
+              />
+            </ThemeProvider>
           </View>
 
           <View style={styles.homeButton}>
-            <Button
-              type={"outline"}
-              raised={true}
-              onPress={this._buttonFindOpenBounty}
-              title="FIND LITTER BOUNTY"
-            />
+            <ThemeProvider theme={homeButton}>
+              <Button
+                type={"outline"}
+                raised={true}
+                onPress={this._buttonFindOpenBounty}
+                title="FIND LITTER BOUNTY"
+              />
+            </ThemeProvider>
           </View>
 
           <View style={styles.homeButton}>
-            <Button
-              type={"outline"}
-              raised={true}
-              onPress={this._buttonTrackCleanUp}
-              title="TRACK CLEANUP"
-            />
+            <ThemeProvider theme={homeButton}>
+              <Button
+                type={"outline"}
+                raised={true}
+                onPress={this._buttonTrackCleanUp}
+                title="TRACK CLEANUP"
+              />
+            </ThemeProvider>
           </View>
           <AuthScreen />
         </View>
@@ -185,17 +121,31 @@ const styles = StyleSheet.create({
     paddingTop: 30
   },
   headerBg: {
-    backgroundColor: "rgba(0, 255, 0, 0.3)",
-    borderColor: "darkgreen",
-    borderWidth: 1,
     paddingTop: 30
   },
+  headerTopText: {
+    fontSize: 22,
+    fontWeight: "bold",
+    color: "#FFFFFF",
+    textAlign: "center",
+    textShadowColor: "rgba(0,0,0, 1)",
+    textShadowOffset: { width: 1, height: 2 },
+    textShadowRadius: 3
+  },
   headerText: {
-    paddingBottom: 2
+    fontSize: 16,
+    paddingBottom: 2,
+    marginBottom: 3,
+    color: "#FFF",
+    textAlign: "center",
+    textShadowColor: "rgba(0,0,0, 1)",
+    textShadowOffset: { width: 1, height: 2 },
+    textShadowRadius: 3
   },
   homeButtons: {
     alignItems: "center",
     height: 10
+
     // paddingTop: 10,
     // paddingBottom: 10
   },
@@ -203,6 +153,7 @@ const styles = StyleSheet.create({
     width: "85%",
     fontSize: 15,
     height: "10%",
+    marginBottom: 15,
     textAlign: "center"
   },
   developmentModeText: {
@@ -232,26 +183,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginHorizontal: 50
   },
-  homeScreenFilename: {
-    marginVertical: 7
-  },
-  codeHighlightText: {
-    color: "rgba(96,100,109, 0.8)"
-  },
+
   codeHighlightContainer: {
     backgroundColor: "rgba(0,0,0,0.05)",
     borderRadius: 3,
     paddingHorizontal: 4
   },
-  headerTopText: {
-    fontSize: 22,
-    fontWeight: "bold",
-    color: "#fa7b62",
-    lineHeight: 24,
-    textAlign: "center",
-    marginTop: 2,
-    marginBottom: 2
-  },
+
   tabBarInfoContainer: {
     position: "absolute",
     bottom: 0,
@@ -269,12 +207,12 @@ const styles = StyleSheet.create({
       }
     }),
     alignItems: "center",
-    backgroundColor: "#fbfbfb",
+    backgroundColor: "#def2e4",
     paddingVertical: 20
   },
   tabBarInfoText: {
     fontSize: 17,
-    color: "rgba(96,100,109, 1)",
+    color: "#00a86b",
     textAlign: "center"
   },
   navigationFilename: {

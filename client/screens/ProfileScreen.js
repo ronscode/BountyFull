@@ -6,12 +6,14 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  View
+  View,
+  Button
 } from "react-native";
 import { WebBrowser } from "expo";
 import AuthScreen from "../components/AuthScreen";
 
 import { MonoText } from "../components/StyledText";
+import ListUserBounties from "../components/ListUserBounties";
 
 export default class ProfileScreen extends React.Component {
   static navigationOptions = {
@@ -21,100 +23,133 @@ export default class ProfileScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <ScrollView
-          style={styles.container}
-          contentContainerStyle={styles.contentContainer}
-        >
-          <View style={styles.welcomeContainer}>
-            <AuthScreen />
+        <View style={styles.viewProfileCard}>
+          <View style={styles.profileBoxHeader}>
+            <Text style={styles.profileBoxUsername}>Zaphod BeebleBrox</Text>
+            <Text style={styles.profileBoxAmount}>🌟</Text>
           </View>
-
-          <View style={styles.getStartedContainer}>
-            <Text style={styles.getStartedText}>PROFILE PAGE</Text>
-
-            <View
-              style={[styles.codeHighlightContainer, styles.homeScreenFilename]}
+          <View style={styles.profileBox}>
+            <Image
+              style={styles.listBountyImage}
+              source={require("../assets/images/demo/zaphod.jpg")}
             />
+            <View style={styles.profileBoxColumn}>
+              <View style={styles.labelRow}>
+                <Text style={styles.profileLabel}>VERIFIED CLEANUPS: </Text>
+                <Text>42</Text>
+              </View>
+              <View style={styles.labelRow}>
+                <Text style={styles.profileLabel}>AMOUNT EARNED:</Text>
+                <Text> $583</Text>
+              </View>
 
-            <Text style={styles.getStartedText}>FirstName</Text>
-            <Text style={styles.getStartedText}>LastName</Text>
-            <Text style={styles.getStartedText}>Email</Text>
-            <Text style={styles.getStartedText}>Bounties Cleaned</Text>
-            <Text style={styles.getStartedText}>Bounties Posted</Text>
-            <Text style={styles.getStartedText}>
-              Bio: I love cheesecake tootsie roll topping sweet tootsie roll.
-              Marshmallow dessert donut marzipan sugar plum. Brownie dessert
-              cotton candy sweet roll I love caramels topping pastry.
-            </Text>
-          </View>
-
-          <View style={styles.helpContainer}>
-            <TouchableOpacity
-              onPress={this._handleHelpPress}
-              style={styles.helpLink}
-            />
-          </View>
-        </ScrollView>
-
-        <View style={styles.tabBarInfoContainer}>
-          <Text style={styles.tabBarInfoText}>
-            This is a tab bar. You can edit it in:
-          </Text>
-
-          <View
-            style={[styles.codeHighlightContainer, styles.navigationFilename]}
-          >
-            <MonoText style={styles.codeHighlightText}>
-              navigation/MainTabNavigator.js
-            </MonoText>
+              <Button title={"Tip User"} />
+            </View>
           </View>
         </View>
-        {this._maybeRenderDevelopmentModeWarning()}
+        <Text style={styles.subTitleText}>Verified Cleanups By Zaphod:</Text>
+        <ScrollView>
+          <ListUserBounties />
+        </ScrollView>
       </View>
     );
   }
-
-  _maybeRenderDevelopmentModeWarning() {
-    if (__DEV__) {
-      const learnMoreButton = (
-        <Text onPress={this._handleLearnMorePress} style={styles.helpLinkText}>
-          Learn more
-        </Text>
-      );
-
-      return (
-        <Text style={styles.developmentModeText}>
-          Development mode is enabled, your app will be slower but you can use
-          useful development tools. {learnMoreButton}
-        </Text>
-      );
-    } else {
-      return (
-        <Text style={styles.developmentModeText}>
-          You are not in development mode, your app will run at full speed.
-        </Text>
-      );
-    }
-  }
-
-  _handleLearnMorePress = () => {
-    WebBrowser.openBrowserAsync(
-      "https://docs.expo.io/versions/latest/guides/development-mode"
-    );
-  };
-
-  _handleHelpPress = () => {
-    WebBrowser.openBrowserAsync(
-      "https://docs.expo.io/versions/latest/guides/up-and-running.html#can-t-see-your-changes"
-    );
-  };
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff"
+    backgroundColor: "#4eba7e",
+    padding: 2
   },
+  headerTopText: {
+    fontSize: 22,
+    fontWeight: "bold",
+    color: "#FFFFFF",
+    textAlign: "center",
+    textShadowColor: "rgba(0,0,0, 1)",
+    textShadowOffset: { width: 1, height: 2 },
+    textShadowRadius: 3
+  },
+  subTitleText: {
+    fontSize: 18,
+    marginBottom: 8,
+    fontWeight: "bold",
+    color: "#FFFFFF",
+    textAlign: "center",
+    textShadowColor: "rgba(0,0,0, 1)",
+    textShadowOffset: { width: 1, height: 2 },
+    textShadowRadius: 3
+  },
+  profileBox: {
+    flexDirection: "row",
+    padding: 1,
+    backgroundColor: "#FFFFFF"
+  },
+  labelRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: 5
+  },
+  profileLabel: {
+    fontWeight: "bold"
+  },
+  profileBoxColumn: {
+    flexDirection: "column",
+    padding: 1,
+    margin: 5
+  },
+  profileBoxUsername: {
+    marginLeft: 2,
+    width: 308,
+    marginBottom: 1,
+    color: "rgba(0,0,0,0.9)",
+    fontSize: 22
+  },
+  profileBoxAmount: {
+    marginRight: 2,
+    width: 62,
+    color: "rgba(33,108,42,1)",
+    fontSize: 22
+  },
+
+  viewProfileCard: {
+    padding: 10,
+    marginLeft: 10,
+    marginRight: 10,
+    borderColor: "grey",
+    borderWidth: 1,
+    marginTop: 30,
+    marginBottom: 15,
+
+    backgroundColor: "#FFFFFF"
+  },
+  profileBoxHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between"
+  },
+  profileText: {
+    color: "rgba(33,108,42,1)",
+    paddingTop: 10,
+    paddingBottom: 10,
+    fontSize: 18
+  },
+  listBountyImage: {
+    width: 140,
+    height: 120
+  },
+
+  bountyAmount: {
+    marginBottom: 10,
+    color: "rgba(33,108,42,1)",
+    fontSize: 22
+  },
+  bountyButton: {
+    marginBottom: 20,
+    color: "rgba(0,0,0,0.9)",
+    fontSize: 22
+  },
+
   developmentModeText: {
     marginBottom: 20,
     color: "rgba(0,0,0,0.4)",
@@ -137,27 +172,7 @@ const styles = StyleSheet.create({
     marginTop: 3,
     marginLeft: -10
   },
-  getStartedContainer: {
-    alignItems: "center",
-    marginHorizontal: 50
-  },
-  homeScreenFilename: {
-    marginVertical: 7
-  },
-  codeHighlightText: {
-    color: "rgba(96,100,109, 0.8)"
-  },
-  codeHighlightContainer: {
-    backgroundColor: "rgba(0,0,0,0.05)",
-    borderRadius: 3,
-    paddingHorizontal: 4
-  },
-  getStartedText: {
-    fontSize: 17,
-    color: "rgba(96,100,109, 1)",
-    lineHeight: 24,
-    textAlign: "center"
-  },
+
   tabBarInfoContainer: {
     position: "absolute",
     bottom: 0,
@@ -175,26 +190,11 @@ const styles = StyleSheet.create({
       }
     }),
     alignItems: "center",
-    backgroundColor: "#fbfbfb",
     paddingVertical: 20
   },
   tabBarInfoText: {
     fontSize: 17,
     color: "rgba(96,100,109, 1)",
     textAlign: "center"
-  },
-  navigationFilename: {
-    marginTop: 5
-  },
-  helpContainer: {
-    marginTop: 15,
-    alignItems: "center"
-  },
-  helpLink: {
-    paddingVertical: 15
-  },
-  helpLinkText: {
-    fontSize: 14,
-    color: "#2e78b7"
   }
 });

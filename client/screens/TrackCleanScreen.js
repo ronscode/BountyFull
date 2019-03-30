@@ -28,17 +28,19 @@ export default class TrackCleanScreen extends React.Component {
           style={styles.container}
           contentContainerStyle={styles.contentContainer}
         >
-          <View style={styles.PostBountyContainer}>
-            <Text style={styles.trackCleanHeader}>TRACK YOUR CLEAN UP</Text>
-            <Text style={styles.trackCleanHeader}>CURRENTLY CLEANING:</Text>
-            <Text>Hiking Trail is Trashed! Please Help!</Text>
+          <Text style={styles.headerTopText}>TRACK YOUR CLEAN UP</Text>
+          <Text style={styles.subTitleText}>CURRENTLY CLEANING:</Text>
+          <View style={styles.trackCleanContainer}>
             <Text />
-            <Text>POSTED BY: Zaphod Beeblbrox</Text>
-            <Text style={styles.trackCleanHeader}>BEFORE IMAGE</Text>
-            <Image
-              source={require("../assets/images/demo/before_1.jpg")}
-              style={{ width: 150, height: 150 }}
-            />
+
+            <Text style={styles.trackBountyTitle}>
+              Hiking Trail is Trashed! Please Help!
+            </Text>
+            <Text />
+            <View style={styles.labelRow}>
+              <Text style={styles.profileLabel}>POSTED BY: </Text>
+              <Text>Zaphod Beeblbrox</Text>
+            </View>
 
             <TrackCleanForm />
           </View>
@@ -51,9 +53,47 @@ export default class TrackCleanScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    padding: 4,
-    margin: 3
+    padding: 2,
+    backgroundColor: "#4eba7e"
+  },
+  trackBountyTitle: {
+    fontSize: 16
+  },
+  labelRow: {
+    flexDirection: "row"
+  },
+  profileLabel: {
+    fontWeight: "bold"
+  },
+  headerTopText: {
+    fontSize: 22,
+    fontWeight: "bold",
+    color: "#FFFFFF",
+    marginBottom: 10,
+    textAlign: "center",
+    textShadowColor: "rgba(0,0,0, 1)",
+    textShadowOffset: { width: 1, height: 2 },
+    textShadowRadius: 3
+  },
+  subTitleText: {
+    fontSize: 18,
+    marginBottom: 8,
+    fontWeight: "bold",
+    color: "#FFFFFF",
+    textAlign: "center",
+    textShadowColor: "rgba(0,0,0, 1)",
+    textShadowOffset: { width: 1, height: 2 },
+    textShadowRadius: 3
+  },
+  imageContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between"
+  },
+  beforeImageLeft: {
+    margin: 5
+  },
+  afterImageRight: {
+    margin: 5
   },
   homeButton: {
     flex: 1,
@@ -62,13 +102,15 @@ const styles = StyleSheet.create({
     height: 32,
     marginTop: 10
   },
-  trackCleanHeader: {
+  headerTitle: {
     fontSize: 18,
+    fontWeight: "bold",
     color: "rgba(96,100,109, 1)",
-    lineHeight: 24,
+    lineHeight: 20,
     textAlign: "center",
-    padding: 3
+    marginTop: 2
   },
+
   trackCleanText: {
     fontSize: 14,
     color: "rgba(96,100,109, 1)",
@@ -92,10 +134,11 @@ const styles = StyleSheet.create({
   contentContainer: {
     paddingTop: 30
   },
-  PostBountyContainer: {
+  trackCleanContainer: {
     alignItems: "center",
     marginTop: 10,
-    marginBottom: 20
+    marginBottom: 20,
+    backgroundColor: "#FFFFFF"
   },
   welcomeImage: {
     width: 100,

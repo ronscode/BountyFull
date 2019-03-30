@@ -2,13 +2,18 @@
 
 # dependencies
 /node_modules
+/client/node_modules
 /.pnp
 .pnp.js
 proxyUrl.js
 
 # Expo stuff
- client/.expo/packager-info.json
 
+.expo
+__generated__
+ client/.expo/packager-info.json
+ .expo/packager-info.json
+.expo/packager-info.json
 # testing
 /coverage
 

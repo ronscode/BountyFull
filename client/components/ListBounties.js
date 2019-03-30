@@ -60,7 +60,7 @@ let  ListBounties2 =({bounty, getBounties}) => {
               <View style={styles.bountyBox}>
                 <Image
                   style={styles.listBountyImage}
-                  
+                       source={{ uri: bounty.pictures.post }}
                 />
                 <View style={styles.bountyBoxColumn}>
                   <Text>

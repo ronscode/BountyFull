@@ -1,1 +1,9 @@
-{}
+{
+  "devToolsPort": 19002,
+  "expoServerPort": 19000,
+  "packagerPort": 19001,
+  "packagerPid": 15096,
+  "expoServerNgrokUrl": "https://da-n6t.ronscode.client.exp.direct",
+  "packagerNgrokUrl": "https://packager.da-n6t.ronscode.client.exp.direct",
+  "ngrokPid": 15117
+}

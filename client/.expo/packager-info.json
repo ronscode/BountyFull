@@ -1,15 +1,1 @@
-{
-  "expoServerPort": 19000,
-  "expoServerNgrokUrl": "https://wg-kq3.ronscode.client.exp.direct",
-  "packagerNgrokUrl": "https://packager.wg-kq3.ronscode.client.exp.direct",
-  "ngrokPid": 11612,
-  "devToolsPort": 19002,
-<<<<<<< HEAD
-  "packagerPort": 19001,
-  "packagerPid": 11590
-=======
-  "packagerPort": null,
-  "packagerPid": null,
-  "webpackServerPort": null
->>>>>>> master
-}
+{}

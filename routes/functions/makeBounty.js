@@ -1,10 +1,17 @@
 module.exports = body => {
-  let { poster, amount, location, picture, title, notes } = body;
+  let { poster, location, picture, bountyAmount, bountyTitle, bountyNotes } = body;
+
   let errors = [];
   if (!poster) {
     errors.push({ msg: "no user provided" });
   }
-  if (!amount) {
+  if (!bountyAmount) {
+    errors.push({ msg: "no bounty amount provided" });
+  }
+  if (!bountyNotes) {
+    errors.push({ msg: "no bounty amount provided" });
+  }
+  if (!bountyTitle) {
     errors.push({ msg: "no bounty amount provided" });
   }
   if (!location) {
@@ -31,8 +38,9 @@ module.exports = body => {
     ...defaultValues,
     poster,
     location,
-    bountyTitle: title,
-    bountyAmount: amount,
+    bountyNotes,
+    bountyTitle,
+    bountyAmount,
     pictures: {
       post: picture,
       start: "",

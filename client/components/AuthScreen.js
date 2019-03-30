@@ -2,7 +2,11 @@ import React from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
 import Google from "expo";
 import { Button } from "react-native-elements";
+import axios from 'axios';
 
+
+// Reference URL
+const proxyUrl = require("../proxyUrl.js");
 export default class App extends React.Component {
   constructor(props) {
     super(props);
@@ -19,14 +23,17 @@ export default class App extends React.Component {
           "990631818883-q2jq7nd4agsl7nn5f3c0s2puo4r62fdk.apps.googleusercontent.com",
         //iosClientId: YOUR_CLIENT_ID_HERE,  <-- if you use iOS
         scopes: ["profile", "email"]
-      });
-
+      })
       if (result.type === "success") {
-        this.setState({
-          signedIn: true,
-          name: result.user.name,
-          photoUrl: result.user.photoUrl
-        });
+        await axios.post(proxyUrl.url + '/users/login/', result)
+          .then(() => {
+            this.setState({
+              signedIn: true,
+              name: result.user.name,
+              photoUrl: result.user.photoUrl
+            })
+          })
+
       } else {
         console.log("cancelled");
       }

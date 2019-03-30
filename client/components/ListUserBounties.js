@@ -31,7 +31,7 @@ export default class ListUserBounties extends Component {
   }
   componentDidMount() {
     axios
-      .get(proxyUrl.url + "/find/")
+      .get(proxyUrl.url + "/find/all/Zaphod")
       .then(res => this.setState({ bounties: res.data }))
       .catch(err => console.log(err));
   }

@@ -13,7 +13,7 @@ import { MonoText } from "../components/StyledText";
 import AuthScreen from "../components/AuthScreen";
 import PostBountyForm from "../components/PostBountyForm";
 
-export default class PostBountycreen extends React.Component {
+export default class PostBountyScreen extends React.Component {
   static navigationOptions = {
     header: null
   };

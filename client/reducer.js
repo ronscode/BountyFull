@@ -1,4 +1,4 @@
-const intiialState = {
+const initialState = {
     bounties: {
             "id": "",
             "claimer": " ",
@@ -32,12 +32,13 @@ const intiialState = {
         profile_pic :'',
         complete : [],
         posted : [],
+        signedIn : false,
         inProgress: false           //Once the user is starts a bounty inProgress is true.
     }
 }
 
 
-const reducer = (state = intiialState, actions) =>{
+const reducer = (state = initialState, actions) =>{
 
     //destructured payloads
     let { type, bounties, user, picture } = actions

@@ -45,9 +45,7 @@ let  ListBounties2 =({bounty, getBounties}) => {
     // console.log(bounty)
     return (
       <ScrollView>
-        
-       
-        
+       <Text>Jordan</Text>
         {bounty.reverse().map((bounty, i) => {
           return (
             <View style={styles.listBountyCard} key={i}>

@@ -37,9 +37,10 @@ export default class TrackCleanScreen extends React.Component {
               Hiking Trail is Trashed! Please Help!
             </Text>
             <Text />
-            <Text style={styles.trackBountyTitle}>
-              POSTED BY: Zaphod Beeblbrox
-            </Text>
+            <View style={styles.labelRow}>
+              <Text style={styles.profileLabel}>POSTED BY: </Text>
+              <Text>Zaphod Beeblbrox</Text>
+            </View>
 
             <TrackCleanForm />
           </View>
@@ -57,6 +58,12 @@ const styles = StyleSheet.create({
   },
   trackBountyTitle: {
     fontSize: 16
+  },
+  labelRow: {
+    flexDirection: "row"
+  },
+  profileLabel: {
+    fontWeight: "bold"
   },
   headerTopText: {
     fontSize: 22,

@@ -31,7 +31,7 @@ export default class ProfileScreen extends React.Component {
           <View style={styles.profileBox}>
             <Image
               style={styles.listBountyImage}
-              source={require("../assets/images/demo/uploadImage.png")}
+              source={require("../assets/images/demo/zaphod.jpg")}
             />
             <View style={styles.profileBoxColumn}>
               <View style={styles.labelRow}>
@@ -47,8 +47,8 @@ export default class ProfileScreen extends React.Component {
             </View>
           </View>
         </View>
+        <Text style={styles.subTitleText}>Verified Cleanups By Zaphod:</Text>
         <ScrollView>
-          <Text style={styles.subTitleText}>Verified Cleanups By Zaphod:</Text>
           <ListUserBounties />
         </ScrollView>
       </View>
@@ -87,14 +87,17 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFFFFF"
   },
   labelRow: {
-    flexDirection: "row"
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: 5
   },
   profileLabel: {
     fontWeight: "bold"
   },
   profileBoxColumn: {
     flexDirection: "column",
-    padding: 1
+    padding: 1,
+    margin: 5
   },
   profileBoxUsername: {
     marginLeft: 2,

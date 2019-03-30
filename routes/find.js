@@ -7,6 +7,7 @@ const updateBounty = require('./functions/updateBounty')
 // Database Models
 const Bounty = require('../models/Bounty');
 
+// List Bounties Route
 router.get('/:started?', (req, res) => {
     let search = req.params.started === 'started';
     Bounty.find({ isStarted: search })
@@ -16,12 +17,21 @@ router.get('/:started?', (req, res) => {
         ))
 });
 
+// Update Bounty Route
 router.get('/status/:id', (req, res) => {
     Bounty.find({ _id: req.params.id })
         .then(reply => res.send(reply))
         .catch(err => res.status(400).send([{ msg: 'Something happened!' }]));
 });
 
+// Get bounties posted by email
+router.get('/all/:email', (req, res) => {
+    Bounty.find({poster: req.params.email})
+        .then(reply => res.status(200).send(reply))
+        .catch(err => res.status(400).send([{ msg: 'Something happened!' }]));
+})
+
+// Update bounty status
 router.put('/update/', (req, res) => {
     Bounty.findOne({ _id : req.body.id})
         .then(reply => {

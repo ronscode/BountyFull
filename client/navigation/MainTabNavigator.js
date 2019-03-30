@@ -9,7 +9,6 @@ import TabBarIcon from "../components/TabBarIcon";
 import HomeScreen from "../screens/HomeScreen";
 import LinksScreen from "../screens/LinksScreen";
 import ProfileScreen from "../screens/ProfileScreen";
-import SettingsScreen from "../screens/SettingsScreen";
 import PostBountyScreen from "../screens/PostBountyScreen";
 import FindBountyScreen from "../screens/FindBountyScreen";
 import CameraExampleScreen from "../screens/CameraExampleScreen";

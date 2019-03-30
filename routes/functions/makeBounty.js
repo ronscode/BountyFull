@@ -1,6 +1,6 @@
 module.exports = body => {
   let { poster, location, picture, bountyAmount, bountyTitle, bountyNotes } = body;
-  console.log(body);
+
   let errors = [];
   if (!poster) {
     errors.push({ msg: "no user provided" });

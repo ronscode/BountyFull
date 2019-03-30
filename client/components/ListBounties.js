@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from 'react-redux'
 import {
   Text,
   ListItem,
@@ -21,24 +22,33 @@ import { Button, List, Card } from "react-native-elements";
 // Reference URL
 const proxyUrl = require("../proxyUrl.js");
 
-export default class ListBounties2 extends Component {
-  constructor(props) {
-    super(props);
-    let initialState = {
-      bounties: []
-    };
-    this.state = initialState;
-  }
-  componentDidMount() {
+let  ListBounties2 =({bounty, getBounties}) => {
+  // constructor(props) {
+  //   super(props);
+  //   // let initialState = {
+  //   //   bounties: []
+  //   // };
+  //   // this.state = initialState;
+  // }
+  (function componentDidMount(){
     axios
-      .get(proxyUrl.url + "/find/")
-      .then(res => this.setState({ bounties: res.data }))
+      .get(proxyUrl.url + "/find")
+      .then((res) => {
+        // console.log(res.data)
+        getBounties(res.data)
+        //this.setState({ bounties: res.data })
+      })
       .catch(err => console.log(err));
-  }
-  render() {
+  }())
+  
+  // render() {
+    // console.log(bounty)
     return (
       <ScrollView>
-        {this.state.bounties.reverse().map((bounty, i) => {
+        
+       
+        
+        {bounty.reverse().map((bounty, i) => {
           return (
             <View style={styles.listBountyCard} key={i}>
               <View style={styles.bountyBoxHeader}>
@@ -50,7 +60,7 @@ export default class ListBounties2 extends Component {
               <View style={styles.bountyBox}>
                 <Image
                   style={styles.listBountyImage}
-                  source={{ uri: bounty.pictures.post }}
+                  
                 />
                 <View style={styles.bountyBoxColumn}>
                   <Text>
@@ -68,6 +78,8 @@ export default class ListBounties2 extends Component {
             </View>
           );
         })}
+
+        
 
         {/* 
         {this.state.bounties.reverse().map(bounty => {
@@ -89,7 +101,7 @@ export default class ListBounties2 extends Component {
         })} */}
       </ScrollView>
     );
-  }
+  // }
 }
 
 const styles = StyleSheet.create({
@@ -154,3 +166,35 @@ const styles = StyleSheet.create({
     fontSize: 22
   }
 });
+
+
+const mapStateToProps = (state)=>{
+  return{
+    // bounty : state.bounty,
+    bounty: state.bounty,
+    // bountyTitle : state.bounty.bountyTitle,             
+    // claimed_id : state.bounty.claimed_id,              
+    // bountyAmount : state.bounty.bountyAmount,         
+    // post : state.bounty.pictures.post,   
+    // start: state.bounty.pictures.start,     
+    // end : state.bounty.pictures.end ,     
+    // location: state.bounty.location,              
+    // timeStarted : Date(),           
+    // time_completed: state.bounty.time_completed,          
+    // isStarted : state.bounty.isStarted,           
+    // isCleaned : state.bounty.isCleaned,           
+    // isVerified : state.bounty.isVerified,         
+    // isPaid : state.bounty.isPaid,              
+    // isComplete : state.bounty.isComplete
+  }
+}
+
+const mapDispatchToProps = (dispatch) =>{
+  return {
+    getBounties : (bounties) =>dispatch({type : "GET_BOUNTY", bounties : bounties})
+  }
+}
+export default connect (
+  mapStateToProps,
+  mapDispatchToProps
+)(ListBounties2)

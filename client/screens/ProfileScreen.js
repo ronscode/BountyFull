@@ -14,36 +14,50 @@ import AuthScreen from "../components/AuthScreen";
 
 import { MonoText } from "../components/StyledText";
 import ListUserBounties from "../components/ListUserBounties";
+import { connect } from 'react-redux';
 
-export default class ProfileScreen extends React.Component {
+class ProfileScreen extends React.Component {
   static navigationOptions = {
     header: null
   };
-
+  tipUser(){
+    console.log('user is tipped');
+  }
   render() {
+    let {
+      totalEarnings,
+      totalHours,
+      profilePic,
+      completed,
+      firstName,
+      lastName,
+      posted,
+      bio,
+    } = this.props;
     return (
       <View style={styles.container}>
         <View style={styles.viewProfileCard}>
           <View style={styles.profileBoxHeader}>
-            <Text style={styles.profileBoxUsername}>Zaphod BeebleBrox</Text>
+            <Text style={styles.profileBoxUsername}>{firstName} {lastName}</Text>
             <Text style={styles.profileBoxAmount}>🌟</Text>
           </View>
           <View style={styles.profileBox}>
             <Image
               style={styles.listBountyImage}
-              source={require("../assets/images/demo/zaphod.jpg")}
+              source={{uri: profilePic}}
+              // source={require("../assets/images/demo/zaphod.jpg")}  
             />
             <View style={styles.profileBoxColumn}>
               <View style={styles.labelRow}>
                 <Text style={styles.profileLabel}>VERIFIED CLEANUPS: </Text>
-                <Text>42</Text>
+                <Text> {completed.length}</Text>
               </View>
               <View style={styles.labelRow}>
                 <Text style={styles.profileLabel}>AMOUNT EARNED:</Text>
-                <Text> $583</Text>
+                <Text> ${totalEarnings}</Text>
               </View>
 
-              <Button title={"Tip User"} />
+              <Button onPress={this.tipUser} title={"Tip User"} />
             </View>
           </View>
         </View>
@@ -56,6 +70,30 @@ export default class ProfileScreen extends React.Component {
   }
 }
 
+let mapStateToProps = (state) => {
+  return {
+    firstName: state.user.firstName,
+    lastName: state.user.lastName,
+    bio: state.user.bio,
+    profilePic: state.user.profilePic,
+    totalEarnings: state.user.totalEarnings,
+    totalEarnings: state.user.totalEarnings,
+    totalHours: state.user.totalHours,
+    completed: state.user.completed,
+    posted: state.user.posted,
+  }
+}
+
+let mapDispatchToProps = (dispatch) => {
+  return {
+    saveUser: (user) => dispatch({type: 'SAVE_USER', user})
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ProfileScreen)
 const styles = StyleSheet.create({
   container: {
     flex: 1,

@@ -3,18 +3,13 @@ import { StyleSheet, Text, View, Image } from "react-native";
 import Google from "expo";
 import { Button } from "react-native-elements";
 import axios from 'axios';
-
+import { connect } from 'react-redux';
 
 // Reference URL
 const proxyUrl = require("../proxyUrl.js");
-export default class App extends React.Component {
+class AuthScreen extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      signedIn: false,
-      name: "",
-      photoUrl: ""
-    };
   }
   signIn = async () => {
     try {
@@ -26,13 +21,11 @@ export default class App extends React.Component {
       })
       if (result.type === "success") {
         await axios.post(proxyUrl.url + '/users/login/', result)
-          .then(() => {
-            this.setState({
-              signedIn: true,
-              name: result.user.name,
-              photoUrl: result.user.photoUrl
-            })
+          .then(res => {
+            console.log(res.data);
+            this.props.saveUser(res.data)
           })
+          .catch(err => console.log(err))
 
       } else {
         console.log("cancelled");
@@ -44,8 +37,8 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        {this.state.signedIn ? (
-          <LoggedInPage name={this.state.name} photoUrl={this.state.photoUrl} />
+        {this.props.email ? (
+          <LoggedInPage name={this.props.firstName} photoUrl={this.props.profilePic} />
         ) : (
           <LoginPage signIn={this.signIn} />
         )}
@@ -53,6 +46,25 @@ export default class App extends React.Component {
     );
   }
 }
+
+let mapStateToProps = (state) => {
+  return {
+    email: state.user.email,
+    firstName: state.user.firstName,
+    profilePic: state.user.profilePic,
+  }
+}
+
+let mapDispatchToProps = (dispatch) => {
+  return {
+    saveUser: (user) => dispatch({type: 'SAVE_USER', user})
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AuthScreen)
 
 const LoginPage = props => {
   return (

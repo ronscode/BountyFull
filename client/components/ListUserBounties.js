@@ -125,7 +125,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 1,
     marginBottom: 15,
-    width: 370,
     backgroundColor: "#ffffff"
   },
   bountyBoxHeader: {

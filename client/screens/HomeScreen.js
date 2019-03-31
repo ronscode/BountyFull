@@ -23,7 +23,7 @@ const homeButton = {
   Button: {
     titleStyle: {
       fontSize: 16,
-      color: "#008e4c"
+      color: "#696969"
     }
   }
 };

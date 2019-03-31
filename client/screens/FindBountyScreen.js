@@ -36,7 +36,7 @@ class FindBountyScreen extends React.Component {
             <Text style={styles.headerTopText}>CHOOSE A CLEANUP:</Text>
 
             <Text style={styles.headerText}>
-              Select a bounty and tracking your cleanup.
+              Select a bounty and track the cleanup.
             </Text>
 
             <ListBounties />

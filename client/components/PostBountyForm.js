@@ -23,6 +23,12 @@ const initialValues = {
 };
 export default class App extends React.Component {
   //Posts new bounty to DB. Also has the thankyou message that pops up after submission
+  constructor(props) {
+    super(props);
+    this.state = {
+      photo: null
+    };
+  }
 
   async onSubmit(values) {
     //List of form values to be inserted here
@@ -55,10 +61,12 @@ export default class App extends React.Component {
   async _pickImage(handleChange) {
     let result = await ImagePicker.launchImageLibraryAsync({
       allowsEditing: true,
-      aspect: [4, 3]
+      aspect: [4, 3],
+      noData: true
     });
     console.log("Thank you for the bounty submission!" + result);
     if (!result.cancelled) {
+      this.setState({ photo: result });
       handleChange(result.uri);
     }
   }

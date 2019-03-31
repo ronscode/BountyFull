@@ -24,11 +24,18 @@ export default class TrackCleanScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+        <View>
+          <Text style={styles.headerTopText}>TRACK YOUR CLEAN UP</Text>
+        </View>
+        <View style={styles.trackChooseButtons}>
+          <Button title={"Select Bounty"} />
+          <Button title={"Track New Clean"} />
+        </View>
+
         <ScrollView
           style={styles.container}
           contentContainerStyle={styles.contentContainer}
         >
-          <Text style={styles.headerTopText}>TRACK YOUR CLEAN UP</Text>
           <Text style={styles.subTitleText}>CURRENTLY CLEANING:</Text>
           <View style={styles.trackCleanContainer}>
             <Text />
@@ -53,14 +60,23 @@ export default class TrackCleanScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 2,
+    padding: 1,
     backgroundColor: "#4eba7e"
+  },
+  trackChooseButtons: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    marginBottom: 1
+  },
+  trackButton: {
+    width: "30%"
   },
   trackBountyTitle: {
     fontSize: 16
   },
   labelRow: {
-    flexDirection: "row"
+    flexDirection: "row",
+    alignItems: "center"
   },
   profileLabel: {
     fontWeight: "bold"
@@ -69,7 +85,8 @@ const styles = StyleSheet.create({
     fontSize: 22,
     fontWeight: "bold",
     color: "#FFFFFF",
-    marginBottom: 10,
+    marginBottom: 7,
+    marginTop: 30,
     textAlign: "center",
     textShadowColor: "rgba(0,0,0, 1)",
     textShadowOffset: { width: 1, height: 2 },

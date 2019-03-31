@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { connect } from 'react-redux'
+import { connect } from "react-redux";
 import {
   Text,
   ListItem,
@@ -22,53 +22,47 @@ import { Button, List, Card } from "react-native-elements";
 // Reference URL
 const proxyUrl = require("../proxyUrl.js");
 
-const ListUserBounties = ({bounty , getBounties}) =>{
-  
-  (function componentDidMount(){
+const ListUserBounties = ({ bounty, getBounties }) => {
+  (function componentDidMount() {
     axios
       .get(proxyUrl.url + "/find")
-      .then(res => 
-      // this.setState({ bounties: res.data })
-      //console.log(res.data)
-       getBounties(res.data)
+      .then(res =>
+        // this.setState({ bounties: res.data })
+        //console.log(res.data)
+        getBounties(res.data)
       )
       .catch(err => console.log(err));
-  }());
+  })();
   // render() {
-    return (
-      <ScrollView>
-        {bounty.reverse().map((bounty, i) => {
-          return (
-            <View style={styles.listBountyCard} key={i}>
-              <View style={styles.bountyBoxHeader}>
-                <Text style={styles.bountyBoxTitle}>{bounty.bountyTitle}</Text>
-                <Text style={styles.bountyBoxAmount}>
-                  ${bounty.bountyAmount}
-                </Text>
-              </View>
-              <View style={styles.bountyBox}>
-                {/* <Image
+  return (
+    <ScrollView>
+      {bounty.reverse().map((bounty, i) => {
+        return (
+          <View style={styles.listBountyCard} key={i}>
+            <View style={styles.bountyBoxHeader}>
+              <Text style={styles.bountyBoxTitle}>{bounty.bountyTitle}</Text>
+              <Text style={styles.bountyBoxAmount}>${bounty.bountyAmount}</Text>
+            </View>
+            <View style={styles.bountyBox}>
+              {/* <Image
                   style={styles.listBountyImage}
                   source={{ uri: bounty.pictures.post }}
                 /> */}
-                <View style={styles.bountyBoxColumn}>
-                  <Text>
-                    POSTED BY: {bounty.bountyPoster} {bounty.poster}
-                  </Text>
-                  <Text>AMOUNT: ${bounty.bountyAmount}</Text>
-                  <Text>Pre-Clean Notes:</Text>
-                  <Text>{bounty.bountyNotes}</Text>
-                  <Button
-                    containerStyle={{ width: "50%" }}
-                    title="Tip Cleanup"
-                  />
-                </View>
+              <View style={styles.bountyBoxColumn}>
+                <Text>
+                  POSTED BY: {bounty.bountyPoster} {bounty.poster}
+                </Text>
+                <Text>AMOUNT: ${bounty.bountyAmount}</Text>
+                <Text>Pre-Clean Notes:</Text>
+                <Text>{bounty.bountyNotes}</Text>
+                <Button containerStyle={{ width: "50%" }} title="Tip Cleanup" />
               </View>
             </View>
-          );
-        })}
+          </View>
+        );
+      })}
 
-        {/* 
+      {/* 
         {this.state.bounties.reverse().map(bounty => {
           return (
             <View>
@@ -86,10 +80,10 @@ const ListUserBounties = ({bounty , getBounties}) =>{
             </View>
           );
         })} */}
-      </ScrollView>
-    );
+    </ScrollView>
+  );
   // }
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -124,7 +118,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 1,
     marginBottom: 15,
-    width: 370,
     backgroundColor: "#ffffff"
   },
   bountyBoxHeader: {
@@ -154,19 +147,20 @@ const styles = StyleSheet.create({
   }
 });
 
-const mapStateToProps = (state) =>{
+const mapStateToProps = state => {
   return {
-    bounty :state.bounty
-  }
-}
+    bounty: state.bounty
+  };
+};
 
-const mapDispatchToProps = (dispatch) =>{
+const mapDispatchToProps = dispatch => {
   return {
-    getBounties : (bounties) => dispatch({type: "GET_BOUNTY", bounties : bounties})
-  }
-}
+    getBounties: bounties =>
+      dispatch({ type: "GET_BOUNTY", bounties: bounties })
+  };
+};
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ListUserBounties)
+)(ListUserBounties);

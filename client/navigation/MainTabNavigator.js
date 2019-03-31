@@ -113,6 +113,7 @@ ProfileStack.navigationOptions = {
   tabBarLabel: "Profile",
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
+      style={{ color: "red" }}
       focused={focused}
       name={Platform.OS === "ios" ? "ios-happy" : "md-person"}
     />

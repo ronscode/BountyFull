@@ -20,6 +20,7 @@
     "react-native-camera": "^2.0.2",
     "react-native-elements": "^1.1.0",
     "react-native-paper": "^2.14.0",
+    "react-native-picker": "^4.3.7",
     "react-navigation": "^3.5.1",
     "react-redux": "^6.0.1",
     "redux": "^4.0.1"

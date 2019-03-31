@@ -12,7 +12,9 @@ import { WebBrowser } from "expo";
 import { Button } from "react-native-elements";
 import FetchLocation from "../components/FetchLocation";
 import { MonoText } from "../components/StyledText";
+import PostBountyInputTitle from "../components/PostBountyInputTitle";
 import TrackCleanForm from "../components/TrackCleanForm";
+import TestImageUpload from "../components/TestImageUpload";
 
 export default class TrackCleanScreen extends React.Component {
   static navigationOptions = {

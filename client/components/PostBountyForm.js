@@ -12,6 +12,7 @@ import {
   Button
 } from "react-native";
 import UsersMap from "../components/UsersMap";
+import FetchBountyLocation from "../components/FetchBountyLocation";
 import axios from "axios";
 
 // Reference URL

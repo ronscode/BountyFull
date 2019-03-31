@@ -9,6 +9,7 @@ import TabBarIcon from "../components/TabBarIcon";
 import HomeScreen from "../screens/HomeScreen";
 import LinksScreen from "../screens/LinksScreen";
 import ProfileScreen from "../screens/ProfileScreen";
+import SettingsScreen from "../screens/SettingsScreen";
 import PostBountyScreen from "../screens/PostBountyScreen";
 import FindBountyScreen from "../screens/FindBountyScreen";
 import CameraExampleScreen from "../screens/CameraExampleScreen";
@@ -112,6 +113,7 @@ ProfileStack.navigationOptions = {
   tabBarLabel: "Profile",
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
+      style={{ color: "red" }}
       focused={focused}
       name={Platform.OS === "ios" ? "ios-happy" : "md-person"}
     />

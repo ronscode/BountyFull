@@ -45,9 +45,6 @@ let  ListBounties2 =({bounty, getBounties}) => {
     // console.log(bounty)
     return (
       <ScrollView>
-        
-       
-        
         {bounty.reverse().map((bounty, i) => {
           return (
             <View style={styles.listBountyCard} key={i}>
@@ -60,7 +57,7 @@ let  ListBounties2 =({bounty, getBounties}) => {
               <View style={styles.bountyBox}>
                 <Image
                   style={styles.listBountyImage}
-                       source={{ uri: bounty.pictures.post }}
+                  
                 />
                 <View style={styles.bountyBoxColumn}>
                   <Text>
@@ -170,22 +167,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state)=>{
   return{
-    // bounty : state.bounty,
-    bounty: state.bounty,
-    // bountyTitle : state.bounty.bountyTitle,             
-    // claimed_id : state.bounty.claimed_id,              
-    // bountyAmount : state.bounty.bountyAmount,         
-    // post : state.bounty.pictures.post,   
-    // start: state.bounty.pictures.start,     
-    // end : state.bounty.pictures.end ,     
-    // location: state.bounty.location,              
-    // timeStarted : Date(),           
-    // time_completed: state.bounty.time_completed,          
-    // isStarted : state.bounty.isStarted,           
-    // isCleaned : state.bounty.isCleaned,           
-    // isVerified : state.bounty.isVerified,         
-    // isPaid : state.bounty.isPaid,              
-    // isComplete : state.bounty.isComplete
+    bounty: state.bounty, 
   }
 }
 

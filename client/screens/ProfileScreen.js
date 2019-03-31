@@ -190,7 +190,8 @@ const styles = StyleSheet.create({
       }
     }),
     alignItems: "center",
-    paddingVertical: 20
+    paddingVertical: 20,
+    color: "red"
   },
   tabBarInfoText: {
     fontSize: 17,

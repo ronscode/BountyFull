@@ -42,7 +42,7 @@ class HomeScreen extends React.Component {
         style={{ width: "100%", height: "100%" }}
       >
         <View style={styles.headerBg}>
-          <Text style={styles.headerTopText}>BountyFull WELCOMES YOU!</Text>
+          <Text style={styles.headerTopText}>BountyFull</Text>
           <Text />
 
           <Text />
@@ -124,8 +124,8 @@ const styles = StyleSheet.create({
     paddingTop: 30
   },
   headerTopText: {
-    fontSize: 22,
-    fontWeight: "bold",
+    fontSize: 50,
+    fontFamily: "gatsby-retro",
     color: "#FFFFFF",
     textAlign: "center",
     textShadowColor: "rgba(0,0,0, 1)",
@@ -140,7 +140,8 @@ const styles = StyleSheet.create({
     textAlign: "center",
     textShadowColor: "rgba(0,0,0, 1)",
     textShadowOffset: { width: 1, height: 2 },
-    textShadowRadius: 3
+    textShadowRadius: 3,
+    fontFamily: "baddest"
   },
   homeButtons: {
     alignItems: "center",

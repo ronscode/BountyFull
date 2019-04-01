@@ -23,7 +23,7 @@ router.get('/status/:id', (req, res) => {
 });
 
 router.put('/update/', (req, res) => {
-    Bounty.findOne({ _id : req.body.id})
+    Bounty.findOne({ _id : req.body._id})
         .then(reply => {
             let update = updateBounty(reply._doc, req.body);
             if(update.errors && update.errors.length > 0){

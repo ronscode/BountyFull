@@ -15,6 +15,7 @@ module.exports = (bounty, body) => {
         return {
             ...bounty,
             isCleaned: true,
+            bountyNotes: body.bountyNotes,
             timeEnded: Date.now(),
             pictures: {
                 ...bounty.pictures,

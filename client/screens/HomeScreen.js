@@ -37,57 +37,58 @@ class HomeScreen extends React.Component {
 
   render() {
     return (
-        <ImageBackground
-            source={require('../assets/images/demo/bgg2.jpg')}
-            style={{ width: '100%', height: '100%' }}
-        >
-            <View style={styles.headerBg}>
-                <Text style={styles.headerTopText}>BountyFull</Text>
-                <Text />
+      <ImageBackground
+        source={require("../assets/images/demo/bgg2.jpg")}
+        style={{ width: "100%", height: "100%" }}
+      >
+        <View style={styles.headerBg}>
+          <Text style={styles.headerTopText}>BountyFull</Text>
+          <Text />
 
-                <Text />
-                <Text style={styles.headerText}>💰Clean litter for bounties</Text>
-                <Text style={styles.headerText}>⛳ Track Litter Cleanups</Text>
-            </View>
-            <View style={styles.container}>
-                <View style={styles.homeButton}>
-                    <ThemeProvider theme={homeButton}>
-                        <Button
-                            type={'outline'}
-                            raised={true}
-                            onPress={this._buttonPostBounty}
-                            title='POST CLEANUP BOUNTY'
-                        />
-                    </ThemeProvider>
-                </View>
+          <Text />
+          <Text style={styles.headerText}>💰Clean litter for bounties</Text>
+          <Text style={styles.headerText}>⛳ Track Litter Cleanups</Text>
+        </View>
+        <View style={styles.container}>
+          <View style={styles.homeButton}>
+            <ThemeProvider theme={homeButton}>
+              <Button
+                type={"outline"}
+                raised={true}
+                onPress={this._buttonPostBounty}
+                title="POST CLEANUP BOUNTY"
+              />
+            </ThemeProvider>
+          </View>
 
-                <View style={styles.homeButton}>
-                    <ThemeProvider theme={homeButton}>
-                        <Button
-                            type={'outline'}
-                            raised={true}
-                            onPress={this._buttonFindOpenBounty}
-                            title='FIND LITTER BOUNTY'
-                        />
-                    </ThemeProvider>
-                </View>
-                <View style={styles.activeView}>
-                    <Text style={styles.activeViewTitle}>Active Litter Bounties:</Text>
-                    <Text style={styles.activeAmount}>$42,404 </Text>
-                </View>
-                <View style={styles.homeButton}>
-                    <ThemeProvider theme={homeButton}>
-                        <Button
-                            type={'outline'}
-                            raised={true}
-                            onPress={this._buttonTrackCleanUp}
-                            title='TRACK CLEANUP'
-                        />
-                    </ThemeProvider>
-                </View>
-                <AuthScreen />
-            </View>
-        </ImageBackground>
+          <View style={styles.homeButton}>
+            <ThemeProvider theme={homeButton}>
+              <Button
+                type={"outline"}
+                raised={true}
+                onPress={this._buttonFindOpenBounty}
+                title="FIND LITTER BOUNTY"
+              />
+            </ThemeProvider>
+          </View>
+
+          <View style={styles.homeButton}>
+            <ThemeProvider theme={homeButton}>
+              <Button
+                type={"outline"}
+                raised={true}
+                onPress={this._buttonTrackCleanUp}
+                title="TRACK CLEANUP"
+              />
+            </ThemeProvider>
+          </View>
+          <View style={styles.activeView}>
+            <Text style={styles.activeViewTitle}>Active Litter Bounties:</Text>
+            <Text style={styles.activeAmount}>$42,404 </Text>
+          </View>
+          <AuthScreen />
+        </View>
+      </ImageBackground>
     );
   }
 

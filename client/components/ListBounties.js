@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { connect } from 'react-redux'
+import { connect } from "react-redux";
 import {
   Text,
   ListItem,
@@ -30,21 +30,21 @@ class ListBounties extends Component {
     };
     this.state = initialState;
   }
-  componentDidMount(){
+  componentDidMount() {
     axios
       .get(proxyUrl.url + "/find")
       .then(res => this.setState({ bounties: res.data }))
       .catch(err => console.log(err));
   }
-  selectBounty(id){
+  selectBounty(id) {
     this.props.checkoutBounty(id);
     // PUT REDIRECT HERE TO TRACK BOUNTY PAGE
   }
   render() {
-    if(this.props.isStarted){
+    if (this.props.isStarted) {
       // PUT REDIRECT HERE TO TRACK BOUNTY PAGE
       // PUT REDIRECT HERE!
-      console.log('isStarted is true')
+      console.log("isStarted is true");
     }
     return (
       <ScrollView>
@@ -53,7 +53,9 @@ class ListBounties extends Component {
             <View style={styles.listBountyCard} key={i}>
               <View style={styles.bountyBoxHeader}>
                 <Text style={styles.bountyBoxTitle}>{bounty.bountyTitle}</Text>
-                <Text style={styles.bountyBoxAmount}>${bounty.bountyAmount}</Text>
+                <Text style={styles.bountyBoxAmount}>
+                  ${bounty.bountyAmount}
+                </Text>
               </View>
               <View style={styles.bountyBox}>
                 <Image
@@ -67,13 +69,13 @@ class ListBounties extends Component {
                   <Text>AMOUNT: ${bounty.bountyAmount}</Text>
                   <Text>Pre-Clean Notes:</Text>
                   <Text>{bounty.bountyNotes}</Text>
-                  <Button 
-                    containerStyle={{ width: "50%" }} 
+                  <Button
+                    containerStyle={{ width: "50%" }}
                     onPress={() => this.selectBounty(bounty._id)}
-                    title="Start Clean" 
+                    title="Start Clean"
                   />
-                  </View>
                 </View>
+              </View>
             </View>
           );
         })}
@@ -98,14 +100,14 @@ const styles = StyleSheet.create({
     width: 308,
     marginBottom: 1,
     color: "rgba(0,0,0,0.9)",
-    fontSize: 22,
-    textAlign: 'right'
+    fontSize: 22
   },
   bountyBoxAmount: {
     paddingRight: 2,
     width: 62,
     color: "rgba(33,108,42,1)",
-    fontSize: 22
+    fontSize: 22,
+    textAlign: "right"
   },
 
   listBountyCard: {
@@ -145,21 +147,21 @@ const styles = StyleSheet.create({
   }
 });
 
-
-const mapStateToProps = (state)=>{
+const mapStateToProps = state => {
   return {
     isStarted: state.bounties.isStarted,
     potentialBounty: state.potentialBounty
   };
-}
+};
 
-const mapDispatchToProps = (dispatch) =>{
+const mapDispatchToProps = dispatch => {
   return {
-    checkoutBounty : (bounties) => dispatch({ type: 'CHECKOUT_BOUNTY', bounties}),
-    getBounties : (bounties) =>dispatch({type : "GET_BOUNTY", bounties : bounties})
-  }
-}
-export default connect (
+    checkoutBounty: bounties => dispatch({ type: "CHECKOUT_BOUNTY", bounties }),
+    getBounties: bounties =>
+      dispatch({ type: "GET_BOUNTY", bounties: bounties })
+  };
+};
+export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ListBounties)
+)(ListBounties);

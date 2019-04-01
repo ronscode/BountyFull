@@ -2,6 +2,10 @@ const tintColor = "#00a86b";
 
 export default {
   tintColor,
+  tabBarOptions: {
+    activeTintColor: "#00a86b",
+    inactiveTintColor: "#ccc"
+  },
   activeTintColor: tintColor,
   inactiveTintColor: "white",
   tabBarLabelActive: "red",

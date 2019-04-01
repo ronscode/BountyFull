@@ -15,47 +15,69 @@ import { MonoText } from "../components/StyledText";
 import PostBountyInputTitle from "../components/PostBountyInputTitle";
 import TrackCleanForm from "../components/TrackCleanForm";
 import TestImageUpload from "../components/TestImageUpload";
+import { connect } from 'react-redux';
 
-export default class TrackCleanScreen extends React.Component {
+class TrackCleanScreen extends React.Component {
   static navigationOptions = {
     header: null
   };
 
   render() {
+    let { bountyTitle, bountyNotes, poster, isStarted } = this.props;
+    if(!isStarted){
+      console.log("NO BOUNTY SELECTED TO START")
+      // RENDER BASIC SCREEN
+    }
+    console.log(this.props.claimer);
     return (
-      <View style={styles.container}>
-        <View>
-          <Text style={styles.headerTopText}>TRACK YOUR CLEAN UP</Text>
-        </View>
-        <View style={styles.trackChooseButtons}>
-          <Button title={"Select Bounty"} />
-          <Button title={"Track New Clean"} />
-        </View>
-
-        <ScrollView
-          style={styles.container}
-          contentContainerStyle={styles.contentContainer}
-        >
-          <Text style={styles.subTitleText}>CURRENTLY CLEANING:</Text>
-          <View style={styles.trackCleanContainer}>
-            <Text />
-
-            <Text style={styles.trackBountyTitle}>
-              Hiking Trail is Trashed! Please Help!
-            </Text>
-            <Text />
-            <View style={styles.labelRow}>
-              <Text style={styles.profileLabel}>POSTED BY: </Text>
-              <Text>Zaphod Beeblbrox</Text>
+        <View style={styles.container}>
+            <View>
+                <Text style={styles.headerTopText}>TRACK YOUR CLEAN UP</Text>
+            </View>
+            <View style={styles.trackChooseButtons}>
+                <Button title={'Select Bounty'} />
+                <Button title={'Track New Clean'} />
             </View>
 
-            <TrackCleanForm />
-          </View>
-        </ScrollView>
-      </View>
+            <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+                <Text style={styles.subTitleText}>CURRENTLY CLEANING: {bountyTitle}</Text>
+                <View style={styles.trackCleanContainer}>
+                    <Text />
+
+                    <Text style={styles.trackBountyTitle}>{bountyNotes}</Text>
+                    <Text />
+                    <View style={styles.labelRow}>
+                        <Text style={styles.profileLabel}>POSTED BY: </Text>
+                        <Text>{poster}</Text>
+                    </View>
+
+                    <TrackCleanForm />
+                </View>
+            </ScrollView>
+        </View>
     );
   }
 }
+let mapStateToProps = (state) => {
+  return {
+    firstName: state.user.firstName,
+    bountyTitle: state.bounties.bountyTitle,
+    bountyNotes: state.bounties.bountyNotes,
+    poster: state.bounties.poster,
+    bountyAmount: state.bounties.bountyAmount,
+  }
+}
+
+let mapDispatchToProps = (dispatch) => {
+  return {
+    saveUser: (user) => dispatch({ type: 'SAVE_USER', user })
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TrackCleanScreen)
 
 const styles = StyleSheet.create({
   container: {

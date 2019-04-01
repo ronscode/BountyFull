@@ -11,16 +11,41 @@ import {
   Text,
   TextInput
 } from "react-native";
-
+import { connect } from 'react-redux';
+import axios from 'axios';
 const initialValues = {
   image: ""
 };
 
-export default class App extends React.Component {
-  onSubmit(values) {
+// Reference URL
+const proxyUrl = require("../proxyUrl.js");
+
+class TrackCleanForm extends React.Component {
+  async onSubmit(values) {
     //List of form values
-    console.log(values);
+
+    let body = {
+      _id: this.props._id,
+      picUrl: values.image,
+      bountyNotes: values.bountyNotes
+    }
+    let url = proxyUrl.url + '/find/update/';
+    await axios.put(url, body)
+      .then(res => this.props.cleanBounty(values.image))
+      .catch(err => console.log(err));
     Alert.alert(JSON.stringify(values));
+    Keyboard.dismiss();
+  }
+
+  async verifyCleanup() {
+    let body = {
+      _id: this.props._id,
+    }
+    let url = proxyUrl.url + '/post/update/';
+    await axios.put(url, body)
+      .then(res => this.props.verifyBounty())
+      .catch(err => console.log(err));
+    Alert.alert('Bounty Verified');
     Keyboard.dismiss();
   }
 
@@ -35,7 +60,26 @@ export default class App extends React.Component {
     }
   }
 
+  async saveStartPic(){
+    let result = await ImagePicker.launchImageLibraryAsync({
+      allowsEditing: true,
+      aspect: [4, 3]
+    });
+
+    let body = {
+      _id: this.props._id,
+      claimer: this.props.email,
+      picUrl: result.uri
+    }
+    let url = proxyUrl.url + '/find/update/';
+    await axios.put(url, body)
+        .then(res => this.props.startBounty(result.uri))
+        .catch(err => console.log(err));
+  }
+
   render() {
+    let { pictures, firstName, poster, isCleaned, email } = this.props;
+    console.log(pictures)
     return (
       <View style={[styles.container, styles.content]}>
         <Formik
@@ -52,28 +96,51 @@ export default class App extends React.Component {
               /> */}
               <View style={styles.imageContainer}>
                 <View style={styles.beforeImageLeft}>
-                  <Text style={styles.trackCleanHeader}>BEFORE IMAGE</Text>
-                  <Image
-                    source={require("../assets/images/demo/before_1.jpg")}
-                    style={{ width: 150, height: 150 }}
-                  />
+                  <Text style={styles.trackCleanHeader}>Post Pic</Text>
+                  {
+                    pictures.post
+                    ?
+                      <Image
+                        source={{ uri: pictures.post }}
+                        style={{ width: 150, height: 150 }}
+                      />
+                    :
+                      <Image
+                        source={require("../assets/images/demo/before_1.jpg")}
+                        style={{ width: 150, height: 150 }}
+                      />
+                  }
+
                 </View>
                 <View style={styles.afterImageRight}>
-                  <Text style={styles.trackCleanHeader}>AFTER IMAGE</Text>
-                  <Image
-                    source={require("../assets/images/demo/after_1.jpg")}
-                    style={{ width: 150, height: 150 }}
-                  />
+                  <Text style={styles.trackCleanHeader}>Start Pic</Text>
+                  {
+                    pictures.start 
+                    ? 
+                      <Image
+                        source={{ uri: pictures.start }}
+                        style={{ width: 150, height: 150 }}
+                      />
+                    :
+                      <Button
+                        title="ADD START PIC"
+                        icon="add-a-photo"
+                        mode="contained"
+                        style={styles.button}
+                        onPress={() => this.saveStartPic()}
+                      />
+                  }
+
                 </View>
               </View>
 
               <Text>HOW DID THE CLEANUP GO?</Text>
 
               <TextInput
-                onChangeText={handleChange("TrackCleanNotes")}
-                style={styles.trackCleanNotes}
-                value={values.TrackCleanNotes}
-                label="TrackCleanNotes"
+                onChangeText={handleChange("bountyNotes")}
+                style={styles.bountyNotes}
+                value={values.bountyNotes}
+                label="bountyNotes"
                 placeholder="Notes about cleanup"
               />
 
@@ -118,18 +185,34 @@ export default class App extends React.Component {
                   style={{ width: 150, height: 150 }}
                 />
               )}
-
+              
               <Text>
-                A new cleanup by "Render Username" was completed for "Render
-                Poster"{" "}
+                A new cleanup by {firstName} was completed for {poster}
               </Text>
               <Text />
-
+              
               <Text style={styles.trackCleanSubHeader}>
                 Notes from the cleaner:{" "}
               </Text>
               <Text />
-              <Text>{values.TrackCleanNotes}</Text>
+              <Text>{values.bountyNotes}</Text>
+              {isCleaned && email === poster
+                ? 
+                  <View>
+                    <Text>PosterActions</Text>
+                    <Button
+                      title="VERIFY CLEANUP"
+                      icon="add-a-photo"
+                      mode="contained"
+                      style={styles.button}
+                      onPress={() => this.verifyCleanup()}
+                    />
+                  </View>
+                :
+                email === poster 
+                ? <Text>Area not yet cleaned</Text>
+                : <Text>Once cleaned, bounty poster will verify!</Text>
+              }
               <Text style={styles.thanksBox}>
                 Thank you for helping clean up the world! Keep up the good work
                 and tell a friend!
@@ -141,6 +224,36 @@ export default class App extends React.Component {
     );
   }
 }
+
+let mapStateToProps = (state) => {
+  return {
+    user: state.user,
+    firstName: state.user.firstName,
+    email: state.user.email,
+    _id: state.bounties._id,
+    claimer: state.bounties.claimer,
+    poster: state.bounties.poster,
+    isCleaned: state.bounties.isCleaned,
+    bountyTitle: state.bounties.bountyTitle,
+    bountyNotesPoster: state.bounties.bountyNotesPoster,
+    bountyPoster: state.bounties.bountyPoster,
+    bountyAmount: state.bounties.bountyAmount,
+    pictures: state.bounties.pictures,
+  }
+}
+
+let mapDispatchToProps = (dispatch) => {
+  return {
+    startBounty: (picture) => dispatch({type: 'START_BOUNTY', picture}),
+    cleanBounty: (picture) => dispatch({type: 'CLEAN_BOUNTY', picture}),
+    verifyBounty: () => dispatch({type: 'VERIFY_BOUNTY'})
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TrackCleanForm)
 
 const styles = StyleSheet.create({
   container: {
@@ -170,7 +283,7 @@ const styles = StyleSheet.create({
     width: 150,
     height: 150
   },
-  trackCleanNotes: {
+  bountyNotes: {
     height: 80,
     marginTop: 2,
     marginBottom: 2,

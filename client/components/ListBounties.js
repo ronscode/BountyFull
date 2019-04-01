@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { connect } from 'react-redux'
+import { connect } from "react-redux";
 import {
   Text,
   ListItem,
@@ -22,7 +22,7 @@ import { Button, List, Card } from "react-native-elements";
 // Reference URL
 const proxyUrl = require("../proxyUrl.js");
 
-let  ListBounties2 =({bounty, getBounties}) => {
+let ListBounties2 = ({ bounty, getBounties }) => {
   // constructor(props) {
   //   super(props);
   //   // let initialState = {
@@ -30,55 +30,48 @@ let  ListBounties2 =({bounty, getBounties}) => {
   //   // };
   //   // this.state = initialState;
   // }
-  (function componentDidMount(){
+  (function componentDidMount() {
     axios
       .get(proxyUrl.url + "/find")
-      .then((res) => {
+      .then(res => {
         // console.log(res.data)
-        getBounties(res.data)
+        getBounties(res.data);
         //this.setState({ bounties: res.data })
       })
       .catch(err => console.log(err));
-  }())
-  
+  })();
+
   // render() {
-    // console.log(bounty)
-    return (
-      <ScrollView>
-        {bounty.reverse().map((bounty, i) => {
-          return (
-            <View style={styles.listBountyCard} key={i}>
-              <View style={styles.bountyBoxHeader}>
-                <Text style={styles.bountyBoxTitle}>{bounty.bountyTitle}</Text>
-                <Text style={styles.bountyBoxAmount}>
-                  ${bounty.bountyAmount}
+  // console.log(bounty)
+  return (
+    <ScrollView>
+      {bounty.reverse().map((bounty, i) => {
+        return (
+          <View style={styles.listBountyCard} key={i}>
+            <View style={styles.bountyBoxHeader}>
+              <Text style={styles.bountyBoxTitle}>{bounty.bountyTitle}</Text>
+              <Text style={styles.bountyBoxAmount}>${bounty.bountyAmount}</Text>
+            </View>
+            <View style={styles.bountyBox}>
+              <Image
+                style={styles.listBountyImage}
+                source={{ uri: bounty.pictures.post }}
+              />
+              <View style={styles.bountyBoxColumn}>
+                <Text>
+                  POSTED BY: {bounty.bountyPoster} {bounty.poster}
                 </Text>
-              </View>
-              <View style={styles.bountyBox}>
-                <Image
-                  style={styles.listBountyImage}
-                  
-                />
-                <View style={styles.bountyBoxColumn}>
-                  <Text>
-                    POSTED BY: {bounty.bountyPoster} {bounty.poster}
-                  </Text>
-                  <Text>AMOUNT: ${bounty.bountyAmount}</Text>
-                  <Text>Pre-Clean Notes:</Text>
-                  <Text>{bounty.bountyNotes}</Text>
-                  <Button
-                    containerStyle={{ width: "50%" }}
-                    title="Start Clean"
-                  />
-                </View>
+                <Text>AMOUNT: ${bounty.bountyAmount}</Text>
+                <Text>Pre-Clean Notes:</Text>
+                <Text>{bounty.bountyNotes}</Text>
+                <Button containerStyle={{ width: "50%" }} title="Start Clean" />
               </View>
             </View>
-          );
-        })}
+          </View>
+        );
+      })}
 
-        
-
-        {/* 
+      {/* 
         {this.state.bounties.reverse().map(bounty => {
           return (
             <View>
@@ -96,10 +89,10 @@ let  ListBounties2 =({bounty, getBounties}) => {
             </View>
           );
         })} */}
-      </ScrollView>
-    );
+    </ScrollView>
+  );
   // }
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -120,10 +113,11 @@ const styles = StyleSheet.create({
     fontSize: 22
   },
   bountyBoxAmount: {
-    marginRight: 2,
-    width: 42,
+    paddingRight: 2,
+    width: 62,
     color: "rgba(33,108,42,1)",
-    fontSize: 22
+    fontSize: 22,
+    textAlign: "right"
   },
 
   listBountyCard: {
@@ -134,12 +128,11 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 1,
     marginBottom: 15,
-    width: 370,
     backgroundColor: "#ffffff"
   },
   bountyBoxHeader: {
     flexDirection: "row",
-    justifyContent: "space-between"
+    justifyContent: "space-around"
   },
   bountyText: {
     color: "rgba(33,108,42,1)",
@@ -164,19 +157,19 @@ const styles = StyleSheet.create({
   }
 });
 
-
-const mapStateToProps = (state)=>{
-  return{
-    bounty: state.bounty, 
-  }
-}
-
-const mapDispatchToProps = (dispatch) =>{
+const mapStateToProps = state => {
   return {
-    getBounties : (bounties) =>dispatch({type : "GET_BOUNTY", bounties : bounties})
-  }
-}
-export default connect (
+    bounty: state.bounty
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    getBounties: bounties =>
+      dispatch({ type: "GET_BOUNTY", bounties: bounties })
+  };
+};
+export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ListBounties2)
+)(ListBounties2);

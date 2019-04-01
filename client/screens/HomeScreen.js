@@ -23,7 +23,7 @@ const homeButton = {
   Button: {
     titleStyle: {
       fontSize: 16,
-      color: "#696969"
+      color: "#010101"
     }
   }
 };
@@ -82,6 +82,10 @@ class HomeScreen extends React.Component {
               />
             </ThemeProvider>
           </View>
+          <View style={styles.activeView}>
+            <Text style={styles.activeViewTitle}>Active Litter Bounties:</Text>
+            <Text style={styles.activeAmount}>$42,404 </Text>
+          </View>
           <AuthScreen />
         </View>
       </ImageBackground>
@@ -125,7 +129,7 @@ const styles = StyleSheet.create({
   },
   headerTopText: {
     fontSize: 50,
-    fontFamily: "gatsby-retro",
+    fontFamily: "sign45",
     color: "#FFFFFF",
     textAlign: "center",
     textShadowColor: "rgba(0,0,0, 1)",
@@ -133,15 +137,14 @@ const styles = StyleSheet.create({
     textShadowRadius: 3
   },
   headerText: {
-    fontSize: 16,
-    paddingBottom: 2,
-    marginBottom: 3,
+    fontSize: 20,
+    marginBottom: 12,
     color: "#FFF",
     textAlign: "center",
     textShadowColor: "rgba(0,0,0, 1)",
     textShadowOffset: { width: 1, height: 2 },
     textShadowRadius: 3,
-    fontFamily: "baddest"
+    fontFamily: "sign45"
   },
   homeButtons: {
     alignItems: "center",
@@ -166,6 +169,30 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     paddingTop: 30
+  },
+  activeView: {
+    backgroundColor: "rgba(0,0,0,0.8)",
+    padding: 5,
+    justifyContent: "center",
+    textAlign: "center",
+    alignItems: "center",
+    borderRadius: 15
+  },
+  activeViewTitle: {
+    fontFamily: "pittsbrook-sans",
+    fontSize: 26,
+    color: "#00a86b"
+  },
+  activeAmount: {
+    fontSize: 24,
+    padding: 5,
+    backgroundColor: "black",
+    alignItems: "center",
+    fontFamily: "pittsbrook-sans",
+    color: "white",
+    textShadowColor: "rgba(0,0,0, 1)",
+    textShadowOffset: { width: 0, height: 1 },
+    textShadowRadius: 1
   },
   welcomeContainer: {
     marginTop: 10,

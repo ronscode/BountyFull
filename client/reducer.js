@@ -1,43 +1,42 @@
 const initialState = {
     bounties: {
-            "id": "",
-            "claimer": " ",
-            "isStarted": false,
-            "bountyTitle": " ",
-            "bountyNotesPoster": " ",
-            "isCleaned": false,
-            "isVerified": false,
-            "isPaid": false,
-            "isComplete": false,
-            "timeStarted": "",
-            "timeEnded": "",
-            "bountyPoster": " ",
-            "bountyAmount": 0,
-            "location": " ",
-            "pictures": {
-                "post": "assets/images/demo/before_1.jpg",
-                "start": "blank",
-                "end": "blank"
-            },
+        _id: '',
+        claimer: ' ',
+        isStarted: false,
+        bountyTitle: ' ',
+        bountyNotes: ' ',
+        isCleaned: false,
+        isVerified: false,
+        isPaid: false,
+        isComplete: false,
+        timeStarted: '',
+        timeEnded: '',
+        poster: ' ',
+        bountyAmount: 0,
+        location: ' ',
+        pictures: {
+            post: null,
+            start: null,
+            end: null
+        }
     },
-    bounty : [],
-    potentialBounty: '',
+    bounty: [],
     user: {
-        user_id : 0,                 
-        firstName : '',              
-        lastName : '',
-        email : '',
-        user_bio : '',
-        total_earnings : '',
-        total_time : '',
-        profile_pic :'',
-        complete : [],
-        posted : [],
+        user_id: 0,
+        firstName: '',
+        lastName: '',
+        email: '',
+        user_bio: '',
+        total_earnings: '',
+        total_time: '',
+        profile_pic: '',
+        complete: [],
+        posted: [],
         currentPostedBounty: '',
-        signedIn : false,
-        inProgress: false           //Once the user is starts a bounty inProgress is true.
+        signedIn: false,
+        inProgress: false //Once the user is starts a bounty inProgress is true.
     }
-}
+};
 
 
 const reducer = (state = initialState, actions) =>{
@@ -83,24 +82,30 @@ const reducer = (state = initialState, actions) =>{
         case "CHECKOUT_BOUNTY":
         return {
             ...state,
-            potentialBounty: bounties
+            bounties: bounties
         };
         case "START_BOUNTY": 
         return{
             ...state,
-            start : state.bounty.pictures.start,
-            isStarted : !state.bounty.isStarted
+            bounties: {
+                ...state.bounties,
+                isStarted: true,
+                pictures: {
+                    ...state.bounties.pictures,
+                    start: picture
+                }
+            }
         }
-        case "COMPLETE_BOUNTY": 
+        case "CLEAN_BOUNTY": 
         return {
             ...state,
-            bounty : {
-                ...state.bounty,
-                picture : {
-                    ...picture,
-                    end : state.bounty.pictures.end
-                },
-                isCleaned : !state.bounty.isCleaned
+            bounties : {
+                ...state.bounties,
+                isCleaned : true,
+                pictures : {
+                    ...state.bounties.pictures,
+                    end : picture
+                }
             } 
         }
 
@@ -116,8 +121,11 @@ const reducer = (state = initialState, actions) =>{
         case "VERIFY_BOUNTY": 
         return {
             ...state,
-            isComplete : !state.isComplete,
-            isPaid : !state.bounty.isPaid
+            bounties: {
+                ...state.bounties,
+                isVerified: true,
+                isPaid: true
+            }
         }
 
         default :

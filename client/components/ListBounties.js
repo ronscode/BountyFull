@@ -37,7 +37,9 @@ class ListBounties extends Component {
       .catch(err => console.log(err));
   }
   selectBounty(id) {
-    this.props.checkoutBounty(id);
+    axios.get(proxyUrl.url + '/find/status/' + id)
+      .then(res => this.props.checkoutBounty(res.data[0]))
+    console.log('REDIRECT USER')
     // PUT REDIRECT HERE TO TRACK BOUNTY PAGE
   }
   render() {
@@ -83,6 +85,24 @@ class ListBounties extends Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+    return {
+        isStarted: state.bounties.isStarted,
+        potentialBounty: state.potentialBounty
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        checkoutBounty: bounties => dispatch({ type: 'CHECKOUT_BOUNTY', bounties }),
+        getBounties: bounties => dispatch({ type: 'GET_BOUNTY', bounties: bounties })
+    };
+};
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(ListBounties);
 
 const styles = StyleSheet.create({
   container: {
@@ -147,21 +167,4 @@ const styles = StyleSheet.create({
   }
 });
 
-const mapStateToProps = state => {
-  return {
-    isStarted: state.bounties.isStarted,
-    potentialBounty: state.potentialBounty
-  };
-};
 
-const mapDispatchToProps = dispatch => {
-  return {
-    checkoutBounty: bounties => dispatch({ type: "CHECKOUT_BOUNTY", bounties }),
-    getBounties: bounties =>
-      dispatch({ type: "GET_BOUNTY", bounties: bounties })
-  };
-};
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ListBounties);

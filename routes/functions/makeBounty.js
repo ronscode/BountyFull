@@ -1,6 +1,5 @@
 module.exports = body => {
   let { poster, location, picture, bountyAmount, bountyTitle, bountyNotes } = body;
-
   let errors = [];
   if (!poster) {
     errors.push({ msg: "no user provided" });
@@ -21,6 +20,7 @@ module.exports = body => {
     errors.push({ msg: "no picture provided" });
   }
   if (errors.length > 0) {
+    console.log(errors);
     return errors;
   }
 

@@ -16,37 +16,36 @@ router.post("/", (req, res) => {
     res.status(400).send(post.errors);
   } else {
     let newBounty = new Bounty({ ...post });
-    newBounty
-      .save()
-      .then(reply => {
-        User.findOne({ email: post.poster})
-          .then(user => 
-            User.findOneAndUpdate({ email: post.poster} , 
-              {...user._doc, currentPostedBounty: newBounty._id}
-            ))
-          .catch(err => {throw err})
-        res.send(reply)
-      })
+    console.log(newBounty);
+    newBounty.save()
+      .then(reply => res.send(reply))
       .catch(err => res.status(400).send([{ msg: "Something happened!" }]));
   }
 });
 
 router.put("/update/", (req, res) => {
-  Bounty.findOne({ _id: req.body.id })
+  Bounty.findOne({ _id: req.body._id })
     .then(reply => {
       let update = updateBounty(reply._doc);
+      console.log("verified" + update.isVerified);
       if (update.isVerified) {
         /*****************************
               DO PAYMENT STUFF
         *****************************/
         update = updateBounty(update);
+
       }
+      console.log("Paid" + update.isPaid);
       if (update.isPaid) {
         update = updateBounty(update);
       }
+      console.log("Complete" + update.isComplete);
       if (update.errors && update.errors.length > 0) {
+        console.log(update.errors); 
         throw update.errors;
       } else {
+        console.log('updateDatabaseFinal')
+        console.log(update)
         Bounty.findOneAndUpdate({ _id: update._id }, update)
           .then(reply => res.send(update))
           .catch(err => {

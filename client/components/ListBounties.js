@@ -22,83 +22,61 @@ import { Button, List, Card } from "react-native-elements";
 // Reference URL
 const proxyUrl = require("../proxyUrl.js");
 
-let  ListBounties2 =({bounty, getBounties}) => {
-  // constructor(props) {
-  //   super(props);
-  //   // let initialState = {
-  //   //   bounties: []
-  //   // };
-  //   // this.state = initialState;
-  // }
-  (function componentDidMount(){
+class ListBounties extends Component {
+  constructor(props) {
+    super(props);
+    let initialState = {
+      bounties: []
+    };
+    this.state = initialState;
+  }
+  componentDidMount(){
     axios
       .get(proxyUrl.url + "/find")
-      .then((res) => {
-        // console.log(res.data)
-        getBounties(res.data)
-        //this.setState({ bounties: res.data })
-      })
+      .then(res => this.setState({ bounties: res.data }))
       .catch(err => console.log(err));
-  }())
-  
-  // render() {
-    // console.log(bounty)
+  }
+  selectBounty(id){
+    this.props.checkoutBounty(id);
+    // PUT REDIRECT HERE TO TRACK BOUNTY PAGE
+  }
+  render() {
+    if(this.props.isStarted){
+      // PUT REDIRECT HERE TO TRACK BOUNTY PAGE
+      // PUT REDIRECT HERE!
+      console.log('isStarted is true')
+    }
     return (
       <ScrollView>
-        {bounty.reverse().map((bounty, i) => {
+        {this.state.bounties.reverse().map((bounty, i) => {
           return (
-            <View style={styles.listBountyCard} key={i}>
-              <View style={styles.bountyBoxHeader}>
-                <Text style={styles.bountyBoxTitle}>{bounty.bountyTitle}</Text>
-                <Text style={styles.bountyBoxAmount}>
-                  ${bounty.bountyAmount}
-                </Text>
+              <View style={styles.listBountyCard} key={i}>
+                  <View style={styles.bountyBoxHeader}>
+                      <Text style={styles.bountyBoxTitle}>{bounty.bountyTitle}</Text>
+                      <Text style={styles.bountyBoxAmount}>${bounty.bountyAmount}</Text>
+                  </View>
+                  <View style={styles.bountyBox}>
+                      <Image style={styles.listBountyImage} />
+                      <View style={styles.bountyBoxColumn}>
+                          <Text>
+                              POSTED BY: {bounty.bountyPoster} {bounty.poster}
+                          </Text>
+                          <Text>AMOUNT: ${bounty.bountyAmount}</Text>
+                          <Text>Pre-Clean Notes:</Text>
+                          <Text>{bounty.bountyNotes}</Text>
+                          <Button
+                              containerStyle={{ width: '50%' }}
+                              title='Start Clean'
+                              onPress={() => this.selectBounty(bounty._id)}
+                          />
+                      </View>
+                  </View>
               </View>
-              <View style={styles.bountyBox}>
-                <Image
-                  style={styles.listBountyImage}
-                  
-                />
-                <View style={styles.bountyBoxColumn}>
-                  <Text>
-                    POSTED BY: {bounty.bountyPoster} {bounty.poster}
-                  </Text>
-                  <Text>AMOUNT: ${bounty.bountyAmount}</Text>
-                  <Text>Pre-Clean Notes:</Text>
-                  <Text>{bounty.bountyNotes}</Text>
-                  <Button
-                    containerStyle={{ width: "50%" }}
-                    title="Start Clean"
-                  />
-                </View>
-              </View>
-            </View>
           );
         })}
-
-        
-
-        {/* 
-        {this.state.bounties.reverse().map(bounty => {
-          return (
-            <View>
-              <Text>{bounty.bountyTitle}</Text>
-              <Text>POSTED BY: {bounty.bountyPoster}</Text>
-              <Text>AMOUNT: ${bounty.bountyAmount}</Text>
-              <Text>Notes for cleaner:</Text>
-              <Text>{bounty.bountyNotes}</Text>
-
-              <Image
-                style={styles.listBountyImage}
-                source={{ uri: bounty.pictures.post }}
-              />
-              <Button title={"Start Bounty"}>Start Bounty</Button>
-            </View>
-          );
-        })} */}
       </ScrollView>
     );
-  // }
+  }
 }
 
 const styles = StyleSheet.create({
@@ -166,17 +144,19 @@ const styles = StyleSheet.create({
 
 
 const mapStateToProps = (state)=>{
-  return{
-    bounty: state.bounty, 
-  }
+  return {
+    isStarted: state.bounties.isStarted,
+    potentialBounty: state.potentialBounty
+  };
 }
 
 const mapDispatchToProps = (dispatch) =>{
   return {
+    checkoutBounty : (bounties) => dispatch({ type: 'CHECKOUT_BOUNTY', bounties}),
     getBounties : (bounties) =>dispatch({type : "GET_BOUNTY", bounties : bounties})
   }
 }
 export default connect (
   mapStateToProps,
   mapDispatchToProps
-)(ListBounties2)
+)(ListBounties)

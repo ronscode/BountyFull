@@ -1,5 +1,4 @@
 module.exports = body => {
-    console.log(body)
     let { givenName, familyName, email, photoUrl } = body;
     let defaultValues = {
         bio: '',
@@ -7,6 +6,7 @@ module.exports = body => {
         totalEarnings: 0,
         totalHours: 0,
         inProgress: false,
+        currentPostedBounty: '',
         completed: [],
         posted: []
     };

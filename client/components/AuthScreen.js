@@ -22,7 +22,6 @@ class AuthScreen extends React.Component {
       if (result.type === "success") {
         await axios.post(proxyUrl.url + '/users/login/', result)
           .then(res => {
-            console.log(res.data);
             this.props.saveUser(res.data)
           })
           .catch(err => console.log(err))

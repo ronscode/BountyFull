@@ -11,14 +11,11 @@ const makeUser = require('./functions/makeUser')
 
 // Routes for login
 router.post('/login', (req, res) => {
-    console.log('ping')
     User.findOne({ email: req.body.user.email })
         .then(user => {
             if (user) {
-                console.log('Already User...')
                 res.status(200).send(user);
             } else {
-                console.log('New User')
                 const newUser = new User(makeUser(req.body.user));
                 newUser
                     .save()

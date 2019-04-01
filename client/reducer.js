@@ -21,6 +21,7 @@ const initialState = {
             },
     },
     bounty : [],
+    potentialBounty: '',
     user: {
         user_id : 0,                 
         firstName : '',              
@@ -32,6 +33,7 @@ const initialState = {
         profile_pic :'',
         complete : [],
         posted : [],
+        currentPostedBounty: '',
         signedIn : false,
         inProgress: false           //Once the user is starts a bounty inProgress is true.
     }
@@ -75,9 +77,14 @@ const reducer = (state = initialState, actions) =>{
         
         //CLEANER STORY 
         case "PICK_BOUNTY":  //consider making this a button   
-        return{
-            
-        }
+        return {
+            potentialBounty: bounties
+        };
+        case "CHECKOUT_BOUNTY":
+        return {
+            ...state,
+            potentialBounty: bounties
+        };
         case "START_BOUNTY": 
         return{
             ...state,
@@ -85,7 +92,7 @@ const reducer = (state = initialState, actions) =>{
             isStarted : !state.bounty.isStarted
         }
         case "COMPLETE_BOUNTY": 
-        return{
+        return {
             ...state,
             bounty : {
                 ...state.bounty,
@@ -99,15 +106,15 @@ const reducer = (state = initialState, actions) =>{
 
         //POSTER
         case "POST_BOUNTY": 
-        return{
+        return {
             ...state,
             user: {
                 ...user,
-                user_id : state.bounty.poster_id
+                currentPostedBounty: bounties
             }
-        }
+        };
         case "VERIFY_BOUNTY": 
-        return{
+        return {
             ...state,
             isComplete : !state.isComplete,
             isPaid : !state.bounty.isPaid

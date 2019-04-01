@@ -11,6 +11,7 @@ import {
   Text,
   Button
 } from "react-native";
+import { connect } from 'react-redux';
 import UsersMap from "../components/UsersMap";
 import FetchBountyLocation from "../components/FetchBountyLocation";
 import axios from "axios";
@@ -21,7 +22,7 @@ const proxyUrl = require("../proxyUrl.js");
 const initialValues = {
   image: ""
 };
-export default class App extends React.Component {
+class PostBountyForm extends React.Component {
   //Posts new bounty to DB. Also has the thankyou message that pops up after submission
   constructor(props) {
     super(props);
@@ -33,28 +34,24 @@ export default class App extends React.Component {
   async onSubmit(values) {
     //List of form values to be inserted here
     let body = {
-      poster: "Zaphod",
+      poster: this.props.email,
       location: "22232323232 NW",
       picture: values.image,
       bountyAmount: values.bountyAmount,
       bountyNotes: values.bountyNotes,
       bountyTitle: values.bountyTitle
     };
-    console.log(body);
     let message =
       "Thank you! Your bounty " +
-      values.bountyTitle +
+      body.bountyTitle +
       " for $" +
-      values.bountyAmount +
+      body.bountyAmount +
       " has been posted.";
     await axios
       .post(proxyUrl.url + "/post/", body)
-      .then(res => this.props.saveBounty(res.data))
-      .then(res => this.setState({ bounties: res.data }))
+      .then(res => this.props.postBounty(res.data._id))
       .catch(err => console.log(err));
-    console.log(values.bountyNotes);
     Alert.alert(message);
-
     Keyboard.dismiss();
   }
 
@@ -72,6 +69,9 @@ export default class App extends React.Component {
   }
 
   render() {
+    if(this.props.currentPostedBounty){
+      //REDIRECT TO TRACK CLEAN BOUNTY PAGE
+    }
     return (
       <View style={[styles.container, styles.content]}>
         <Formik
@@ -175,6 +175,33 @@ export default class App extends React.Component {
     );
   }
 }
+
+let mapStateToProps = (state) => {
+  return {
+    firstName: state.user.firstName,
+    lastName: state.user.lastName,
+    bio: state.user.bio,
+    email: state.user.email,
+    profilePic: state.user.profilePic,
+    totalEarnings: state.user.totalEarnings,
+    totalEarnings: state.user.totalEarnings,
+    totalHours: state.user.totalHours,
+    completed: state.user.completed,
+    currentPostedBounty: state.user.currentPostedBounty,
+    posted: state.user.posted
+  };
+}
+
+let mapDispatchToProps = (dispatch) => {
+  return {
+    postBounty: (bounties) => dispatch({ type: 'POST_BOUNTY', bounties })
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PostBountyForm)
 
 const styles = StyleSheet.create({
   container: {

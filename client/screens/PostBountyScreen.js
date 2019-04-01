@@ -40,6 +40,7 @@ const styles = StyleSheet.create({
   },
   headerTopText: {
     fontSize: 22,
+    fontFamily: "sign45",
     fontWeight: "bold",
     color: "#FFFFFF",
     textAlign: "center",

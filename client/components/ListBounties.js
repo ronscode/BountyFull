@@ -50,28 +50,31 @@ class ListBounties extends Component {
       <ScrollView>
         {this.state.bounties.reverse().map((bounty, i) => {
           return (
-              <View style={styles.listBountyCard} key={i}>
-                  <View style={styles.bountyBoxHeader}>
-                      <Text style={styles.bountyBoxTitle}>{bounty.bountyTitle}</Text>
-                      <Text style={styles.bountyBoxAmount}>${bounty.bountyAmount}</Text>
-                  </View>
-                  <View style={styles.bountyBox}>
-                      <Image style={styles.listBountyImage} />
-                      <View style={styles.bountyBoxColumn}>
-                          <Text>
-                              POSTED BY: {bounty.bountyPoster} {bounty.poster}
-                          </Text>
-                          <Text>AMOUNT: ${bounty.bountyAmount}</Text>
-                          <Text>Pre-Clean Notes:</Text>
-                          <Text>{bounty.bountyNotes}</Text>
-                          <Button
-                              containerStyle={{ width: '50%' }}
-                              title='Start Clean'
-                              onPress={() => this.selectBounty(bounty._id)}
-                          />
-                      </View>
-                  </View>
+            <View style={styles.listBountyCard} key={i}>
+              <View style={styles.bountyBoxHeader}>
+                <Text style={styles.bountyBoxTitle}>{bounty.bountyTitle}</Text>
+                <Text style={styles.bountyBoxAmount}>${bounty.bountyAmount}</Text>
               </View>
+              <View style={styles.bountyBox}>
+                <Image
+                  style={styles.listBountyImage}
+                  source={{ uri: bounty.pictures.post }}
+                />
+                <View style={styles.bountyBoxColumn}>
+                  <Text>
+                    POSTED BY: {bounty.bountyPoster} {bounty.poster}
+                  </Text>
+                  <Text>AMOUNT: ${bounty.bountyAmount}</Text>
+                  <Text>Pre-Clean Notes:</Text>
+                  <Text>{bounty.bountyNotes}</Text>
+                  <Button 
+                    containerStyle={{ width: "50%" }} 
+                    onPress={() => this.selectBounty(bounty._id)}
+                    title="Start Clean" 
+                  />
+                  </View>
+                </View>
+            </View>
           );
         })}
       </ScrollView>
@@ -95,11 +98,12 @@ const styles = StyleSheet.create({
     width: 308,
     marginBottom: 1,
     color: "rgba(0,0,0,0.9)",
-    fontSize: 22
+    fontSize: 22,
+    textAlign: 'right'
   },
   bountyBoxAmount: {
-    marginRight: 2,
-    width: 42,
+    paddingRight: 2,
+    width: 62,
     color: "rgba(33,108,42,1)",
     fontSize: 22
   },
@@ -112,12 +116,11 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 1,
     marginBottom: 15,
-    width: 370,
     backgroundColor: "#ffffff"
   },
   bountyBoxHeader: {
     flexDirection: "row",
-    justifyContent: "space-between"
+    justifyContent: "space-around"
   },
   bountyText: {
     color: "rgba(33,108,42,1)",

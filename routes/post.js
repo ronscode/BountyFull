@@ -7,6 +7,7 @@ const updateBounty = require("./functions/updateBounty");
 
 // Database Models
 const Bounty = require("../models/Bounty");
+const User = require("../models/User");
 
 // Routes for posting litter bounties
 router.post("/", (req, res) => {
@@ -15,10 +16,17 @@ router.post("/", (req, res) => {
     res.status(400).send(post.errors);
   } else {
     let newBounty = new Bounty({ ...post });
-    console.log(newBounty);
     newBounty
       .save()
-      .then(reply => res.send(reply))
+      .then(reply => {
+        User.findOne({ email: post.poster})
+          .then(user => 
+            User.findOneAndUpdate({ email: post.poster} , 
+              {...user._doc, currentPostedBounty: newBounty._id}
+            ))
+          .catch(err => {throw err})
+        res.send(reply)
+      })
       .catch(err => res.status(400).send([{ msg: "Something happened!" }]));
   }
 });

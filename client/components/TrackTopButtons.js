@@ -10,13 +10,8 @@ import {
 } from "react-native";
 import { WebBrowser } from "expo";
 import { Button, ThemeProvider } from "react-native-elements";
-import FetchLocation from "../components/FetchLocation";
 import { MonoText } from "../components/StyledText";
-import PostBountyInputTitle from "../components/PostBountyInputTitle";
-import TrackCleanForm from "../components/TrackCleanForm";
-import TestImageUpload from "../components/TestImageUpload";
 import { connect } from "react-redux";
-import TrackTopButtons from "../components/TrackTopButtons";
 
 const homeButton = {
   Button: {
@@ -27,55 +22,36 @@ const homeButton = {
   }
 };
 
-class TrackCleanScreen extends React.Component {
+class TrackTopButtons extends React.Component {
   static navigationOptions = {
     header: null
   };
 
   render() {
     let { bountyTitle, bountyNotes, poster, isStarted } = this.props;
-    if (!isStarted) {
-      console.log("NO BOUNTY SELECTED TO START");
-      // RENDER BASIC SCREEN
-    }
-    console.log(this.props.claimer);
-
-    return (
-      <View style={styles.container}>
-        <View>
-          <Text style={styles.headerTopText}>TRACK YOUR CLEAN UP</Text>
+    const isTitle = bountyTitle;
+    if (bountyTitle < 1) {
+      topButtons = (
+        <View style={styles.trackChooseButtons}>
+          <Button
+            onPress={() => {
+              console.log("Navigate to find an open bounty");
+              navigation.navigate("FindBountyStack");
+            }}
+            title="FIND BOUNTY"
+          />
+          <Button title={"TRACK CLEAN"} />
         </View>
+      );
+    } else topButtons = null;
 
-        <TrackTopButtons />
-
-        <ScrollView
-          style={styles.container}
-          contentContainerStyle={styles.contentContainer}
-        >
-          <Text style={styles.subTitleText}>
-            CURRENTLY CLEANING: {bountyTitle}
-          </Text>
-          <View style={styles.trackCleanContainer}>
-            <Text />
-
-            <Text style={styles.trackBountyTitle}>{bountyNotes}</Text>
-            <Text />
-            <View style={styles.labelRow}>
-              <Text style={styles.profileLabel}>POSTED BY: </Text>
-              <Text>{poster}</Text>
-            </View>
-
-            <TrackCleanForm />
-          </View>
-        </ScrollView>
-      </View>
-    );
+    return <View>{topButtons}</View>;
+    // Navigates to find open bounties
+    _buttonFindOpenBounty = () => {
+      console.log("Navigate to find an open bounty");
+      navigation.navigate("FindBountyStack");
+    };
   }
-  // Navigates to find open bounties
-  _buttonFindOpenBounty = () => {
-    console.log("Navigate to find an open bounty");
-    this.props.navigation.navigate("FindBountyStack");
-  };
 }
 
 let mapStateToProps = state => {
@@ -97,7 +73,7 @@ let mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(TrackCleanScreen);
+)(TrackTopButtons);
 
 const styles = StyleSheet.create({
   container: {

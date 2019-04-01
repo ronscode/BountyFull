@@ -14,14 +14,14 @@ import AuthScreen from "../components/AuthScreen";
 
 import { MonoText } from "../components/StyledText";
 import ListUserBounties from "../components/ListUserBounties";
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 
 class ProfileScreen extends React.Component {
   static navigationOptions = {
     header: null
   };
-  tipUser(){
-    console.log('user is tipped');
+  tipUser() {
+    console.log("user is tipped");
   }
   render() {
     let {
@@ -32,20 +32,22 @@ class ProfileScreen extends React.Component {
       firstName,
       lastName,
       posted,
-      bio,
+      bio
     } = this.props;
     return (
       <View style={styles.container}>
         <View style={styles.viewProfileCard}>
           <View style={styles.profileBoxHeader}>
-            <Text style={styles.profileBoxUsername}>{firstName} {lastName}</Text>
+            <Text style={styles.profileBoxUsername}>
+              {firstName} {lastName}
+            </Text>
             <Text style={styles.profileBoxAmount}>🌟</Text>
           </View>
           <View style={styles.profileBox}>
             <Image
               style={styles.listBountyImage}
-              source={{uri: profilePic}}
-              // source={require("../assets/images/demo/zaphod.jpg")}  
+              source={{ uri: profilePic }}
+              // source={require("../assets/images/demo/zaphod.jpg")}
             />
             <View style={styles.profileBoxColumn}>
               <View style={styles.labelRow}>
@@ -70,7 +72,7 @@ class ProfileScreen extends React.Component {
   }
 }
 
-let mapStateToProps = (state) => {
+let mapStateToProps = state => {
   return {
     firstName: state.user.firstName,
     lastName: state.user.lastName,
@@ -80,20 +82,20 @@ let mapStateToProps = (state) => {
     totalEarnings: state.user.totalEarnings,
     totalHours: state.user.totalHours,
     completed: state.user.completed,
-    posted: state.user.posted,
-  }
-}
+    posted: state.user.posted
+  };
+};
 
-let mapDispatchToProps = (dispatch) => {
+let mapDispatchToProps = dispatch => {
   return {
-    saveUser: (user) => dispatch({type: 'SAVE_USER', user})
-  }
-}
+    saveUser: user => dispatch({ type: "SAVE_USER", user })
+  };
+};
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ProfileScreen)
+)(ProfileScreen);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -102,6 +104,7 @@ const styles = StyleSheet.create({
   },
   headerTopText: {
     fontSize: 22,
+    fontFamily: "sign45",
     fontWeight: "bold",
     color: "#FFFFFF",
     textAlign: "center",

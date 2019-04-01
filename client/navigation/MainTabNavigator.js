@@ -23,6 +23,10 @@ const HomeStack = createStackNavigator({
 
 HomeStack.navigationOptions = {
   tabBarLabel: "Home",
+  tabBarOptions: {
+    activeTintColor: "#00a86b",
+    inactiveTintColor: "#ccc"
+  },
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -41,6 +45,10 @@ const CameraExampleStack = createStackNavigator({
 
 CameraExampleStack.navigationOptions = {
   tabBarLabel: "Camera",
+  tabBarOptions: {
+    activeTintColor: "#00a86b",
+    inactiveTintColor: "#ccc"
+  },
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -55,6 +63,10 @@ const PostBountyStack = createStackNavigator({
 
 PostBountyStack.navigationOptions = {
   tabBarLabel: "Post Bounty",
+  tabBarOptions: {
+    activeTintColor: "#00a86b",
+    inactiveTintColor: "#ccc"
+  },
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -69,6 +81,10 @@ const FindBountyStack = createStackNavigator({
 
 FindBountyStack.navigationOptions = {
   tabBarLabel: "Find Bounty",
+  tabBarOptions: {
+    activeTintColor: "#00a86b",
+    inactiveTintColor: "#ccc"
+  },
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -77,26 +93,16 @@ FindBountyStack.navigationOptions = {
   )
 };
 
-// const LinksStack = createStackNavigator({
-//   Links: LinksScreen
-// });
-
-// LinksStack.navigationOptions = {
-//   tabBarLabel: "Links",
-//   tabBarIcon: ({ focused }) => (
-//     <TabBarIcon
-//       focused={focused}
-//       name={Platform.OS === "ios" ? "ios-link" : "md-link"}
-//     />
-//   )
-// };
-
 const TrackCleanStack = createStackNavigator({
   Settings: TrackCleanScreen
 });
 
 TrackCleanStack.navigationOptions = {
-  tabBarLabel: "Track Clean Up",
+  tabBarLabel: "Track Cleanup",
+  tabBarOptions: {
+    activeTintColor: "#00a86b",
+    inactiveTintColor: "#ccc"
+  },
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -111,6 +117,10 @@ const ProfileStack = createStackNavigator({
 
 ProfileStack.navigationOptions = {
   tabBarLabel: "Profile",
+  tabBarOptions: {
+    activeTintColor: "#00a86b",
+    inactiveTintColor: "#ccc"
+  },
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       style={{ color: "red" }}
@@ -125,6 +135,5 @@ export default createBottomTabNavigator({
   TrackCleanStack,
   FindBountyStack,
   PostBountyStack,
-  ProfileStack,
-  CameraExampleStack
+  ProfileStack
 });

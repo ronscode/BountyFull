@@ -84,7 +84,7 @@ class HomeScreen extends React.Component {
           </View>
           <View style={styles.activeView}>
             <Text style={styles.activeViewTitle}>Active Litter Bounties:</Text>
-            <Text style={styles.activeAmount}>$42,404 </Text>
+            <Text style={styles.activeAmount}>$404,770</Text>
           </View>
           <AuthScreen />
         </View>

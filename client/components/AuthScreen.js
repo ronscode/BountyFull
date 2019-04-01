@@ -2,8 +2,8 @@ import React from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
 import Google from "expo";
 import { Button } from "react-native-elements";
-import axios from 'axios';
-import { connect } from 'react-redux';
+import axios from "axios";
+import { connect } from "react-redux";
 
 // Reference URL
 const proxyUrl = require("../proxyUrl.js");
@@ -18,14 +18,14 @@ class AuthScreen extends React.Component {
           "990631818883-q2jq7nd4agsl7nn5f3c0s2puo4r62fdk.apps.googleusercontent.com",
         //iosClientId: YOUR_CLIENT_ID_HERE,  <-- if you use iOS
         scopes: ["profile", "email"]
-      })
+      });
       if (result.type === "success") {
-        await axios.post(proxyUrl.url + '/users/login/', result)
+        await axios
+          .post(proxyUrl.url + "/users/login/", result)
           .then(res => {
-            this.props.saveUser(res.data)
+            this.props.saveUser(res.data);
           })
-          .catch(err => console.log(err))
-
+          .catch(err => console.log(err));
       } else {
         console.log("cancelled");
       }
@@ -37,7 +37,10 @@ class AuthScreen extends React.Component {
     return (
       <View style={styles.container}>
         {this.props.email ? (
-          <LoggedInPage name={this.props.firstName} photoUrl={this.props.profilePic} />
+          <LoggedInPage
+            name={this.props.firstName}
+            photoUrl={this.props.profilePic}
+          />
         ) : (
           <LoginPage signIn={this.signIn} />
         )}
@@ -46,24 +49,24 @@ class AuthScreen extends React.Component {
   }
 }
 
-let mapStateToProps = (state) => {
+let mapStateToProps = state => {
   return {
     email: state.user.email,
     firstName: state.user.firstName,
-    profilePic: state.user.profilePic,
-  }
-}
+    profilePic: state.user.profilePic
+  };
+};
 
-let mapDispatchToProps = (dispatch) => {
+let mapDispatchToProps = dispatch => {
   return {
-    saveUser: (user) => dispatch({type: 'SAVE_USER', user})
-  }
-}
+    saveUser: user => dispatch({ type: "SAVE_USER", user })
+  };
+};
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(AuthScreen)
+)(AuthScreen);
 
 const LoginPage = props => {
   return (
@@ -89,7 +92,9 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   },
   header: {
-    fontSize: 25
+    fontSize: 26,
+    fontFamily: "pittsbrook-sans",
+    color: "white"
   },
   image: {
     marginTop: 15,

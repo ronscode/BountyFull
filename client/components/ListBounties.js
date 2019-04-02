@@ -26,16 +26,25 @@ class ListBounties extends Component {
   constructor(props) {
     super(props);
     let initialState = {
-      bounties: []
+        bounties: [],
+        currentPostedBounty: ''
     };
     this.state = initialState;
   }
-  componentDidMount() {
-    console.log('componentDidMount')
+  componentWillMount() {
     axios
       .get(proxyUrl.url + "/find")
       .then(res => this.setState({ bounties: res.data }))
       .catch(err => console.log(err));
+  }
+  componentDidUpdate() {
+    // Typical usage (don't forget to compare props):
+    if (this.props.currentPostedBounty !== this.state.currentPostedBounty) {
+        axios
+          .get(proxyUrl.url + '/find')
+          .then(res => this.setState({ bounties: res.data, currentPostedBounty: this.props.currentPostedBounty }))
+          .catch(err => console.log(err));
+    }
   }
   selectBounty(id) {
     axios.get(proxyUrl.url + '/find/status/' + id)
@@ -89,6 +98,7 @@ class ListBounties extends Component {
 
 const mapStateToProps = state => {
     return {
+        currentPostedBounty: state.user.currentPostedBounty,
         isStarted: state.bounties.isStarted,
         potentialBounty: state.potentialBounty
     };

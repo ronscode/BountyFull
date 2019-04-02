@@ -11,7 +11,7 @@ import {
   Text,
   Button
 } from "react-native";
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 import UsersMap from "../components/UsersMap";
 import FetchBountyLocation from "../components/FetchBountyLocation";
 import axios from "axios";
@@ -47,7 +47,8 @@ class PostBountyForm extends React.Component {
       " for $" +
       body.bountyAmount +
       " has been posted.";
-    await axios.post(proxyUrl.url + "/post/", body)
+    await axios
+      .post(proxyUrl.url + "/post/", body)
       .then(res => console.log(res.data) && this.props.postBounty(res.data._id))
       .catch(err => console.log(err));
     Alert.alert(message);
@@ -68,7 +69,7 @@ class PostBountyForm extends React.Component {
   }
 
   render() {
-    if(this.props.currentPostedBounty){
+    if (this.props.currentPostedBounty) {
       //REDIRECT TO TRACK CLEAN BOUNTY PAGE
     }
     return (
@@ -175,7 +176,7 @@ class PostBountyForm extends React.Component {
   }
 }
 
-let mapStateToProps = (state) => {
+let mapStateToProps = state => {
   return {
     firstName: state.user.firstName,
     lastName: state.user.lastName,
@@ -189,18 +190,18 @@ let mapStateToProps = (state) => {
     currentPostedBounty: state.user.currentPostedBounty,
     posted: state.user.posted
   };
-}
+};
 
-let mapDispatchToProps = (dispatch) => {
+let mapDispatchToProps = dispatch => {
   return {
-    postBounty: (bounties) => dispatch({ type: 'POST_BOUNTY', bounties })
-  }
-}
+    postBounty: bounties => dispatch({ type: "POST_BOUNTY", bounties })
+  };
+};
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(PostBountyForm)
+)(PostBountyForm);
 
 const styles = StyleSheet.create({
   container: {

@@ -3,7 +3,7 @@
   "expoServerPort": null,
   "packagerPort": null,
   "packagerPid": null,
-  "expoServerNgrokUrl": "https://tt-cwt.ronscode.client.exp.direct",
-  "packagerNgrokUrl": "https://packager.tt-cwt.ronscode.client.exp.direct",
-  "ngrokPid": 16650
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null
 }

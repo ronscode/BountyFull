@@ -34,7 +34,14 @@ class TrackCleanForm extends React.Component {
       .put(url, body)
       .then(res => this.props.cleanBounty(values.image))
       .catch(err => console.log(err));
-    Alert.alert(JSON.stringify(values));
+    let message =
+      body.bountyTitle +
+      " cleanup is being reviewed. Once verifed the bounty is released." +
+      "You'll earn $" +
+      body.bountyAmount +
+      " for this cleanup.";
+
+    Alert.alert(message);
     Keyboard.dismiss();
   }
 
@@ -117,7 +124,7 @@ class TrackCleanForm extends React.Component {
                   {pictures.start ? (
                     <Image
                       source={{ uri: pictures.start }}
-                      style={{ width: 150, height: 150 }}
+                      style={{ width: 120, height: 120 }}
                     />
                   ) : (
                     <Button
@@ -179,7 +186,7 @@ class TrackCleanForm extends React.Component {
               ) : (
                 <Image
                   source={require("../assets/images/demo/uploadImage.png")}
-                  style={{ width: 150, height: 150 }}
+                  style={{ width: 120, height: 120 }}
                 />
               )}
 

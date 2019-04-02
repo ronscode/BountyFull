@@ -43,6 +43,10 @@ const BountySchema = new mongoose.Schema({
     type: mongoose.Mixed,
     required: true
   },
+  datePosted: {
+    type: mongoose.Mixed,
+    required: true
+  },
   pictures: {
     type: mongoose.Mixed,
     required: true

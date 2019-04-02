@@ -34,41 +34,46 @@ class ProfileScreen extends React.Component {
       posted,
       bio
     } = this.props;
-    return (
-      <View style={styles.container}>
-        <View style={styles.viewProfileCard}>
-          <View style={styles.profileBoxHeader}>
-            <Text style={styles.profileBoxUsername}>
-              {firstName} {lastName}
-            </Text>
-            <Text style={styles.profileBoxAmount}>🌟</Text>
-          </View>
-          <View style={styles.profileBox}>
-            <Image
-              style={styles.listBountyImage}
-              source={{ uri: profilePic }}
-              // source={require("../assets/images/demo/zaphod.jpg")}
-            />
-            <View style={styles.profileBoxColumn}>
-              <View style={styles.labelRow}>
-                <Text style={styles.profileLabel}>VERIFIED CLEANUPS: </Text>
-                <Text> {completed.length}</Text>
-              </View>
-              <View style={styles.labelRow}>
-                <Text style={styles.profileLabel}>AMOUNT EARNED:</Text>
-                <Text> ${totalEarnings}</Text>
-              </View>
+    if(!this.props.firstName){
+      return <AuthScreen />
+    }
+    else {
+      return (
+        <View style={styles.container}>
+          <View style={styles.viewProfileCard}>
+            <View style={styles.profileBoxHeader}>
+              <Text style={styles.profileBoxUsername}>
+                {firstName} {lastName}
+              </Text>
+              <Text style={styles.profileBoxAmount}>🌟</Text>
+            </View>
+            <View style={styles.profileBox}>
+              <Image
+                style={styles.listBountyImage}
+                source={{ uri: profilePic }}
+                // source={require("../assets/images/demo/zaphod.jpg")}
+              />
+              <View style={styles.profileBoxColumn}>
+                <View style={styles.labelRow}>
+                  <Text style={styles.profileLabel}>VERIFIED CLEANUPS: </Text>
+                  <Text> {completed.length}</Text>
+                </View>
+                <View style={styles.labelRow}>
+                  <Text style={styles.profileLabel}>AMOUNT EARNED:</Text>
+                  <Text> ${totalEarnings}</Text>
+                </View>
 
-              <Button onPress={this.tipUser} title={"Tip User"} />
+                <Button onPress={this.tipUser} title={"Tip User"} />
+              </View>
             </View>
           </View>
+          <Text style={styles.subTitleText}>Verified Cleanups By Zaphod:</Text>
+          <ScrollView>
+            <ListUserBounties />
+          </ScrollView>
         </View>
-        <Text style={styles.subTitleText}>Verified Cleanups By Zaphod:</Text>
-        <ScrollView>
-          <ListUserBounties />
-        </ScrollView>
-      </View>
-    );
+      );
+    }
   }
 }
 

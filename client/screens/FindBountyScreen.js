@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
 
   headerText: {
     fontSize: 15,
-    color: "rgba(96,100,109, 1)",
+    color: "rgba(250,250,250, 1)",
     lineHeight: 24,
     textAlign: "center",
     marginBottom: 15

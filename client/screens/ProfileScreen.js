@@ -1,6 +1,7 @@
 import React from "react";
 import {
   Image,
+  Alert,
   Platform,
   ScrollView,
   StyleSheet,
@@ -22,6 +23,7 @@ class ProfileScreen extends React.Component {
   };
   tipUser() {
     console.log("user is tipped");
+    Alert.alert("Tipped $1");
   }
   render() {
     let {

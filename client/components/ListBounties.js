@@ -31,6 +31,7 @@ class ListBounties extends Component {
     this.state = initialState;
   }
   componentDidMount() {
+    console.log('componentDidMount')
     axios
       .get(proxyUrl.url + "/find")
       .then(res => this.setState({ bounties: res.data }))

@@ -25,6 +25,7 @@ module.exports = body => {
   }
 
   let defaultValues = {
+    datePosted: Date.now(),
     claimer: "",
     isStarted: false,
     isCleaned: false,

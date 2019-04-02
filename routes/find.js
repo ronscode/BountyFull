@@ -3,6 +3,7 @@ const router = express.Router();
 
 // Functions
 const updateBounty = require('./functions/updateBounty')
+const sortBounties = require('./functions/sortBounties')
 
 // Database Models
 const Bounty = require('../models/Bounty');
@@ -10,7 +11,7 @@ const Bounty = require('../models/Bounty');
 router.get('/:started?', (req, res) => {
     let search = req.params.started === 'started';
     Bounty.find({ isStarted: search })
-        .then(reply => res.send(reply))
+        .then(reply => res.send(sortBounties(reply)))
         .catch(err => res.status(400).send(
             [{ msg: 'Something happened!' }]
         ))

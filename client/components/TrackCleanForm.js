@@ -54,7 +54,6 @@ class TrackCleanForm extends React.Component {
       allowsEditing: true,
       aspect: [4, 3]
     });
-    console.log(result);
     if (!result.cancelled) {
       handleChange(result.uri);
     }
@@ -79,7 +78,6 @@ class TrackCleanForm extends React.Component {
 
   render() {
     let { pictures, firstName, poster, isCleaned, email } = this.props;
-    console.log(pictures)
     return (
       <View style={[styles.container, styles.content]}>
         <Formik

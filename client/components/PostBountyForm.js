@@ -48,7 +48,7 @@ class PostBountyForm extends React.Component {
       body.bountyAmount +
       " has been posted.";
     await axios.post(proxyUrl.url + "/post/", body)
-      .then(res => console.log(res.data) && this.props.postBounty(res.data._id))
+      .then(res => this.props.postBounty(res.data._id))
       .catch(err => console.log(err));
     Alert.alert(message);
     Keyboard.dismiss();
